@@ -1,0 +1,467 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>開発ポートフォリオ | Python アプリケーション</title>
+  <meta name="description" content="製造業向け業務システム・OCR・IoT連携・AI/RAGなど、Pythonで開発したアプリケーションのポートフォリオ">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+JP:wght@400;500;700&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+  <header class="site-header">
+    <nav class="nav">
+      <a class="logo" href="#top">Portfolio</a>
+      <ul class="nav-links">
+        <li><a href="#about">概要</a></li>
+        <li><a href="#skills">技術スタック</a></li>
+        <li><a href="#projects">プロジェクト</a></li>
+        <li><a href="#architecture">設計思想</a></li>
+      </ul>
+    </nav>
+  </header>
+
+  <main id="top">
+    <section class="hero">
+      <div class="hero-inner">
+        <p class="hero-label">Python Developer Portfolio</p>
+        <h1>製造現場の課題を<br>ソフトウェアで解く</h1>
+        <p class="hero-lead">
+          品質保証・計測機器管理・データ自動化を中心に、
+          デスクトップ / Web / IoT 連携アプリを設計・開発しています。
+          業務ロジックの共通化、テスト、MSI 配布まで一貫して手がけています。
+        </p>
+        <div class="hero-stats">
+          <div class="stat">
+            <span class="stat-num">12+</span>
+            <span class="stat-label">主要アプリ</span>
+          </div>
+          <div class="stat">
+            <span class="stat-num">6</span>
+            <span class="stat-label">技術領域</span>
+          </div>
+          <div class="stat">
+            <span class="stat-num">40+</span>
+            <span class="stat-label">テストケース（最大）</span>
+          </div>
+        </div>
+        <a class="btn-primary" href="#projects">プロジェクトを見る</a>
+      </div>
+      <div class="hero-visual" aria-hidden="true">
+        <div class="code-block">
+          <span class="code-line"><span class="kw">class</span> <span class="type">ServiceLayer</span>:</span>
+          <span class="code-line">  <span class="cmt"># Desktop UI ──直接──┐</span></span>
+          <span class="code-line">  <span class="cmt"># Web API ──委譲──┘</span></span>
+          <span class="code-line">  <span class="kw">def</span> <span class="fn">execute</span>(<span class="var">self</span>, ctx):</span>
+          <span class="code-line">    <span class="kw">return</span> <span class="var">self</span>.repository.query(ctx)</span>
+        </div>
+      </div>
+    </section>
+
+    <section id="about" class="section">
+      <div class="container">
+        <h2 class="section-title">概要</h2>
+        <div class="about-grid">
+          <div class="about-card">
+            <h3>ドメイン</h3>
+            <p>品質保証部門における測定データ管理、計測機器台帳、現場計測器との自動連携、文書変換・OCR など、製造業の実務に直結するシステム開発。</p>
+          </div>
+          <div class="about-card">
+            <h3>開発スタイル</h3>
+            <p>UI とビジネスロジックの分離、カラム名ベースの DB アクセス、pytest による回帰テスト、PyInstaller / WiX による EXE・MSI 配布。社内ツールでも保守性を重視した設計。</p>
+          </div>
+          <div class="about-card">
+            <h3>汎用機能集</h3>
+            <p>複数プロジェクトで再利用する共通モジュール（SQL Server 接続、設定管理、ログ、MSI ビルド、バージョン管理など）を <code>汎用機能集</code> として整備し、横展開しています。</p>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section id="skills" class="section section-alt">
+      <div class="container">
+        <h2 class="section-title">技術スタック</h2>
+        <div class="skills-grid">
+          <div class="skill-group">
+            <h3>言語・フレームワーク</h3>
+            <ul class="tag-list">
+              <li>Python 3.11–3.13</li>
+              <li>PyQt6</li>
+              <li>FastAPI</li>
+              <li>React + TypeScript</li>
+              <li>Vite + TailwindCSS</li>
+            </ul>
+          </div>
+          <div class="skill-group">
+            <h3>データ・AI</h3>
+            <ul class="tag-list">
+              <li>SQL Server (pyodbc)</li>
+              <li>ChromaDB</li>
+              <li>Tesseract / EasyOCR</li>
+              <li>llama-cpp (VLM)</li>
+              <li>LM Studio API</li>
+            </ul>
+          </div>
+          <div class="skill-group">
+            <h3>画像・信号処理</h3>
+            <ul class="tag-list">
+              <li>OpenCV</li>
+              <li>PyMuPDF</li>
+              <li>NumPy</li>
+              <li>QPainter カスタム描画</li>
+            </ul>
+          </div>
+          <div class="skill-group">
+            <h3>IoT・通信</h3>
+            <ul class="tag-list">
+              <li>BLE (bleak)</li>
+              <li>MQTT (paho-mqtt)</li>
+              <li>シリアル (pyserial)</li>
+              <li>TCP/IP / Telnet</li>
+            </ul>
+          </div>
+          <div class="skill-group">
+            <h3>品質・配布</h3>
+            <ul class="tag-list">
+              <li>pytest / pytest-qt</li>
+              <li>ruff / mypy</li>
+              <li>PyInstaller</li>
+              <li>WiX MSI</li>
+            </ul>
+          </div>
+          <div class="skill-group">
+            <h3>その他</h3>
+            <ul class="tag-list">
+              <li>openpyxl</li>
+              <li>SpeechRecognition</li>
+              <li>DeepL / Google Translate</li>
+              <li>Anthropic Vision API</li>
+            </ul>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section id="projects" class="section">
+      <div class="container">
+        <h2 class="section-title">プロジェクト</h2>
+        <p class="section-desc">各リポジトリを調査し、技術的深度・完成度・デモ可能性を基準に選定しました。</p>
+
+        <!-- Tier 1 -->
+        <div class="tier-header">
+          <span class="tier-badge tier-1">Flagship</span>
+          <h3>代表作・エンタープライズ</h3>
+        </div>
+        <div class="project-grid">
+
+          <article class="project-card featured" data-category="enterprise">
+            <div class="card-header">
+              <span class="card-version">v3.0.2</span>
+              <span class="card-category">フルスタック</span>
+            </div>
+            <h4>測定機器管理台帳システム</h4>
+            <p class="card-repo">管理台帳_統合版</p>
+            <p>工場の測定機器台帳、始業点検・年次校正記録、承認ワークフロー、帳票出力を一元管理。デスクトップ（PyQt6）と Web（React + FastAPI）の二系統で同一ビジネスロジックを共有。</p>
+            <ul class="feature-list">
+              <li>6種別の機器登録モード（マルチメータ・三次元など専用画面）</li>
+              <li>承認ワークフロー・メール通知・管理図出力</li>
+              <li><code>services/</code> レイヤの Desktop / Web 共有アーキテクチャ</li>
+              <li>WiX MSI 配布・OpenAPI スナップショットからの型生成</li>
+            </ul>
+            <div class="tech-tags">
+              <span>PyQt6</span><span>FastAPI</span><span>React</span><span>SQL Server</span><span>WiX</span>
+            </div>
+          </article>
+
+          <article class="project-card featured" data-category="enterprise">
+            <div class="card-header">
+              <span class="card-version">v1.1.x</span>
+              <span class="card-category">分散システム</span>
+            </div>
+            <h4>U-WAVE 中継システム</h4>
+            <p class="card-repo">U-WAVE分岐送信</p>
+            <p>Mitutoyo U-WAVE 測定器のデータを中継 PC 経由で複数クライアント PC へ MQTT 配信。測定器 ID ベースのルーティング、仮想 COM 出力、QC-PRO 連携。</p>
+            <ul class="feature-list">
+              <li>中継アプリ + クライアントアプリの二構成</li>
+              <li>U-WAVE パケット解析・ルーティング・合言葉認証</li>
+              <li>タスクトレイ常駐・二重起動防止・40+ pytest</li>
+              <li>WiX MSI 配布</li>
+            </ul>
+            <div class="tech-tags">
+              <span>MQTT</span><span>pyserial</span><span>tkinter</span><span>pytest</span><span>WiX</span>
+            </div>
+          </article>
+
+          <article class="project-card featured" data-category="enterprise">
+            <div class="card-header">
+              <span class="card-version">v1.0.x</span>
+              <span class="card-category">DB アプリ群</span>
+            </div>
+            <h4>分析測定結果保存システム</h4>
+            <p class="card-repo">分析測定結果保存（TP / CTE / VM）</p>
+            <p>品質保証向け測定データの SQL Server 登録・管理。3アプリ構成で TP 測定・CTE 入力・VM 揮発分管理を担い、履歴テーブル・管理図・印刷機能を提供。</p>
+            <ul class="feature-list">
+              <li>カラム名ベース DB アクセス・入力バリデーション</li>
+              <li>グローバルホットキー貼付・CTE↔TP 連携</li>
+              <li>共有フォルダ MSI 自動更新機構</li>
+              <li>QPainter による管理図カスタム描画</li>
+            </ul>
+            <div class="tech-tags">
+              <span>PyQt6</span><span>SQL Server</span><span>QPainter</span><span>WiX</span>
+            </div>
+          </article>
+        </div>
+
+        <!-- Tier 2 -->
+        <div class="tier-header">
+          <span class="tier-badge tier-2">Technical</span>
+          <h3>AI・OCR・コンピュータビジョン</h3>
+        </div>
+        <div class="project-grid">
+
+          <article class="project-card" data-category="ai">
+            <div class="card-header">
+              <span class="card-version">v1.1.11</span>
+              <span class="card-category">OCR + VLM</span>
+            </div>
+            <h4>軸受リング OCR → Excel</h4>
+            <p class="card-repo">shaft_ring_ocr</p>
+            <p>手書き測定表（軸受リング）の画像/PDF を OCR し、罫線付き Excel に変換。Tesseract + EasyOCR に加え、Qwen2.5-VL による VLM 補完で精度を向上。</p>
+            <ul class="feature-list">
+              <li>グリッド検出・行境界手動調整 UI</li>
+              <li>OCR 結果の確認・修正フロー</li>
+              <li>36 本の pytest スイート・WiX MSI 配布</li>
+            </ul>
+            <div class="tech-tags">
+              <span>PyQt6</span><span>Tesseract</span><span>OpenCV</span><span>llama-cpp</span>
+            </div>
+          </article>
+
+          <article class="project-card" data-category="ai">
+            <div class="card-header">
+              <span class="card-category">ローカル RAG</span>
+            </div>
+            <h4>RAG System</h4>
+            <p class="card-repo">RAG</p>
+            <p>PDF / テキスト / Markdown / Web を横断して質問応答するローカル RAG。LM Studio × ChromaDB 構成の PyQt6 GUI。</p>
+            <ul class="feature-list">
+              <li>ファイル・URL・ディレクトリのインデックス化</li>
+              <li>ベクトル検索 + LLM 回答生成</li>
+              <li>バックグラウンドワーカー・ダークテーマ UI</li>
+            </ul>
+            <div class="tech-tags">
+              <span>PyQt6</span><span>ChromaDB</span><span>LM Studio</span>
+            </div>
+          </article>
+
+          <article class="project-card" data-category="ai">
+            <div class="card-header">
+              <span class="card-category">翻訳</span>
+            </div>
+            <h4>Excel 翻訳ツール</h4>
+            <p class="card-repo">Excel翻訳</p>
+            <p>Excel テキストセルを複数翻訳エンジンで指定言語へ翻訳。GGUF ローカル LLM → deep-translator → DeepL → Google のフォールバック連鎖。</p>
+            <ul class="feature-list">
+              <li>用語集・プレースホルダー保持</li>
+              <li>非同期 QThread ワーカー・pytest + mypy</li>
+              <li>PyInstaller exe ビルド</li>
+            </ul>
+            <div class="tech-tags">
+              <span>PyQt6</span><span>openpyxl</span><span>DeepL</span><span>GGUF</span>
+            </div>
+          </article>
+
+          <article class="project-card" data-category="ai">
+            <div class="card-header">
+              <span class="card-category">Vision API</span>
+            </div>
+            <h4>PDF → Excel 変換</h4>
+            <p class="card-repo">PDF→EXCEL変換</p>
+            <p>スキャン PDF を Claude Vision API で解析し、表・テキスト・結合セル情報を Excel に変換。CLI と GUI 両対応。</p>
+            <ul class="feature-list">
+              <li>ページ画像化 → Vision API → JSON 抽出</li>
+              <li>結合セル・書式情報の保持</li>
+            </ul>
+            <div class="tech-tags">
+              <span>PyMuPDF</span><span>Anthropic API</span><span>openpyxl</span>
+            </div>
+          </article>
+        </div>
+
+        <!-- Tier 3 -->
+        <div class="tier-header">
+          <span class="tier-badge tier-3">IoT</span>
+          <h3>計測機器連携・リアルタイム処理</h3>
+        </div>
+        <div class="project-grid">
+
+          <article class="project-card" data-category="iot">
+            <div class="card-header">
+              <span class="card-category">コンピュータビジョン</span>
+            </div>
+            <h4>ショア硬度計 針検出ツール</h4>
+            <p class="card-repo">NeedleDetection</p>
+            <p>Web カメラ映像から硬度計の針を Hough 変換で検出し、角度から測定値を算出。校正換算表でショア硬度値に変換し、他アプリへキー入力自動送信。</p>
+            <ul class="feature-list">
+              <li>リアルタイム針検出・マシン番号別キャリブレーション</li>
+              <li>スペースキー等での自動値送信・音声フィードバック</li>
+            </ul>
+            <div class="tech-tags">
+              <span>OpenCV</span><span>NumPy</span><span>Tkinter</span>
+            </div>
+          </article>
+
+          <article class="project-card" data-category="iot">
+            <div class="card-header">
+              <span class="card-category">BLE</span>
+            </div>
+            <h4>TIME5370 データ取得</h4>
+            <p class="card-repo">TIME5370_データ取得</p>
+            <p>Mitutoyo TIME5370 硬度計から BLE 経由で測定データを受信し、キーボード入力として PC アプリへ送信。システムトレイ常駐。</p>
+            <ul class="feature-list">
+              <li>BLE スキャン・接続・プロトコル実装</li>
+              <li>換算表 CSV による値変換・単一インスタンス制御</li>
+            </ul>
+            <div class="tech-tags">
+              <span>PyQt6</span><span>bleak</span><span>pynput</span>
+            </div>
+          </article>
+
+          <article class="project-card" data-category="iot">
+            <div class="card-header">
+              <span class="card-category">TCP/IP</span>
+            </div>
+            <h4>軟化点データ取得</h4>
+            <p class="card-repo">軟化点データ取得</p>
+            <p>軟化点試験装置から TCP/IP（Telnet）で測定データを自動受信・ログ保存。Sample ID によるログ自動分類。</p>
+            <ul class="feature-list">
+              <li>Telnet ネゴシエーション・ネットワーク共有フォルダ保存</li>
+              <li>仮想 TCP-IP エコーツール同梱</li>
+            </ul>
+            <div class="tech-tags">
+              <span>socket</span><span>threading</span><span>tkinter</span>
+            </div>
+          </article>
+
+          <article class="project-card" data-category="iot">
+            <div class="card-header">
+              <span class="card-category">音声入力</span>
+            </div>
+            <h4>音声入力 HID</h4>
+            <p class="card-repo">Voice_HID</p>
+            <p>音声認識結果をキーボード入力（HID）として送出するタスクトレイアプリ。「スタート」「エンド」で受付制御、TTS 読み上げ後に自動入力。</p>
+            <ul class="feature-list">
+              <li>システムトレイ常駐・無音検出しきい値設定</li>
+              <li>「戻る」コマンドで Alt+Tab → 全選択 → 削除</li>
+            </ul>
+            <div class="tech-tags">
+              <span>SpeechRecognition</span><span>pystray</span><span>pynput</span>
+            </div>
+          </article>
+        </div>
+
+        <!-- Tier 4 -->
+        <div class="tier-header">
+          <span class="tier-badge tier-4">Tooling</span>
+          <h3>開発ツール・ユーティリティ</h3>
+        </div>
+        <div class="project-grid project-grid-compact">
+
+          <article class="project-card compact" data-category="tooling">
+            <h4>pyファイル exe 化ツール</h4>
+            <p class="card-repo">pyファイルexe化ツール</p>
+            <p>AST 解析で依存自動検出、venv 作成、PyInstaller ビルド、file_version_info 生成を GUI で一元化。</p>
+            <div class="tech-tags"><span>tkinter</span><span>PyInstaller</span><span>AST</span></div>
+          </article>
+
+          <article class="project-card compact" data-category="tooling">
+            <h4>汎用機能集</h4>
+            <p class="card-repo">汎用機能集</p>
+            <p>SQL Server 接続、設定管理、ログ、MSI ビルド、バージョン bump、数値入力ウィジェットなど再利用モジュール群。</p>
+            <div class="tech-tags"><span>pyodbc</span><span>WiX</span><span>PyQt6</span></div>
+          </article>
+
+          <article class="project-card compact" data-category="tooling">
+            <h4>図番 PDF 管理ソフト</h4>
+            <p class="card-repo">図番pdf管理ソフト</p>
+            <p>図面番号と PDF の紐付け・検索・インアプリプレビュー。SQLite ベースの CRUD 管理。</p>
+            <div class="tech-tags"><span>Tkinter</span><span>SQLite</span><span>PyMuPDF</span></div>
+          </article>
+
+          <article class="project-card compact" data-category="tooling">
+            <h4>図面編集ツール</h4>
+            <p class="card-repo">図面編集ツール</p>
+            <p>図面番号振り付け（D&D 対応）、HSV 閾値による背景除去の 3 ツール群。</p>
+            <div class="tech-tags"><span>Tkinter</span><span>OpenCV</span><span>Pillow</span></div>
+          </article>
+
+          <article class="project-card compact" data-category="tooling">
+            <h4>Cursor 使用量ダッシュボード</h4>
+            <p class="card-repo">Cursor使用量</p>
+            <p>Cursor IDE の usage-events CSV を読み込み、月次リクエスト数・トークン・コストを可視化。</p>
+            <div class="tech-tags"><span>PyQt6</span><span>pandas</span></div>
+          </article>
+        </div>
+      </div>
+    </section>
+
+    <section id="architecture" class="section section-alt">
+      <div class="container">
+        <h2 class="section-title">設計の特徴</h2>
+        <div class="arch-grid">
+          <div class="arch-card">
+            <div class="arch-icon">01</div>
+            <h3>ロジック共有アーキテクチャ</h3>
+            <p>管理台帳では Desktop UI と Web API が同一の <code>services/</code> を参照。UI 変更と業務ルール変更を独立させ、二重実装を排除。</p>
+          </div>
+          <div class="arch-card">
+            <div class="arch-icon">02</div>
+            <h3>テスト駆動の品質担保</h3>
+            <p>shaft_ring_ocr（36 テスト）、U-WAVE 分岐送信（40+ テスト）など、パケット解析・ルーティング・OCR パイプラインに pytest を適用。</p>
+          </div>
+          <div class="arch-card">
+            <div class="arch-icon">03</div>
+            <h3>配布まで含めた開発</h3>
+            <p>PyInstaller EXE 化、WiX MSI、ランタイム DLL 除外（OS 同梱 DLL 利用）、共有フォルダ自動更新まで一貫対応。</p>
+          </div>
+          <div class="arch-card">
+            <div class="arch-icon">04</div>
+            <h3>現場機器との実接続</h3>
+            <p>BLE・シリアル・MQTT・TCP/IP など、実機プロトコルに基づく連携。仮想 COM・エコーツールで開発・検証環境も整備。</p>
+          </div>
+        </div>
+
+        <div class="diagram-wrap">
+          <h3>管理台帳システム アーキテクチャ</h3>
+          <pre class="arch-diagram">┌─────────────────┐     ┌─────────────────┐
+│  Desktop UI     │     │  Web Frontend   │
+│  (PyQt6)        │     │  (React + TS)   │
+└────────┬────────┘     └────────┬────────┘
+         │ 直接呼出               │ HTTP
+         ▼                       ▼
+    ┌────────────────────────────────────┐
+    │         services/（共通コア）        │
+    │  点検判定・権限・登録モード・CSV出力  │
+    └────────────────┬───────────────────┘
+                     ▼
+              ┌─────────────┐
+              │  SQL Server │
+              └─────────────┘</pre>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <footer class="site-footer">
+    <div class="container">
+      <p>各プロジェクトは <code>c:\Users\m-sato\Desktop\python</code> 配下のリポジトリに格納されています。</p>
+      <p class="footer-note">社内業務システムのため、デモ・ソース公開は個別にご相談ください。</p>
+      <p class="footer-copy">Generated 2026-07-07</p>
+    </div>
+  </footer>
+
+  <script src="script.js"></script>
+</body>
+</html>

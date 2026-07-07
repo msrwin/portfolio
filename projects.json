@@ -1,0 +1,153 @@
+{
+  "generated": "2026-07-07",
+  "source_root": "c:\\Users\\m-sato\\Desktop\\python",
+  "selection_criteria": [
+    "技術的深度（アーキテクチャ・AI/IoT・テスト）",
+    "完成度（ドキュメント・配布・バージョン管理）",
+    "ポートフォリオでの訴求力"
+  ],
+  "tiers": {
+    "flagship": [
+      {
+        "name": "測定機器管理台帳システム",
+        "repo": "管理台帳_統合版",
+        "version": "3.0.2.0",
+        "category": "enterprise",
+        "highlight": "PyQt6 + React + FastAPI + SQL Server、services/ 共有"
+      },
+      {
+        "name": "U-WAVE 中継システム",
+        "repo": "U-WAVE分岐送信",
+        "version": "client 1.1.12 / relay 1.1.10",
+        "category": "distributed",
+        "highlight": "MQTT・シリアル・40+ pytest・WiX MSI"
+      },
+      {
+        "name": "分析測定結果保存システム",
+        "repo": "分析測定結果保存",
+        "version": "TP 1.0.13 / CTE 1.0.3 / VM 1.0.3",
+        "category": "enterprise",
+        "highlight": "3アプリ構成・SQL Server・管理図・MSI自動更新"
+      }
+    ],
+    "technical": [
+      {
+        "name": "軸受リング OCR → Excel",
+        "repo": "shaft_ring_ocr",
+        "version": "1.1.11.0",
+        "category": "ocr",
+        "highlight": "Tesseract + VLM + 36 pytest"
+      },
+      {
+        "name": "RAG System",
+        "repo": "RAG",
+        "version": null,
+        "category": "ai",
+        "highlight": "LM Studio × ChromaDB ローカル RAG"
+      },
+      {
+        "name": "Excel 翻訳ツール",
+        "repo": "Excel翻訳",
+        "version": null,
+        "category": "translation",
+        "highlight": "マルチエンジンフォールバック・GGUF"
+      },
+      {
+        "name": "PDF → Excel 変換",
+        "repo": "PDF→EXCEL変換",
+        "version": null,
+        "category": "vision",
+        "highlight": "Claude Vision API"
+      }
+    ],
+    "iot": [
+      {
+        "name": "ショア硬度計 針検出ツール",
+        "repo": "NeedleDetection",
+        "version": null,
+        "category": "cv",
+        "highlight": "OpenCV Hough 変換・リアルタイム"
+      },
+      {
+        "name": "TIME5370 データ取得",
+        "repo": "TIME5370_データ取得",
+        "version": null,
+        "category": "ble",
+        "highlight": "BLE 硬度計連携"
+      },
+      {
+        "name": "軟化点データ取得",
+        "repo": "軟化点データ取得",
+        "version": null,
+        "category": "tcp",
+        "highlight": "Telnet プロトコル・ログ自動分類"
+      },
+      {
+        "name": "音声入力 HID",
+        "repo": "Voice_HID",
+        "version": null,
+        "category": "voice",
+        "highlight": "音声認識 → キーボード入力"
+      }
+    ],
+    "tooling": [
+      {
+        "name": "pyファイル exe 化ツール",
+        "repo": "pyファイルexe化ツール",
+        "version": null,
+        "category": "build",
+        "highlight": "AST 依存解析・venv・PyInstaller GUI"
+      },
+      {
+        "name": "汎用機能集",
+        "repo": "汎用機能集",
+        "version": null,
+        "category": "library",
+        "highlight": "横断再利用モジュール群"
+      },
+      {
+        "name": "図番 PDF 管理ソフト",
+        "repo": "図番pdf管理ソフト",
+        "version": "1.0",
+        "category": "utility",
+        "highlight": "SQLite + PDF プレビュー"
+      },
+      {
+        "name": "図面編集ツール",
+        "repo": "図面編集ツール",
+        "version": null,
+        "category": "utility",
+        "highlight": "番号振り付け・背景除去"
+      },
+      {
+        "name": "Cursor 使用量ダッシュボード",
+        "repo": "Cursor使用量",
+        "version": null,
+        "category": "analytics",
+        "highlight": "CSV 可視化"
+      }
+    ]
+  },
+  "excluded": [
+    {
+      "repo": "説明書変換",
+      "reason": "単一スクリプトのユーティリティ"
+    },
+    {
+      "repo": "shore",
+      "reason": "ソースは NeedleDetection に集約（ビルド環境のみ）"
+    },
+    {
+      "repo": "ocr_excel_build",
+      "reason": "shaft_ring_ocr と同一パッケージ"
+    },
+    {
+      "repo": "U-WAVEPAK",
+      "reason": "U-WAVE分岐送信の前身・小規模補助ツール"
+    },
+    {
+      "repo": "管理台帳_SQLServer(旧)",
+      "reason": "統合版に置き換え済み"
+    }
+  ]
+}
