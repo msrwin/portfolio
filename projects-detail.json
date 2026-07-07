@@ -1,0 +1,709 @@
+{
+  "generated": "2026-07-07",
+  "projects": [
+    {
+      "id": "equipment-management",
+      "tier": "flagship",
+      "name": "測定機器管理台帳システム",
+      "repo": "管理台帳_統合版",
+      "version": "3.0.2.0",
+      "tagline": "工場の測定機器台帳・点検・校正・承認を一元管理するデスクトップ＋Webシステム",
+      "overview": [
+        "工場で使用する測定機器の台帳管理、始業点検・年次校正の記録、承認ワークフロー、帳票出力を担うエンタープライズ向け業務システムです。PyQt6 デスクトップ版と React Web 版の2系統を提供し、いずれも SQL Server をバックエンドとします。",
+        "最大の設計思想は、デスクトップ UI と Web API が別アプリではなく、同一のビジネスロジック層 services/ を共有する構成である点です。点検判定・権限・登録モード・CSV 出力などのコアロジックを一元化することで、デスクトップと Web の仕様乖離を防いでいます。",
+        "マルチメータ・三次元測定機・ゲージ・セットリングなど、機器種別ごとに専用画面と登録フォームを持ち、承認フロー・メール通知・管理図表示まで品質保証業務の一連をカバーします。"
+      ],
+      "problem": "測定機器の校正期限管理、始業点検・年次校正の記録、承認ワークフロー、複数拠点・機器種別の台帳運用が紙・Excel・個別システムに分散し、漏れ・二重管理・監査対応の負荷が大きかった。",
+      "solution": "SQL Server 上の統合台帳にデスクトップ（PyQt6）と Web（React + FastAPI）の両面からアクセス。共通 services/ 層で判定・権限・登録ロジックを共有し、PIN 認証・変更申請承認・MSI 自動更新で現場運用と配布を両立。",
+      "features": [
+        "機器一覧（始業点検 / 年次校正タブ）・地域切替・検索フィルタ・校正期限バー表示",
+        "6種類の登録モード（基本・マルチメータ・三次元・ゲージ・セットリング・基準片）",
+        "始業点検・年次校正・機器履歴の CRUD と測定値自動判定",
+        "変更申請・承認・却下・一括承認・メール通知ワークフロー",
+        "管理図（コントロールチャート）・CSV エクスポート",
+        "Web 版（React + TypeScript + Vite + TailwindCSS）",
+        "QR コードによる詳細画面オープン",
+        "MSI インストーラー配布・自動アップデート"
+      ],
+      "tech_stack": ["Python 3.12", "PyQt6", "FastAPI", "Uvicorn", "React", "TypeScript", "Vite", "TailwindCSS", "SQL Server", "pyodbc", "PyYAML", "pytest", "pytest-qt", "WiX Toolset", "PyInstaller"],
+      "architecture": "デスクトップ UI ──直接──┐\n                         ├── services/（共通コア）── database/ ── SQL Server\nWeb フロント ──HTTP── web_api/（FastAPI）──委譲──┘\n\n主要ディレクトリ:\n  main_app.py, web_api/, services/, database/\n  ui/, screens/, frontend/, infrastructure/",
+      "highlights": [
+        "デスクトップと Web で services/ レイヤを共有するハイブリッドアーキテクチャ",
+        "200+ pytest による Web API セキュリティ・承認・登録ロジックの網羅的テスト",
+        "composition.yaml による DB・地域・メール・表示設定の外部化",
+        "api_outline/shards/ による大規模コードベース向け AI 索引",
+        "WiX MSI + ランタイム DLL 除外ポリシーによるエンタープライズ配布"
+      ],
+      "challenges": [
+        "デスクトップと Web の機能同等性を services/ 共有で維持しつつ UI 差異を吸収",
+        "登録モード誤選択時の訂正（モード変更・誤登録退避）設計",
+        "Web API のセッション認証・権限レベル・列挙攻撃対策の段階的強化"
+      ],
+      "file_structure": {
+        "main_entry": "main_app.py",
+        "key_dirs": ["services/", "web_api/", "database/", "ui/", "screens/", "frontend/", "infrastructure/", "docs/", "test_file/"],
+        "config": "composition.yaml, file_version_info.txt"
+      },
+      "testing": "pytest + pytest-qt。test_file/ に 200 件超のテスト（Web API 認証・承認・登録・UI mixin・MSI ビルド等）",
+      "distribution": "WiX MSI（python build_msi.py）。PyInstaller onedir + file_version_info.txt v3.0.2.0。ランタイム DLL は同梱除外。",
+      "related_projects": ["汎用機能集", "管理台帳_SQLServer(旧)（置換済み）"]
+    },
+    {
+      "id": "uwave-relay",
+      "tier": "flagship",
+      "name": "U-WAVE 中継システム",
+      "repo": "U-WAVE分岐送信",
+      "version": "client 1.1.12.0 / relay 1.1.10.0",
+      "tagline": "共有 U-WAVE 測定器のデータを MQTT 経由で複数クライアント PC に配信",
+      "overview": [
+        "Mitutoyo U-WAVE 測定器から U-WAVE-R 経由でシリアル受信した測定データを、1台の中継 PC から LAN 内の複数クライアント PC へ配信する tkinter アプリ群です。中継アプリ（relay_app.py）とクライアントアプリ（client_app.py）の2構成で、現場の QC-PRO 連携を実現します。",
+        "中継側は受信パケットを解析し、測定器 ID（R{受信機}-G{グループ}-C{チャネル}）に基づくルーティング設定で MQTT トピックへ振り分けます。クライアント側は合言葉（passphrase）照合後、仮想 COM ポートへ出力します。",
+        "大規模リファクタ後は core/・mqtt/・uwave_serial/・relay/・client/ に責務分離され、40件超の pytest と WiX MSI 配布・自動更新に対応しています。"
+      ],
+      "problem": "1台の U-WAVE 測定器を複数の測定用 PC（QC-PRO）で共有利用したいが、物理的には1つのシリアル出力しかなく、測定器 ID ごとの振り分け・セキュリティ・常駐運用が課題だった。",
+      "solution": "中継 PC で Mosquitto + 中継アプリがシリアル受信→MQTT 配信。各クライアント PC の受信アプリが MQTT 購読→合言葉照合→仮想 COM 出力。ルーティング一覧の MQTT 同期・出力 ID（チャネル上書き）・タスクトレイ常駐で現場運用を支援。",
+      "features": [
+        "U-WAVE-R シリアル受信と ASCII パケット解析（DT形式）",
+        "測定器 ID ベースのルーティング（宛先クライアント / BROADCAST）",
+        "MQTT トピック設計（uwave/<client_id>/<device_id> 等）",
+        "出力 ID によるチャネル番号上書き（0〜99）",
+        "クライアント合言葉照合による不正データ遮断",
+        "タスクトレイ常駐・二重起動防止・受信音フィードバック",
+        "ルーティング一覧の並び替え・一括宛先変更",
+        "MSI 自動アップデート（tkinter 版 auto-update-tk）"
+      ],
+      "tech_stack": ["Python 3.10+", "tkinter", "pyserial", "paho-mqtt", "pystray", "Pillow", "PyYAML", "pytest", "PyInstaller", "WiX Toolset", "Mosquitto"],
+      "architecture": "U-WAVE測定器 → U-WAVE-R → シリアル(COM)\n  → 中継PC(relay_app/Mosquitto) → LAN MQTT\n  → クライアントPC(client_app) → 仮想COM → QC-PRO\n\n構成: relay_app.py, client_app.py\n  core/, mqtt/, uwave_serial/, relay/, client/, ui/",
+      "highlights": [
+        "40件超 pytest によるパケット解析・ルーティング・MQTT・COM 出力の単体テスト",
+        "Mixin 合成アーキテクチャと refactor_map.md による保守索引",
+        "build_runtime_excludes.py によるランタイム DLL 除外",
+        "中継停止中の受信警告音・未登録測定器の視覚フィードバック",
+        "README_RELAY / README_CLIENT による現場向け・開発者向けドキュメント分離"
+      ],
+      "challenges": [
+        "U-WAVE パケット形式の解析と出力 ID チャネル上書きの両立",
+        "MQTT ルーティング同期と PC ローカル設定（並び順）の分離",
+        "PyInstaller spec 共有（pyinstaller_shared.py）による依存収集の安定化"
+      ],
+      "file_structure": {
+        "main_entry": "relay_app.py / client_app.py",
+        "key_dirs": ["core/", "mqtt/", "uwave_serial/", "relay/", "client/", "ui/", "tests/", "docs/"],
+        "config": "file_version_info_client.txt, file_version_info_branch.txt"
+      },
+      "testing": "pytest（tests/ に 80+ テストファイル）。パケット解析・ルーティング・MQTT・COM キュー・MSI ビルド等。",
+      "distribution": "PyInstaller EXE + WiX MSI。build_exe.py でビルド。ランタイム DLL 除外方針。",
+      "related_projects": ["汎用機能集（auto-update-tk）", "U-WAVEPAK（前身）"]
+    },
+    {
+      "id": "analysis-measurement-storage",
+      "tier": "flagship",
+      "name": "分析測定結果保存システム",
+      "repo": "分析測定結果保存",
+      "version": "TP 1.0.13.0 / CTE 1.0.3.2 / VM 1.0.3.1",
+      "tagline": "分析室の TP・CTE・VM 測定データを SQL Server に集約・管理する3アプリ群",
+      "overview": [
+        "品質分析室における3種類の測定業務（TP 測定データ管理、CTE 熱膨張係数入力、VM 粘度計管理）を、それぞれ独立した PyQt6 デスクトップアプリとして提供するシステム群です。いずれも SQL Server（pyodbc）をバックエンドとし、composition.yaml による設定外部化・MSI 配布・自動アップデートを共通パターンとしています。",
+        "TP アプリはロット単位の多様な測定結果の登録・履歴管理・管理図（QPainter 描画）・CTE 反映連携を担います。CTE アプリは熱膨張係数の高速入力作業（グローバルホットキー・タイマー・管理図）を支援します。",
+        "VM アプリは粘度計測定結果の DB 管理に加え、TGA-801 用クリップボード監視・CSV インポート/エクスポートのサテライトアプリを持ちます。"
+      ],
+      "problem": "分析室の TP・CTE・VM 測定データが個別の Excel・手入力・計測器付属ソフトに分散し、統計分析（管理図）・他試験との連携（CTE→TP 反映）・監査証跡の確保が困難だった。",
+      "solution": "測定種別ごとに特化 UI を持つ PyQt6 アプリを SQL Server に接続。共通の DB アクセスパターン・設定管理・MSI 自動更新で運用を標準化。管理図は matplotlib ではなく QPainter でカスタム描画。",
+      "features": [
+        "TP: ロット管理・多タブ測定結果登録・履歴テーブル・管理図（QPainter）",
+        "TP: CTE 反映連携・CSV エクスポート・閲覧専用モード",
+        "CTE: 高速データ入力・グローバルホットキー・タイマー・管理図",
+        "CTE: JIS 丸め・数値フォーマット（numeric-input 連携）",
+        "VM: 測定結果 DB 管理・CSV インポート/エクスポート",
+        "VM: TGA-801 クリップボード監視アプリ（タスクトレイ常駐）",
+        "全アプリ: MSI 自動アップデート・単一起動制御",
+        "全アプリ: composition.yaml による DB 接続・機能パスワード設定"
+      ],
+      "tech_stack": ["Python 3.11+", "PyQt6", "pyodbc", "SQL Server", "PyYAML", "keyboard", "pywin32", "openpyxl", "pytest", "PyInstaller", "WiX Toolset"],
+      "architecture": "3独立アプリ構成:\n  TP/（main.py → MeasurementApp）\n  CTE/（main.py → DataEntryApp）\n  VM/（main.py → VMMeasurementApp + TGA-801_clipboard.py）\n\n各アプリ → pyodbc → SQL Server",
+      "highlights": [
+        "QPainter による管理図（コントロールチャート）カスタム描画",
+        "CTE→TP 反映のクロスアプリ連携",
+        "汎用機能集の主要参照元（desktop-config, pyodbc-sqlserver 等）",
+        "カラム名ベースの DB アクセス（row index 参照を排除）",
+        "閲覧専用モードによるパスワード保護"
+      ],
+      "challenges": [
+        "CTE 高速入力作業でのグローバルホットキーと PyQt6 イベントループの共存",
+        "TP 多様な試験形態のテーブル設計と UI 動的切替",
+        "MSI 自動更新の product_name / msi_glob_pattern / file_version_info の整合管理"
+      ],
+      "file_structure": {
+        "main_entry": "TP/main.py, CTE/main.py, VM/main.py",
+        "key_dirs": ["TP/database/, TP/handlers/, TP/ui/", "CTE/core/, CTE/handlers/", "VM/ui/, VM/TGA-801_clipboard.py"],
+        "config": "各サブフォルダの file_version_info.txt, composition.yaml"
+      },
+      "testing": "TP: pytest（validation, history_row_columns, cte_reflection 等）。CTE/VM: 限定的。",
+      "distribution": "各アプリ PyInstaller onedir + WiX MSI。自動アップデート対応。",
+      "related_projects": ["汎用機能集", "管理台帳_統合版"]
+    },
+    {
+      "id": "shaft-ring-ocr",
+      "tier": "technical",
+      "name": "軸受リング OCR → Excel",
+      "repo": "shaft_ring_ocr",
+      "version": "1.1.11.0",
+      "tagline": "手書き軸受リング測定表を OCR し罫線付き Excel に自動変換",
+      "overview": [
+        "手書き測定表（軸受リング）の画像または PDF を OCR 処理し、罫線・日本語ラベル付き Excel テンプレートに変換する PyQt6 GUI ツールです。Tesseract OCR をベースに、グリッド検出・セル前処理・番号列 OCR（EasyOCR フォールバック）を組み合わせた多段パイプラインを持ちます。",
+        "手書き数字の読取精度向上のため、Qwen2.5-VL（GGUF + llama-cpp-python）による VLM 補完機能をオプションで提供。Tesseract で空欄・不正値になったセルのみ VLM で再読取するハイブリッド方式です。",
+        "OCR 結果は入力前確認ダイアログで人手修正可能。36件の pytest によりグリッド検出・前処理・VLM・Excel 出力の各段を検証しています。"
+      ],
+      "problem": "軸受リングの手書き測定表を Excel に転記する作業が手作業で時間がかかり、転記ミス・読取漏れが発生していた。",
+      "solution": "専用レイアウト向けのグリッド検出 + Tesseract OCR + オプション VLM 補完で自動読取。確認 UI で修正後、テンプレート構造の Excel を出力。",
+      "features": [
+        "PNG/JPG/PDF 入力対応（PDF は先頭ページ）",
+        "表頭・C/D セクション各20行の手書き圧力値 OCR",
+        "グリッド自動検出 + 手動グリッド調整",
+        "Tesseract + EasyOCR デュアル読取",
+        "Qwen2.5-VL VLM 補完（空欄・不正値セルのみ）",
+        "OCR 結果確認ダイアログでの人手修正",
+        "罫線付き Excel テンプレート自動出力",
+        "VLM ブロック検証ツール"
+      ],
+      "tech_stack": ["Python 3.11+", "PyQt6", "Tesseract OCR", "EasyOCR", "OpenCV", "numpy", "llama-cpp-python", "Qwen2.5-VL GGUF", "openpyxl", "PyMuPDF", "pytest", "PyInstaller"],
+      "architecture": "main.py → shaft_ring_ocr/ パッケージ\n  ocr/（grid_detector, cell_ocr, preprocessor）\n  vlm/（engine_core, subprocess_client）\n  excel/（template_writer）\n  gui/（main_window, ocr_confirm_dialog）",
+      "highlights": [
+        "36 pytest による多段 OCR パイプラインの網羅的テスト",
+        "VLM をサブプロセス分離して GUI 応答性を維持",
+        "軸受リング専用グリッドアンカー検出アルゴリズム",
+        "Marp 形式の操作説明書（docs/manual.md）"
+      ],
+      "challenges": [
+        "手書き数字の OCR 精度（Tesseract 限界を VLM で補完）",
+        "グリッドずれ・スキャン傾きへの前処理ロバスト性",
+        "CPU 環境での VLM 推論速度（1セル数秒）"
+      ],
+      "file_structure": {
+        "main_entry": "main.py",
+        "key_dirs": ["shaft_ring_ocr/ocr/", "shaft_ring_ocr/vlm/", "shaft_ring_ocr/excel/", "shaft_ring_ocr/gui/", "tests/", "docs/"],
+        "config": "file_version_info.txt, settings.ini"
+      },
+      "testing": "pytest（tests/ に 36 テストファイル）",
+      "distribution": "PyInstaller（軸受リングOCR.spec）。file_version_info v1.1.11.0。",
+      "related_projects": ["ocr_excel_build（ビルド環境）", "RAG"]
+    },
+    {
+      "id": "rag-system",
+      "tier": "technical",
+      "name": "RAG System",
+      "repo": "RAG",
+      "version": null,
+      "tagline": "LM Studio × ChromaDB によるローカル RAG 質問応答システム",
+      "overview": [
+        "PDF・テキスト・Markdown・Web ページを横断して質問に答えるローカル RAG システムです。LM Studio のローカル API（チャットモデル + Embedding モデル）と ChromaDB ベクトルストアを組み合わせ、クラウド依存なしで社内ドキュメント検索・質問応答を実現します。",
+        "当初は CLI として設計されましたが、現在は PyQt6 ベースの GUI アプリに発展。ダークテーマの UI で、インデックス追加・質問・ソース一覧・チャンク管理をタブ操作できます。",
+        "チャンク分割、TOP_K 検索、BeautifulSoup による Web スクレイピング、pdfplumber による PDF 読取をサポート。"
+      ],
+      "problem": "社内マニュアル・規程・技術文書への質問応答をクラウド API に依存せずローカルで行いたい。",
+      "solution": "LM Studio で GGUF モデルをローカル実行し、ChromaDB に Embedding 化してインデックス。検索結果をコンテキストとして LLM に渡し回答生成。",
+      "features": [
+        "PDF / テキスト / Markdown / URL のインデックス追加",
+        "ディレクトリ一括インデックス",
+        "ChromaDB ベクトル検索 + LLM 回答生成",
+        "PyQt6 GUI（ダークテーマ・タブ UI）",
+        "チャンクサイズ・オーバーラップ・TOP_K チューニング",
+        "登録ソース一覧・チャンク数表示",
+        "インデックス全削除・再構築"
+      ],
+      "tech_stack": ["Python", "PyQt6", "ChromaDB", "LM Studio API", "requests", "BeautifulSoup4", "pdfplumber"],
+      "architecture": "rag.py（PyQt6 GUI）\n  → ChromaDB（chroma_db/ 自動生成）\n  → LM Studio Local Server（localhost:1234）\n    ├── CHAT_MODEL（Llama 3 8B Instruct 等）\n    └── EMBED_MODEL（nomic-embed-text 等）",
+      "highlights": [
+        "完全ローカル実行（クラウド API 不要）",
+        "CLI から PyQt6 GUI への進化",
+        "マルチフォーマット対応（PDF/TXT/MD/URL）",
+        "チューニングパラメータのコード上部集中管理"
+      ],
+      "challenges": [
+        "LM Studio モデル名とコード内定数の同期",
+        "Embedding モデル未ロード時のエラーハンドリング",
+        "日本語文書のチャンク分割品質"
+      ],
+      "file_structure": {
+        "main_entry": "rag.py",
+        "key_dirs": ["data/", "chroma_db/（自動生成）"],
+        "config": "requirements.txt, rag.py 上部の定数"
+      },
+      "testing": "テストコードなし",
+      "distribution": "ソース実行のみ",
+      "related_projects": ["Excel翻訳", "shaft_ring_ocr"]
+    },
+    {
+      "id": "excel-translator",
+      "tier": "technical",
+      "name": "Excel 翻訳ツール",
+      "repo": "Excel翻訳",
+      "version": null,
+      "tagline": "Excel セルをマルチエンジンで翻訳する PyQt6 デスクトップアプリ",
+      "overview": [
+        "Excel のテキストセルを指定言語へ翻訳して保存する PyQt6 デスクトップアプリです。ローカル GGUF モデル → deep-translator → DeepL → Google Cloud Translation のマルチエンジンフォールバックを実装し、翻訳順序は設定で変更可能です。",
+        "2つの使い方を提供: (1) ソースファイルのテキストを翻訳して新規保存、(2) ソースの空白セルに翻訳済みファイルの内容を逆翻訳して挿入。用語集・プレースホルダ保護・数値のみセルのスキップを行います。",
+        "excel_translator/ パッケージに分離され、*.pyi 型スタブ・pytest・PyInstaller ビルドに対応。"
+      ],
+      "problem": "多言語対応が必要な Excel 文書の翻訳を手作業で行うと時間がかかり、用語の一貫性・書式の破壊が課題だった。",
+      "solution": "セル単位の翻訳パイプライン（プレースホルダ保護→用語集保護→翻訳→復元）を QThread ワーカーで非同期実行。複数翻訳エンジンのフォールバックで可用性を確保。",
+      "features": [
+        "モード1: ソース翻訳→新規保存（追記/上書き）",
+        "モード2: 空白セルへの逆翻訳挿入",
+        "マルチエンジン: GGUF → deep-translator → DeepL → Google Cloud",
+        "用語集・プレースホルダ保護（URL/メール/HTML/{name}/%s）",
+        "数値のみセルの自動スキップ",
+        "QThread による非同期翻訳とプログレス表示",
+        "API キー設定（環境変数 / アプリ設定）",
+        "xls/xlsx 両対応"
+      ],
+      "tech_stack": ["Python 3.11+", "PyQt6", "openpyxl", "xlrd", "deep-translator", "deepl", "google-cloud-translate", "llama-cpp-python", "pytest", "PyInstaller"],
+      "architecture": "run_app.py → excel_translator/ パッケージ\n  ui/（main_window）\n  workers/（FullTranslationWorker, DiffInsertWorker）\n  translation_engine.py, excel_io.py\n  glossary.py, placeholders.py",
+      "highlights": [
+        "マルチエンジンフォールバックと設定可能な優先順位",
+        "プレースホルダ→用語集→翻訳→復元のマスク適用順設計",
+        "公開 API 型スタブ（*.pyi）による大規模化対応",
+        "docs/API_OVERVIEW.md によるモジュール早見表"
+      ],
+      "challenges": [
+        "セル内改行・結合セルの翻訳単位分割",
+        "GGUF ローカル LLM の推論速度とバッチ翻訳",
+        "除外文字を含むセグメントの分割翻訳"
+      ],
+      "file_structure": {
+        "main_entry": "run_app.py",
+        "key_dirs": ["excel_translator/", "tests/", "docs/", "assets/"],
+        "config": "requirements.txt, excel_translator.spec"
+      },
+      "testing": "pytest（tests/ に 20+ テスト）",
+      "distribution": "PyInstaller（build_exe.py）。--with-gguf オプション。",
+      "related_projects": ["RAG", "pyファイルexe化ツール"]
+    },
+    {
+      "id": "pdf-to-excel",
+      "tier": "technical",
+      "name": "PDF → Excel 変換",
+      "repo": "PDF→EXCEL変換",
+      "version": null,
+      "tagline": "Claude Vision API で PDF 表を認識し Excel に変換",
+      "overview": [
+        "PDF を Claude Vision API で読み取り、表・テキストを認識して Excel に変換するツールです。スキャン PDF・画像 PDF にも対応し、PyMuPDF でページを PNG 画像化してから Vision API に送信します。",
+        "CLI（引数指定）と GUI（引数なし起動）の両モードをサポート。API レスポンスの JSON を openpyxl で再現し、セル結合・背景色・太字等の書式も可能な範囲で保持します。",
+        "単一ファイル（pdf_to_excel.py）構成のコンパクトなツールです。"
+      ],
+      "problem": "スキャン PDF や画像 PDF の表データを Excel に手入力で転記する作業が非効率で、レイアウト再現も困難だった。",
+      "solution": "PDF→画像変換→Claude Vision API で構造化 JSON 抽出→openpyxl で Excel 再構築。スキャン PDF でも Vision API が直接認識。",
+      "features": [
+        "スキャン PDF・画像 PDF 対応",
+        "Claude Vision API による表・テキスト抽出",
+        "セル結合（merge）・書式（styles）の再現",
+        "CLI / GUI 両モード",
+        "出力先指定（-o オプション）",
+        "DPI 調整可能（精度 vs 速度）"
+      ],
+      "tech_stack": ["Python", "anthropic（Claude API）", "PyMuPDF", "openpyxl", "tkinter"],
+      "architecture": "pdf_to_excel.py（単一ファイル）\n  pdf_to_images() → Claude API（JSON 抽出）\n  → openpyxl Workbook 生成",
+      "highlights": [
+        "Vision API によるスキャン PDF 直接認識",
+        "JSON 構造化出力による表レイアウト再現",
+        "単一ファイルで完結するシンプル設計"
+      ],
+      "challenges": [
+        "API コストと処理速度（ページ単位の API 呼び出し）",
+        "複雑な表レイアウトの JSON 再現精度",
+        "ANTHROPIC_API_KEY の安全な管理"
+      ],
+      "file_structure": {
+        "main_entry": "pdf_to_excel.py",
+        "key_dirs": [],
+        "config": "環境変数 ANTHROPIC_API_KEY"
+      },
+      "testing": "テストコードなし",
+      "distribution": "ソース実行のみ",
+      "related_projects": ["shaft_ring_ocr", "Excel翻訳"]
+    },
+    {
+      "id": "needle-detection",
+      "tier": "iot",
+      "name": "ショア硬度計 針検出ツール",
+      "repo": "NeedleDetection",
+      "version": null,
+      "tagline": "Web カメラでショア硬度計の針位置をリアルタイム検出し硬度値を自動送信",
+      "overview": [
+        "Web カメラ映像からショア硬度計の針位置を OpenCV Hough 変換でリアルタイム検出し、換算表に基づく硬度値を計算・表示・自動送信するツールです。元は単一ファイルから config/・ui/・image_processing/・calibration/ 等にリファクタリング済みです。",
+        "機器タイプ別の換算表を読み込み、針角度から硬度値を算出。キーボードショートカット・自動送信・音声フィードバック・設定 UI を備えます。",
+        "composition.yaml による外部設定にも対応しています。"
+      ],
+      "problem": "ショア硬度計の針読取を目視で行い手入力する作業が属人化しており、リアルタイム性と精度に課題があった。",
+      "solution": "Web カメラ + OpenCV HoughLinesP による針検出→角度計算→換算表変換→キーボード自動送信。OpenCV ウィンドウにリアルタイムオーバーレイ表示。",
+      "features": [
+        "Web カメラリアルタイム針検出（HoughLinesP）",
+        "機器タイプ別換算表による硬度値変換",
+        "換算値 ON/OFF 切替・Space キーによる検出 ON/OFF",
+        "自動送信（AutoSend）・音声フィードバック",
+        "設定 UI（基本/詳細/キャリブレーション/キー設定タブ）",
+        "二重起動防止・ウィンドウアイコン対応"
+      ],
+      "tech_stack": ["Python", "OpenCV", "numpy", "tkinter", "keyboard", "pygetwindow", "PyInstaller"],
+      "architecture": "main.py → ShoreHardnessMeter\n  camera/（CameraManager）\n  image_processing/（ImageProcessor, ValueCalculator）\n  calibration/（CalibrationManager）\n  ui/（UIDrawer, SettingsUI）\n  input/（InputHandler, AutoSend）",
+      "highlights": [
+        "モノリスからモジュール分割へのリファクタリング",
+        "針30以下での換算値張り付きバグの根因特定・修正",
+        "composition.yaml による外部パラメータ管理",
+        "ctypes WM_SETICON による OpenCV ウィンドウアイコン設定"
+      ],
+      "challenges": [
+        "線検出処理の例外による表示停止",
+        "9時〜7時領域の負の換算値クランプ",
+        "PyInstaller --onefile でのファイル肥大化"
+      ],
+      "file_structure": {
+        "main_entry": "main.py",
+        "key_dirs": ["core/", "camera/", "image_processing/", "calibration/", "ui/", "config/", "docs/"],
+        "config": "setting.ini, composition.yaml"
+      },
+      "testing": "テストコードなし（手動検証）",
+      "distribution": "PyInstaller（--onefile --noconsole 推奨）",
+      "related_projects": ["shore（ビルド環境）", "pyファイルexe化ツール"]
+    },
+    {
+      "id": "time5370-data-acquisition",
+      "tier": "iot",
+      "name": "TIME5370 データ取得",
+      "repo": "TIME5370_データ取得",
+      "version": null,
+      "tagline": "BLE 硬度計 TIME5370 から測定データを取得する PyQt6 アプリ",
+      "overview": [
+        "BLE（Bluetooth Low Energy）対応の硬度計 TIME5370 から測定データを取得する PyQt6 デスクトップアプリです。bleak ライブラリで BLE 通信を行い、専用プロトコル（NOTIFY/WRITE UUID、CRC16-MODBUS）でデバイスと通信します。",
+        "QLocalServer による単一インスタンス制御、衝撃方向設定、バッテリー残量取得、測定値の自動キーボード送信（pynput）を実装。モジュール分割（ble/, ui/, conversion.py）で保守性を確保しています。"
+      ],
+      "problem": "TIME5370 硬度計の測定データを PC に自動取り込みし、品質管理システムへ入力する手作業を削減したい。",
+      "solution": "BLE 通信プロトコルのリバースエンジニアリングにより自動データ取得。取得値をキーボード入力で既存システムに連携。",
+      "features": [
+        "BLE デバイススキャン・接続・ペアリング",
+        "TIME5370 専用プロトコル（NOTIFY/WRITE UUID）",
+        "衝撃方向設定（6方向）・バッテリー残量取得",
+        "測定値の自動キーボード送信",
+        "QLocalServer 単一インスタンス制御",
+        "CRC16-MODBUS パケット生成"
+      ],
+      "tech_stack": ["Python", "PyQt6", "bleak", "pynput", "pywin32", "PyInstaller"],
+      "architecture": "main.py → QApplication + MainWindow\n  ble/protocol.py（UUID, コマンド, CRC）\n  ui/main_window.py, ui/widgets.py\n  conversion.py（値変換）",
+      "highlights": [
+        "BLE プロトコルの完全な定数定義",
+        "QLocalServer による二重起動防止",
+        "衝撃方向パラメータのビットレベル操作"
+      ],
+      "challenges": [
+        "BLE 通信の不安定性と再接続処理",
+        "Windows BLE スタックとの互換性",
+        "プロトコル仕様の非公開情報からのリバースエンジニアリング"
+      ],
+      "file_structure": {
+        "main_entry": "main.py",
+        "key_dirs": ["ble/", "ui/", "constants.py", "conversion.py"],
+        "config": "requirements.txt, main.spec"
+      },
+      "testing": "テストコードなし",
+      "distribution": "PyInstaller（main.spec）",
+      "related_projects": ["NeedleDetection", "軟化点データ取得"]
+    },
+    {
+      "id": "softening-point-data",
+      "tier": "iot",
+      "name": "軟化点データ取得",
+      "repo": "軟化点データ取得",
+      "version": null,
+      "tagline": "軟化点試験装置から TCP/Telnet/シリアルでデータを受信・自動分類保存",
+      "overview": [
+        "軟化点試験装置から TCP/IP（Telnet プロトコル）またはシリアル（COM）でデータを受信し、サンプル ID に基づいてログを自動分類・保存する tkinter アプリです。",
+        "Telnet ネゴシエーションの実装、STX/ETX フレーム境界での受信データ分割、サンプル ID パターン（G/IP/BP 等）によるフォルダ分類を行います。",
+        "受信スレッドと監視スレッドのソケット競合を解消し、フレーム境界を考慮した安定受信を実現しました。"
+      ],
+      "problem": "軟化点試験装置のデータ受信で文字欠け・行結合・項目順序崩れが発生し、ログの信頼性が低下していた。",
+      "solution": "ETX フレーム境界抽出 + Telnet コマンド除去のタイミング改善 + 受信スレッド専用化で安定受信。サンプル ID パターンでログ自動分類。",
+      "features": [
+        "TCP（Telnet）/ シリアル（COM）両モード",
+        "Telnet プロトコルネゴシエーション実装",
+        "STX/ETX フレーム境界抽出",
+        "サンプル ID パターンによるログ自動分類",
+        "受信データの正規化（NUL/STX/ETX 除去、改行統一）",
+        "仮想 TCP-IP エコーツール"
+      ],
+      "tech_stack": ["Python", "tkinter", "pyserial", "socket", "configparser", "logging", "PyInstaller"],
+      "architecture": "軟化点データ取得.py（単一ファイル）\n  TelnetProtocol クラス\n  ConnectionManager（TCP/シリアル切替）\n  受信スレッド → フレーム分割 → キュー → UI表示/ログ保存",
+      "highlights": [
+        "Telnet プロトコルの自前実装",
+        "フレーム境界（ETX）ベースの受信安定化",
+        "ソケット競合（監視 recv 横取り）の根因修正"
+      ],
+      "challenges": [
+        "受信スレッドと監視スレッドのソケット競合",
+        "フレーム境界を無視した分割による表示崩れ",
+        "Telnet ネゴシエーション応答のタイミング"
+      ],
+      "file_structure": {
+        "main_entry": "軟化点データ取得.py",
+        "key_dirs": ["docs/", "logs/", "ログサンプル/"],
+        "config": "settings.ini, 軟化点データ取得.spec"
+      },
+      "testing": "ログサンプルによる手動回帰検証",
+      "distribution": "PyInstaller（軟化点データ取得.spec）",
+      "related_projects": ["TIME5370_データ取得"]
+    },
+    {
+      "id": "voice-hid",
+      "tier": "iot",
+      "name": "音声入力 HID",
+      "repo": "Voice_HID",
+      "version": null,
+      "tagline": "音声認識結果をキーボード入力として送出するタスクトレイアプリ",
+      "overview": [
+        "音声認識（SpeechRecognition + Google Speech API）の結果をキーボード入力（HID）として送出する Windows タスクトレイ常駐アプリです。「スタート」で音声受付開始、「エンド」で終了、認識テキストをリアルタイムにキー入力として送出します。",
+        "無音検出で発話区切りを判断し、区切りごとに Enter キーを自動送信。pyttsx3 による音声フィードバックと「戻る」ワードによる直前入力の巻き戻しも実装。"
+      ],
+      "problem": "測定現場や事務作業で、キーボード入力の代替として音声で数値・テキストを入力したい。",
+      "solution": "タスクトレイ常駐で音声認識→pynput キーボード送出。スタート/エンドワードによる受付制御と音声フィードバックで操作感を向上。",
+      "features": [
+        "タスクトレイ常駐（pystray）・日本語音声認識（ja-JP）",
+        "認識テキストのリアルタイムキーボード送出",
+        "無音検出による発話区切り + Enter 自動送信",
+        "スタート/エンド/戻る 音声コマンド",
+        "TTS 音声フィードバック（pyttsx3）",
+        "直前入力の巻き戻し（戻るワード）"
+      ],
+      "tech_stack": ["Python", "SpeechRecognition", "pyaudio", "pynput", "pystray", "Pillow", "pyttsx3", "pywin32"],
+      "architecture": "main.py（単一ファイル）\n  pystray アイコン → 音声認識スレッド\n  → pynput Controller → キーボード送出",
+      "highlights": [
+        "音声認識→HID入力のシンプルなパイプライン",
+        "巻き戻し操作のキーシーケンス自動化",
+        "タスクトレイアイコンの受付状態表示（色変化）"
+      ],
+      "challenges": [
+        "音声認識精度（Google Speech API 依存）",
+        "無音検出しきい値の現場調整",
+        "スレッド間の状態同期"
+      ],
+      "file_structure": {
+        "main_entry": "main.py",
+        "key_dirs": [],
+        "config": "main.py 上部の定数"
+      },
+      "testing": "テストコードなし",
+      "distribution": "ソース実行のみ",
+      "related_projects": []
+    },
+    {
+      "id": "py-to-exe-tool",
+      "tier": "tooling",
+      "name": "pyファイル exe 化ツール",
+      "repo": "pyファイルexe化ツール",
+      "version": null,
+      "tagline": "AST 依存解析 + venv 自動構築 + PyInstaller GUI ビルドツール",
+      "overview": [
+        "Python スクリプトを PyInstaller で EXE 化するための tkinter GUI ツールです。AST 解析で import 文から依存パッケージを自動検出し、一時 venv を作成→pip install→PyInstaller ビルドを一気通貫で実行します。",
+        "標準ライブラリ・問題モジュールの判定ロジック、日本語パス対策、エラー表示改善、onefile/onedir ラジオ選択、venv 削除リトライ等の実運用改善が蓄積されています。"
+      ],
+      "problem": "PyInstaller での EXE 化は依存パッケージの手動特定・venv 構築・オプション設定が煩雑で、特に日本語パス環境でエラーが分かりにくい。",
+      "solution": "AST 解析による依存自動検出 + GUI でのワンクリックビルド。日本語パス対策・エラー表示改善・venv 安定化で開発者のビルド体験を向上。",
+      "features": [
+        "AST 解析による import 依存の自動検出",
+        "一時 venv 自動作成・pip install・PyInstaller ビルド",
+        "onefile / onedir ラジオ選択・アイコン指定（.ico）",
+        "日本語パス対策（アイコン一時コピー）",
+        "問題モジュール判定（psutil, pyodbc, cv2, fitz 等）",
+        "PyInstaller -y（出力上書き確認スキップ）",
+        "エラー表示改善（stderr 末尾表示）"
+      ],
+      "tech_stack": ["Python", "tkinter", "ast", "subprocess", "PyInstaller", "venv"],
+      "architecture": "pyファイルexe化ツール.py（単一ファイル）\n  AST解析 → 依存リスト → venv_manager.py\n  → PyInstaller subprocess",
+      "highlights": [
+        "AST 解析 + IMPORTANT_MODULES/PROBLEMATIC_MODULES 判定",
+        "日本語パス環境でのアイコン対策",
+        "venv 削除の onexc ハンドラ + 3回リトライ"
+      ],
+      "challenges": [
+        "日本語パスでの PyInstaller 失敗",
+        "stderr 先頭 INFO でエラーメッセージが埋もれる問題",
+        "venv 残存時の削除ブロック"
+      ],
+      "file_structure": {
+        "main_entry": "pyファイルexe化ツール.py",
+        "key_dirs": ["docs/", "venv_manager.py"],
+        "config": "pyファイルexe化ツール.spec"
+      },
+      "testing": "テストコードなし",
+      "distribution": "自身が PyInstaller でビルド可能",
+      "related_projects": ["NeedleDetection", "Excel翻訳", "管理台帳_統合版"]
+    },
+    {
+      "id": "common-utilities",
+      "tier": "tooling",
+      "name": "汎用機能集",
+      "repo": "汎用機能集",
+      "version": null,
+      "tagline": "デスクトップアプリ横断の共通モジュール参照実装リポジトリ群",
+      "overview": [
+        "今後作成するデスクトップアプリ向けの共通機能を、参照実装として保管するリポジトリ群です。各サブフォルダは独立した git リポジトリとして管理され、実プロジェクトから抽出・汎用化されたモジュールを収録しています。",
+        "管理台帳_統合版・分析測定結果保存・U-WAVE分岐送信 等の実プロジェクトが参照元となっており、新規アプリ開発時はここからコピーして利用する運用です。"
+      ],
+      "problem": "各デスクトップアプリで MSI ビルド・自動更新・DB 接続・設定管理・ログ等の同種コードが重複実装されていた。",
+      "solution": "実績のある実装をサブリポジトリとして抽出・汎用化。新規・移行時は汎用機能集を正とし、各アプリ内の重複を置き換え。",
+      "features": [
+        "msi-installer: PyInstaller onedir + WiX MSI 作成",
+        "auto-update: MSI 自動アップデート（PyQt6 版）",
+        "auto-update-tk: MSI 自動アップデート（tkinter 版）",
+        "desktop-config: AppData 設定パス + INI 読み書き",
+        "pyodbc-sqlserver: SQL Server 接続・行参照",
+        "pyqt-single-instance: Windows 単一起動",
+        "numeric-input: JIS 丸め・半角変換",
+        "logging-bootstrap: AppData ログ + 日次ローテーション",
+        "file-version-bump: file_version_info.txt バージョン増分 CLI"
+      ],
+      "tech_stack": ["Python", "PyQt6", "tkinter", "pyodbc", "PyInstaller", "WiX Toolset", "PyYAML"],
+      "architecture": "独立サブリポジトリ群:\n  msi-installer/, auto-update/, auto-update-tk/\n  desktop-config/, pyodbc-sqlserver/\n  pyqt-single-instance/, numeric-input/\n  logging-bootstrap/, file-version-bump/",
+      "highlights": [
+        "実プロジェクトからの抽出・汎用化パターン",
+        "ランタイム DLL 除外ポリシーの統一",
+        "file-version-bump によるバージョン管理 CLI 化"
+      ],
+      "challenges": [
+        "各アプリ内の重複実装の段階的置き換え",
+        "サブリポジトリ間のバージョン同期",
+        "アプリ固有要件の分離"
+      ],
+      "file_structure": {
+        "main_entry": "各サブフォルダが独立",
+        "key_dirs": ["msi-installer/", "auto-update/", "auto-update-tk/", "desktop-config/", "pyodbc-sqlserver/", "file-version-bump/"],
+        "config": "各サブフォルダの README.md, *.example"
+      },
+      "testing": "各サブモジュールに個別テスト（限定的）",
+      "distribution": "ライブラリとして各アプリにコピー利用",
+      "related_projects": ["管理台帳_統合版", "分析測定結果保存", "U-WAVE分岐送信"]
+    },
+    {
+      "id": "drawing-pdf-manager",
+      "tier": "tooling",
+      "name": "図番 PDF 管理ソフト",
+      "repo": "図番pdf管理ソフト",
+      "version": "1.0",
+      "tagline": "図面番号と PDF を SQLite で管理・プレビューするツール",
+      "overview": [
+        "図面番号と PDF ファイルの対応を SQLite データベースで管理し、PDF プレビュー・検索・登録・削除を行う tkinter アプリです。PyMuPDF で PDF レンダリング、PIL でサムネイル表示。",
+        "図面番号でのグルーピング表示、部分一致検索、複数 PDF の同一図番登録、削除時のパスワード保護を実装。"
+      ],
+      "problem": "図面 PDF がファイルサーバー上に散在し、図番からの検索・最新版の特定が困難だった。",
+      "solution": "SQLite DB に図番-PDF パスの対応を登録。GUI で検索・プレビュー・管理。",
+      "features": [
+        "図面番号と PDF の SQLite 管理",
+        "図番部分一致検索・PDF プレビュー",
+        "複数 PDF の同一図番登録",
+        "削除パスワード保護",
+        "Windows エクスプローラー連携",
+        "INI 設定ファイル管理"
+      ],
+      "tech_stack": ["Python", "tkinter", "SQLite3", "PyMuPDF", "Pillow", "PyInstaller"],
+      "architecture": "図面管理システム.py（単一ファイル）\n  ConfigManager → DrawingDatabaseManager（SQLite）\n  → DrawingManagementApp（tkinter UI）",
+      "highlights": [
+        "SQLite による軽量な図面インデックス",
+        "PyMuPDF による PDF インライン preview",
+        "ConfigManager / DrawingDatabaseManager の責務分離"
+      ],
+      "challenges": [
+        "大容量 PDF のプレビュー性能",
+        "ネットワークパス上の PDF アクセス",
+        "図番命名規則の多様性への対応"
+      ],
+      "file_structure": {
+        "main_entry": "図面管理システム.py",
+        "key_dirs": [],
+        "config": "図面管理システム.spec, INI 設定"
+      },
+      "testing": "テストコードなし",
+      "distribution": "PyInstaller（図面管理システム.spec）",
+      "related_projects": ["図面編集ツール"]
+    },
+    {
+      "id": "drawing-editor",
+      "tier": "tooling",
+      "name": "図面編集ツール",
+      "repo": "図面編集ツール",
+      "version": null,
+      "tagline": "図面画像への番号振り付けと背景除去を行うツール群",
+      "overview": [
+        "図面画像の編集を支援する2つの tkinter ツール群です。(1) 図面番号振り付けツール: 画像に連番アノテーションを配置・回転・色変更してエクスポート。(2) 図面掃除ツール: スキャン図面の背景除去とノイズ除去。",
+        "番号振り付けツールは tkinterdnd2 によるドラッグ&ドロップ対応、画像回転・アノテーション履歴（Undo）・プレビューを実装。"
+      ],
+      "problem": "スキャン図面への番号付けや背景ノイズ除去を手作業で行うと時間がかかり品質にばらつきが出る。",
+      "solution": "専用 GUI で番号の一括配置（連番・フォント・色・回転）と背景除去（閾値調整・バッチ処理）を自動化。",
+      "features": [
+        "図面番号振り付け: 連番アノテーション配置",
+        "ドラッグ&ドロップ画像読込（tkinterdnd2）",
+        "フォントサイズ・色・太字・回転角度設定",
+        "画像回転・アノテーション履歴（Undo）",
+        "図面掃除: 黒閾値ベース背景除去",
+        "バッチ処理・プレビュー・全画面表示"
+      ],
+      "tech_stack": ["Python", "tkinter", "tkinterdnd2", "Pillow", "OpenCV", "numpy", "PyInstaller"],
+      "architecture": "2独立ツール:\n  図面番号振り付けツール2.pyw（ImageAnnotationApp）\n  図面掃除ツール.pyw（AIImageEditor）",
+      "highlights": [
+        "tkinterdnd2 による D&D 対応",
+        "アノテーション履歴による Undo",
+        "番号振り付けと背景除去の用途分離"
+      ],
+      "challenges": [
+        "高解像度スキャン画像のメモリ管理",
+        "図面の傾き・スキャン品質のばらつき",
+        "番号の視認性と配置の効率化"
+      ],
+      "file_structure": {
+        "main_entry": "図面番号振り付けツール2.pyw / 図面掃除ツール.pyw",
+        "key_dirs": [],
+        "config": "各 .spec ファイル"
+      },
+      "testing": "テストコードなし",
+      "distribution": "PyInstaller（各 .spec ファイル）",
+      "related_projects": ["図番pdf管理ソフト"]
+    },
+    {
+      "id": "cursor-usage-dashboard",
+      "tier": "tooling",
+      "name": "Cursor 使用量ダッシュボード",
+      "repo": "Cursor使用量",
+      "version": null,
+      "tagline": "Cursor IDE の usage-events CSV を可視化する PyQt6 ダッシュボード",
+      "overview": [
+        "Cursor IDE が出力する usage-events CSV ファイルを読み込み、使用量を可視化する PyQt6 + Matplotlib ダッシュボードです。ダークテーマの UI で、モデル別使用量・日別推移・コスト分析等をタブ表示します。",
+        "ファイル選択ダイアログまたは CLI 引数で CSV を指定。pandas によるデータ集計、matplotlib によるグラフ描画を実装。"
+      ],
+      "problem": "Cursor IDE の AI 使用量・コストを把握する手段が CSV エクスポートのみで、視覚的な分析が困難だった。",
+      "solution": "usage-events CSV を pandas で集計し、PyQt6 + Matplotlib でダッシュボード表示。",
+      "features": [
+        "usage-events CSV の読込・集計",
+        "モデル別使用量グラフ・日別推移チャート",
+        "ダークテーマ UI",
+        "ファイル選択ダイアログ / CLI 引数",
+        "タブによるマルチビュー表示"
+      ],
+      "tech_stack": ["Python", "PyQt6", "pandas", "matplotlib", "seaborn"],
+      "architecture": "Cursor dashboard.py（単一ファイル）\n  CSV読込（pandas）→ 集計\n  → Matplotlib Figure → PyQt6 QTabWidget 埋込",
+      "highlights": [
+        "ダークテーマのカスタム QSS + Matplotlib スタイル統一",
+        "Cursor usage-events 形式への特化",
+        "単一ファイルでの完結"
+      ],
+      "challenges": [
+        "CSV フォーマットのバージョン差異",
+        "大量データのグラフ描画性能"
+      ],
+      "file_structure": {
+        "main_entry": "Cursor dashboard.py",
+        "key_dirs": [],
+        "config": "usage-events-*.csv（サンプルデータ）"
+      },
+      "testing": "テストコードなし",
+      "distribution": "ソース実行のみ",
+      "related_projects": []
+    }
+  ]
+}

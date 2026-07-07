@@ -4,20 +4,53 @@
 
 ## 閲覧方法
 
-ブラウザで `index.html` を開いてください。
+### 一覧ページ
 
 ```powershell
 Start-Process "c:\Users\m-sato\Desktop\python\portfolio\index.html"
+```
+
+### 詳細ページ
+
+各プロジェクトカードの「詳細を見る →」リンクから遷移できます。
+
+直接 URL で開く例:
+
+```text
+project.html?id=equipment-management
+project.html?id=shaft-ring-ocr
+project.html?id=uwave-relay
+```
+
+> **注意:** 詳細ページは `projects-detail.json` を fetch するため、`file://` 直開きで CORS エラーになる場合があります。その場合は簡易 HTTP サーバーで起動してください。
+
+```powershell
+cd "c:\Users\m-sato\Desktop\python\portfolio"
+py -3 -m http.server 8080
+# ブラウザで http://localhost:8080 を開く
 ```
 
 ## ファイル構成
 
 | ファイル | 内容 |
 |---------|------|
-| `index.html` | ポートフォリオ本体 |
+| `index.html` | ポートフォリオ一覧 |
+| `project.html` | プロジェクト詳細ページ（テンプレート） |
+| `projects-detail.json` | 全16プロジェクトの詳細データ |
+| `project-detail.js` | 詳細ページの描画ロジック |
 | `styles.css` | スタイル |
-| `script.js` | スクロールアニメーション等 |
+| `script.js` | 一覧ページのスクロールアニメーション等 |
 | `projects.json` | 選定基準・プロジェクト一覧（機械可読） |
+
+## 詳細ページの内容（各プロジェクト）
+
+- 概要・課題・解決策
+- 主な機能一覧
+- アーキテクチャ図
+- 技術的ハイライト・克服した課題
+- ファイル構成・テスト・配布情報
+- 関連プロジェクトへのリンク
+- 他プロジェクトへのナビゲーション
 
 ## 選定プロジェクト（概要）
 
@@ -48,5 +81,6 @@ Start-Process "c:\Users\m-sato\Desktop\python\portfolio\index.html"
 ## カスタマイズ
 
 - 氏名・連絡先を追加する場合は `index.html` の hero セクションを編集
-- スクリーンショットを追加する場合は `portfolio/assets/` を作成し、各 `project-card` に `<img>` を追加
-- 社外公開用に社名・機密情報を伏せる場合は各カードの説明文を調整
+- プロジェクト詳細を更新する場合は `projects-detail.json` を編集
+- スクリーンショットを追加する場合は `portfolio/assets/` を作成し、詳細ページに画像セクションを追加
+- 社外公開用に社名・機密情報を伏せる場合は `projects-detail.json` の説明文を調整
