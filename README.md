@@ -54,6 +54,8 @@ py -3 -m http.server 8080
 | `styles.css` | スタイル |
 | `script.js` | 一覧ページのスクロールアニメーション等 |
 | `projects.json` | 選定基準・プロジェクト一覧（機械可読） |
+| `screenshots/` | 画面キャプチャ格納（任意） |
+| `tools/build_screenshots_manifest.py` | スクリーンショット一覧JSON生成 |
 
 ## 詳細ページの内容（各プロジェクト）
 
@@ -95,5 +97,6 @@ py -3 -m http.server 8080
 
 - 氏名・連絡先を追加する場合は `index.html` の hero セクションを編集
 - プロジェクト詳細を更新する場合は `projects-detail.json` を編集
+- スクリーンショットを追加する場合は `screenshots/` に配置し、`py -3 tools/build_screenshots_manifest.py` を実行して `screenshots/manifest.json` を生成（コミット・push）
 - スクリーンショットを追加する場合は `portfolio/assets/` を作成し、詳細ページに画像セクションを追加
 - 社外公開用に社名・機密情報を伏せる場合は `projects-detail.json` の説明文を調整

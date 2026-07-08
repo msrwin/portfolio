@@ -60,6 +60,34 @@ function renderRelated(projects, allProjects) {
     .join("")}</div>`;
 }
 
+function renderGallery(images) {
+  if (!images || images.length === 0) return "";
+
+  return `
+    <div class="detail-block">
+      <h2>スクリーンショット</h2>
+      <div class="gallery">
+        ${images
+          .map((img) => {
+            const src = escapeHtml(img.src);
+            const alt = escapeHtml(img.alt || img.caption || "screenshot");
+            const cap = escapeHtml(img.caption || "");
+            return `
+              <figure class="gallery-item">
+                <a href="${src}" target="_blank" rel="noopener noreferrer">
+                  <img class="gallery-img" src="${src}" alt="${alt}" loading="lazy" />
+                </a>
+                ${cap ? `<figcaption class="gallery-cap">${cap}</figcaption>` : ""}
+              </figure>
+            `;
+          })
+          .join("")}
+      </div>
+      <p class="muted gallery-note">クリックで原寸表示できます。</p>
+    </div>
+  `;
+}
+
 function renderProject(project, allProjects) {
   const tierLabel = TIER_LABELS[project.tier] || project.tier;
   const versionBadge = project.version
@@ -67,6 +95,8 @@ function renderProject(project, allProjects) {
     : "";
 
   document.title = `${project.name} | 開発ポートフォリオ`;
+
+  const images = (project.assets && project.assets.screenshots) || [];
 
   return `
     <article class="detail-page">
@@ -111,6 +141,8 @@ function renderProject(project, allProjects) {
               <h2>主な機能</h2>
               ${renderList(project.features)}
             </div>
+
+            ${renderGallery(images)}
 
             <div class="detail-block">
               <h2>アーキテクチャ</h2>
@@ -210,6 +242,22 @@ async function init() {
     if (!project) {
       root.innerHTML = renderNotFound(id);
       return;
+    }
+
+    // Optional: screenshots manifest (generated locally and committed)
+    try {
+      const manifestRes = await fetch("screenshots/manifest.json");
+      if (manifestRes.ok) {
+        const manifest = await manifestRes.json();
+        const byProject = (manifest && manifest.by_project) || {};
+        const imgs = byProject[project.id] || [];
+        if (imgs.length > 0) {
+          project.assets = project.assets || {};
+          project.assets.screenshots = imgs;
+        }
+      }
+    } catch {
+      // ignore (no screenshots yet)
     }
 
     root.innerHTML = renderProject(project, projects);
