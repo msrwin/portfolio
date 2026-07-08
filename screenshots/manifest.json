@@ -1,7 +1,20 @@
 {
-  "generated_utc": "2026-07-08T07:01:38Z",
-  "n_images": 0,
-  "by_project": {},
+  "generated_utc": "2026-07-08T07:08:05Z",
+  "n_images": 2,
+  "by_project": {
+    "equipment-management": [
+      {
+        "src": "screenshots/equipment-management__機器一覧.png",
+        "alt": "機器一覧",
+        "caption": "機器一覧"
+      },
+      {
+        "src": "screenshots/equipment-management__機器詳細.png",
+        "alt": "機器詳細",
+        "caption": "機器詳細"
+      }
+    ]
+  },
   "misc": [],
   "naming_rule": "screenshots/<projectId>__<screen>.png (例: equipment-management__login.png)"
 }
