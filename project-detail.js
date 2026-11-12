@@ -105,7 +105,7 @@ function renderProject(project, allProjects) {
     : "";
   const talkingHtml = project.interview_talking_points && project.interview_talking_points.length
     ? `<div class="detail-block">
-         <h2>面接で話すポイント</h2>
+         <h2>説明のポイント</h2>
          ${renderList(project.interview_talking_points, "talking-points")}
        </div>`
     : "";
@@ -123,7 +123,6 @@ function renderProject(project, allProjects) {
             <span class="tier-badge tier-${project.tier === "flagship" ? "1" : project.tier === "technical" ? "2" : project.tier === "iot" ? "3" : "4"}">${tierLabel}</span>
             ${versionBadge}
             ${roleBadge}
-            <span class="card-category">${escapeHtml(project.repo)}</span>
           </div>
           <h1>${escapeHtml(project.name)}</h1>
           <p class="detail-tagline">${escapeHtml(project.tagline)}</p>
@@ -179,11 +178,6 @@ function renderProject(project, allProjects) {
 
           <aside class="detail-sidebar">
             <div class="sidebar-card">
-              <h3>リポジトリ</h3>
-              <p class="sidebar-repo"><code>${escapeHtml(project.repo)}</code></p>
-            </div>
-
-            <div class="sidebar-card">
               <h3>ファイル構成</h3>
               ${renderFileStructure(project.file_structure)}
             </div>
@@ -203,7 +197,7 @@ function renderProject(project, allProjects) {
               ${renderRelated(project.related_projects, allProjects)}
             </div>
 
-            <a class="btn-primary btn-block" href="index.html#projects">代表実績に戻る</a>
+            <a class="btn-primary btn-block" href="index.html#projects">主要制作物に戻る</a>
           </aside>
         </div>
       </section>
@@ -217,7 +211,7 @@ function renderProject(project, allProjects) {
 
 function renderNav(currentId, allProjects) {
   const tiers = ["flagship", "technical", "iot", "tooling"];
-  const tierNames = { flagship: "代表実績", technical: "AI・OCR", iot: "計測連携", tooling: "基盤・ツール" };
+  const tierNames = { flagship: "主要制作物", technical: "AI・OCR", iot: "計測連携", tooling: "基盤・ツール" };
   let html = "";
 
   tiers.forEach((tier) => {

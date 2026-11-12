@@ -250,7 +250,7 @@
     {
       "id": "shaft-ring-ocr",
       "tier": "technical",
-      "name": "手書き測定表の読み取り → Excel",
+      "name": "手書き測定表を読み取って Excel にするツール",
       "repo": "shaft_ring_ocr",
       "version": "1.1.11.0",
       "tagline": "手書き測定表を読み取り、確認したうえでExcelへ変換する",
@@ -319,10 +319,10 @@
     {
       "id": "rag-system",
       "tier": "technical",
-      "name": "社内文書へ質問できるローカルAI",
+      "name": "社内文書に質問できる仕組み",
       "repo": "RAG",
       "version": null,
-      "tagline": "社内資料を外部へ出さず、質問して答えを探すローカルAI",
+      "tagline": "社内資料を外部へ出さず、質問して答えを探す仕組み",
       "overview": [
         "PDF・テキスト・Markdown・Web ページを横断して質問に答えるローカル RAG システムです。LM Studio のローカル API（チャットモデル + Embedding モデル）と ChromaDB ベクトルストアを組み合わせ、クラウド依存なしで社内ドキュメント検索・質問応答を実現します。",
         "当初は CLI として設計されましたが、現在は PyQt6 ベースの GUI アプリに発展。ダークテーマの UI で、インデックス追加・質問・ソース一覧・チャンク管理をタブ操作できます。",
@@ -378,7 +378,7 @@
     {
       "id": "excel-translator",
       "tier": "technical",
-      "name": "Excel 翻訳ツール",
+      "name": "Excel の文章を翻訳するツール",
       "repo": "Excel翻訳",
       "version": null,
       "tagline": "Excelの文字を複数の翻訳手段でセル単位に翻訳する",
@@ -443,7 +443,7 @@
     {
       "id": "pdf-to-excel",
       "tier": "technical",
-      "name": "PDF の表を Excel へ変換",
+      "name": "PDF の表を Excel にするツール",
       "repo": "PDF→EXCEL変換",
       "version": null,
       "tagline": "スキャンPDFの表を読み取り、Excelとして再利用できるようにする",
@@ -495,10 +495,10 @@
     {
       "id": "needle-detection",
       "tier": "iot",
-      "name": "硬度計の針をカメラで読むツール",
+      "name": "硬さ測定器の針をカメラで読むツール",
       "repo": "NeedleDetection",
       "version": null,
-      "tagline": "カメラ映像から硬度計の針位置を検出し、硬度値へ換算して自動入力する",
+      "tagline": "カメラ映像から硬さ測定器の針位置を検出し、硬さの値へ換算して自動入力する",
       "overview": [
         "Web カメラ映像からショア硬度計の針位置を OpenCV Hough 変換でリアルタイム検出し、換算表に基づく硬度値を計算・表示・自動送信するツールです。元は単一ファイルから config/・ui/・image_processing/・calibration/ 等にリファクタリング済みです。",
         "機器タイプ別の換算表を読み込み、針角度から硬度値を算出。キーボードショートカット・自動送信・音声フィードバック・設定 UI を備えます。",
@@ -559,10 +559,10 @@
     {
       "id": "shore-hardness-calibration",
       "tier": "iot",
-      "name": "ショア硬度計の校正アプリ",
+      "name": "硬さ測定器の校正アプリ",
       "repo": "D型SH計_校正",
       "version": "0.4.13.0",
-      "tagline": "ショア硬度計の校正測定と換算表をデータベースで管理し、針検出ツールへ公開する",
+      "tagline": "硬さ測定器の校正測定と換算表をデータベースで管理し、針読取ツールへ公開する",
       "overview": [
         "D型ショア硬度計の校正測定を入力し、線形回帰（β0/β1）と換算表を SQL Server（Hardness_Tester_NTC）へ公開する PyQt6 アプリです。",
         "測定打点は value_1〜value_10 の横持ちで保持し、換算係数は conversion_exports へ追記のみで履歴化。NeedleDetection が最新係数を参照する連携仕様を持ちます。",
@@ -703,10 +703,10 @@
     {
       "id": "time5370-data-acquisition",
       "tier": "iot",
-      "name": "無線硬度計からのデータ取得",
+      "name": "無線の硬さ測定器からデータを取るツール",
       "repo": "TIME5370_データ取得",
       "version": null,
-      "tagline": "Bluetooth対応の硬度計から測定値を受け取り、パソコンへ自動入力する",
+      "tagline": "無線対応の硬さ測定器から測定値を受け取り、パソコンへ自動入力する",
       "overview": [
         "BLE（Bluetooth Low Energy）対応の硬度計 TIME5370 から測定データを取得する PyQt6 デスクトップアプリです。bleak ライブラリで BLE 通信を行い、専用プロトコル（NOTIFY/WRITE UUID、CRC16-MODBUS）でデバイスと通信します。",
         "QLocalServer による単一インスタンス制御、衝撃方向設定、バッテリー残量取得、測定値の自動キーボード送信（pynput）を実装。モジュール分割（ble/, ui/, conversion.py）で保守性を確保しています。"
@@ -760,10 +760,10 @@
     {
       "id": "softening-point-data",
       "tier": "iot",
-      "name": "軟化点試験データの受信・保存",
+      "name": "軟化点測定データの受信・保存",
       "repo": "軟化点データ取得",
       "version": null,
-      "tagline": "軟化点試験装置からの受信を安定化し、履歴保存とExcel連携までつなぐ",
+      "tagline": "軟化点測定装置からの受信を安定化し、履歴保存とExcel連携までつなぐ",
       "overview": [
         "軟化点試験装置から TCP/IP（Telnet プロトコル）またはシリアル（COM）でデータを受信し、ログ保存と SQL Server（SP_results）への登録を行う tkinter アプリです。",
         "受信・解析・DB・UI を sp_receiver/ パッケージへ分割し、履歴一覧・年フィルタ・Excel VBA からの履歴選択貼付、トースト通知まで現場運用をカバーします。",
@@ -832,7 +832,7 @@
     {
       "id": "voice-hid",
       "tier": "iot",
-      "name": "音声をキーボード入力へ変換",
+      "name": "声を文字入力に変えるツール",
       "repo": "Voice_HID",
       "version": null,
       "tagline": "話した内容を認識し、選択中の入力欄へキーボード入力として送る",
@@ -883,10 +883,10 @@
     {
       "id": "py-to-exe-tool",
       "tier": "tooling",
-      "name": "Python を実行ファイル化する工具",
+      "name": "プログラムを単体起動できる形にする工具",
       "repo": "pyファイルexe化ツール",
       "version": null,
-      "tagline": "必要な部品の検出から実行ファイル作成までを画面操作で行う工具",
+      "tagline": "必要な部品の検出から配布用ファイル作成までを画面操作で行う工具",
       "overview": [
         "Python スクリプトを PyInstaller で EXE 化するための tkinter GUI ツールです。AST 解析で import 文から依存パッケージを自動検出し、一時 venv を作成→pip install→PyInstaller ビルドを一気通貫で実行します。",
         "標準ライブラリ・問題モジュールの判定ロジック、日本語パス対策、エラー表示改善、onefile/onedir ラジオ選択、venv 削除リトライ等の実運用改善が蓄積されています。"
@@ -1015,7 +1015,7 @@
     {
       "id": "drawing-pdf-manager",
       "tier": "tooling",
-      "name": "図面番号と PDF の管理ツール",
+      "name": "図面番号から PDF を探すツール",
       "repo": "図番pdf管理ソフト",
       "version": "1.0",
       "tagline": "図面番号とPDFの対応を探して、その場で内容を確認するツール",
@@ -1066,7 +1066,7 @@
     {
       "id": "drawing-editor",
       "tier": "tooling",
-      "name": "図面への番号付け・掃除ツール",
+      "name": "図面への番号付け・汚れ除去ツール",
       "repo": "図面編集ツール",
       "version": null,
       "tagline": "図面への番号振りと、スキャン図面の背景汚れ除去を支援する",
@@ -1118,7 +1118,7 @@
     {
       "id": "cursor-usage-dashboard",
       "tier": "tooling",
-      "name": "AI開発ツールの使用量見える化",
+      "name": "AI開発ツールの使用量を見える化する画面",
       "repo": "Cursor使用量",
       "version": null,
       "tagline": "開発支援AIの利用量を集計し、グラフで確認する",

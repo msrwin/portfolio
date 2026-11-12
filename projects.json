@@ -32,28 +32,28 @@
     ],
     "technical": [
       {
-        "name": "手書き測定表の読み取り → Excel",
+        "name": "手書き測定表を読み取って Excel にするツール",
         "repo": "shaft_ring_ocr",
         "version": "1.1.11.0",
         "category": "ocr",
         "highlight": "Tesseract + VLM + 36 pytest"
       },
       {
-        "name": "社内文書へ質問できるローカルAI",
+        "name": "社内文書に質問できる仕組み",
         "repo": "RAG",
         "version": null,
         "category": "ai",
         "highlight": "LM Studio × ChromaDB ローカル RAG"
       },
       {
-        "name": "Excel 翻訳ツール",
+        "name": "Excel の文章を翻訳するツール",
         "repo": "Excel翻訳",
         "version": null,
         "category": "translation",
         "highlight": "マルチエンジンフォールバック・GGUF"
       },
       {
-        "name": "PDF の表を Excel へ変換",
+        "name": "PDF の表を Excel にするツール",
         "repo": "PDF→EXCEL変換",
         "version": null,
         "category": "vision",
@@ -62,14 +62,14 @@
     ],
     "iot": [
       {
-        "name": "硬度計の針をカメラで読むツール",
+        "name": "硬さ測定器の針をカメラで読むツール",
         "repo": "NeedleDetection",
         "version": null,
         "category": "cv",
         "highlight": "OpenCV Hough 変換・リアルタイム"
       },
       {
-        "name": "ショア硬度計の校正アプリ",
+        "name": "硬さ測定器の校正アプリ",
         "repo": "D型SH計_校正",
         "version": "0.4.13.0",
         "category": "calibration",
@@ -83,21 +83,21 @@
         "highlight": "Mi/Ve COM受信・キーボード/TPパイプ・MSI"
       },
       {
-        "name": "無線硬度計からのデータ取得",
+        "name": "無線の硬さ測定器からデータを取るツール",
         "repo": "TIME5370_データ取得",
         "version": null,
         "category": "ble",
         "highlight": "BLE 硬度計連携"
       },
       {
-        "name": "軟化点試験データの受信・保存",
+        "name": "軟化点測定データの受信・保存",
         "repo": "軟化点データ取得",
         "version": null,
         "category": "tcp",
         "highlight": "Telnet・SQL Server 履歴・Excel VBA 連携"
       },
       {
-        "name": "音声をキーボード入力へ変換",
+        "name": "声を文字入力に変えるツール",
         "repo": "Voice_HID",
         "version": null,
         "category": "voice",
@@ -106,7 +106,7 @@
     ],
     "tooling": [
       {
-        "name": "Python を実行ファイル化する工具",
+        "name": "プログラムを単体起動できる形にする工具",
         "repo": "pyファイルexe化ツール",
         "version": null,
         "category": "build",
@@ -120,21 +120,21 @@
         "highlight": "DPAPI・SendInput・HTTP自動更新など横断再利用"
       },
       {
-        "name": "図面番号と PDF の管理ツール",
+        "name": "図面番号から PDF を探すツール",
         "repo": "図番pdf管理ソフト",
         "version": "1.0",
         "category": "utility",
         "highlight": "SQLite + PDF プレビュー"
       },
       {
-        "name": "図面への番号付け・掃除ツール",
+        "name": "図面への番号付け・汚れ除去ツール",
         "repo": "図面編集ツール",
         "version": null,
         "category": "utility",
         "highlight": "番号振り付け・背景除去"
       },
       {
-        "name": "AI開発ツールの使用量見える化",
+        "name": "AI開発ツールの使用量を見える化する画面",
         "repo": "Cursor使用量",
         "version": null,
         "category": "analytics",
