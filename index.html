@@ -8,7 +8,7 @@
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+JP:wght@400;500;700&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
-  <link rel="stylesheet" href="styles.css?v=20261112c">
+  <link rel="stylesheet" href="styles.css?v=20261112d">
 </head>
 <body>
   <header class="site-header">
@@ -17,6 +17,7 @@
       <ul class="nav-links">
         <li><a href="#about">自己紹介</a></li>
         <li><a href="#highlights">強み</a></li>
+        <li><a href="#talk">発表資料</a></li>
         <li><a href="#projects">代表実績</a></li>
         <li><a href="#skills">スキル</a></li>
         <li><a href="#contact">連絡先</a></li>
@@ -111,7 +112,41 @@
       </div>
     </section>
 
-    <section id="projects" class="section">
+    <section id="talk" class="section">
+      <div class="container">
+        <h2 class="section-title">社内発表資料</h2>
+        <p class="section-desc">品質保証の測定記録デジタル化について、社内発表会で説明した資料です。どのような改善を行ったかを知ってもらうために掲載しています。</p>
+        <article class="talk-panel">
+          <div class="talk-main">
+            <div class="card-header">
+              <span class="card-version">社内発表</span>
+              <span class="card-category">品質保証 DX</span>
+            </div>
+            <h3>測定記録のデジタル化と基幹システムへの自動入力</h3>
+            <p class="story-outcome">紙の手書き記録と手入力を前提にした業務を、測定器からの自動取込・記録管理・登録自動化までつなぎ、品質記録の信頼性向上を進めた取り組みです。</p>
+            <ul class="talk-points">
+              <li>発表者: 佐藤 勝（技術回答としても参加）</li>
+              <li>内容: 測定値の無線取込、硬度計のカメラ読取、記録アプリ、登録自動化まで一連の流れ</li>
+              <li>見せ方: 課題 → 改善後 → 効果の順。実機写真や社内画面など社外秘は非公開にし、何を話したかの構成は残しています</li>
+            </ul>
+            <div class="hero-actions">
+              <a class="btn-primary" href="assets/presentations/DX発表.pptx">発表資料をダウンロード（PPTX）</a>
+              <a class="btn-secondary" href="#projects">関連する代表実績へ</a>
+            </div>
+          </div>
+          <aside class="talk-aside">
+            <p class="aside-label">公開範囲について</p>
+            <ul>
+              <li>社名・拠点・実データ画面・実測動画は外しています</li>
+              <li>消した画像・動画の位置には、何を見せていたかの説明を残しています</li>
+              <li>市販測定器の外観など、一般的な画像のみ残しています</li>
+            </ul>
+          </aside>
+        </article>
+      </div>
+    </section>
+
+    <section id="projects" class="section section-alt">
       <div class="container">
         <h2 class="section-title">代表実績</h2>
         <p class="section-desc">面接ではまずこの3件を中心にお話しします。課題 → 対応 → 工夫、の順で説明できます。</p>
@@ -344,7 +379,7 @@
       </div>
     </section>
 
-    <section id="architecture" class="section section-alt">
+    <section id="architecture" class="section">
       <div class="container">
         <h2 class="section-title">設計で意識していること</h2>
         <div class="arch-grid">
@@ -390,7 +425,7 @@
       </div>
     </section>
 
-    <section id="skills" class="section">
+    <section id="skills" class="section section-alt">
       <div class="container">
         <h2 class="section-title">スキルセット</h2>
         <p class="section-desc">面接では、代表実績の話の流れに合わせて具体例を説明します。</p>
@@ -451,7 +486,7 @@
       </div>
     </section>
 
-    <section id="contact" class="section section-alt">
+    <section id="contact" class="section">
       <div class="container">
         <h2 class="section-title">連絡先</h2>
         <div class="contact-panel">
@@ -475,6 +510,6 @@
     </div>
   </footer>
 
-  <script src="script.js?v=20261112c"></script>
+  <script src="script.js?v=20261112d"></script>
 </body>
 </html>
