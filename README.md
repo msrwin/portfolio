@@ -90,7 +90,7 @@ py -3 -m http.server 8080
 
 ## カスタマイズ
 
-- 氏名・連絡先は `index.html` の hero / contact を編集（現在は「佐藤 勝」）
+- 氏名は `index.html` の hero / footer を編集（現在は「佐藤 勝」）。一般公開のため連絡先は掲載しない
 - プロジェクト詳細は `projects-detail.json` を編集
 - スクリーンショット追加後は `py -3 tools/build_screenshots_manifest.py` を実行
 - 社外公開で伏せたい情報があれば `projects-detail.json` の説明文を調整
