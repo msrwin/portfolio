@@ -8,7 +8,7 @@
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+JP:wght@400;500;700&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
-  <link rel="stylesheet" href="styles.css?v=20260708">
+  <link rel="stylesheet" href="styles.css?v=20261112">
 </head>
 <body>
   <header class="site-header">
@@ -35,7 +35,7 @@
         </p>
         <div class="hero-stats">
           <div class="stat">
-            <span class="stat-num">12+</span>
+            <span class="stat-num">14+</span>
             <span class="stat-label">主要アプリ</span>
           </div>
           <div class="stat">
@@ -158,17 +158,17 @@
 
           <article data-id="equipment-management" class="project-card featured" data-category="enterprise">
             <div class="card-header">
-              <span class="card-version">v3.0.2</span>
+              <span class="card-version">v3.2.43</span>
               <span class="card-category">フルスタック</span>
             </div>
             <h4>測定機器管理台帳システム</h4>
             <p class="card-repo">管理台帳_統合版</p>
-            <p>工場の測定機器台帳、始業点検・年次校正記録、承認ワークフロー、帳票出力を一元管理。デスクトップ（PyQt6）と Web（React + FastAPI）の二系統で同一ビジネスロジックを共有。</p>
+            <p>工場の測定機器台帳、始業点検・年次校正記録、承認ワークフロー、帳票出力を一元管理。デスクトップ（PyQt6）と Web（React + FastAPI）の二系統で同一ビジネスロジックを共有。v3.2 で始業点検専用アプリ・社外校正・専用ログイン/DPAPI を拡張。</p>
             <ul class="feature-list">
-              <li>6種別の機器登録モード（マルチメータ・三次元など専用画面）</li>
-              <li>承認ワークフロー・メール通知・管理図出力</li>
+              <li>トレイ常駐の始業点検アプリと複数測定種別 UI</li>
+              <li>社外校正依頼・承認取消・管理図出力</li>
               <li><code>services/</code> レイヤの Desktop / Web 共有アーキテクチャ</li>
-              <li>WiX MSI 配布・OpenAPI スナップショットからの型生成</li>
+              <li>専用 SQL ログイン＋DPAPI・WiX MSI 配布</li>
             </ul>
             <div class="tech-tags">
               <span>PyQt6</span><span>FastAPI</span><span>React</span><span>SQL Server</span><span>WiX</span>
@@ -200,12 +200,12 @@
 
           <article data-id="analysis-measurement-storage" class="project-card featured" data-category="enterprise">
             <div class="card-header">
-              <span class="card-version">v1.0.x</span>
+              <span class="card-version">TP 1.1.9 / CTE 1.0.16 / VM 1.0.5</span>
               <span class="card-category">DB アプリ群</span>
             </div>
             <h4>分析測定結果保存システム</h4>
             <p class="card-repo">分析測定結果保存（TP / CTE / VM）</p>
-            <p>品質保証向け測定データの SQL Server 登録・管理。3アプリ構成で TP 測定・CTE 入力・VM 揮発分管理を担い、履歴テーブル・管理図・印刷機能を提供。</p>
+            <p>品質保証向け測定データの SQL Server 登録・管理。3アプリ構成で TP 測定・CTE 入力・VM 粘度計管理を担い、履歴テーブル・管理図・印刷機能を提供。</p>
             <ul class="feature-list">
               <li>カラム名ベース DB アクセス・入力バリデーション</li>
               <li>グローバルホットキー貼付・CTE↔TP 連携</li>
@@ -329,13 +329,51 @@
             <a href="project.html?id=needle-detection" class="card-detail-link">詳細を見る →</a>
           </article>
 
+          <article data-id="shore-hardness-calibration" class="project-card" data-category="iot">
+            <div class="card-header">
+              <span class="card-version">v0.4.13</span>
+              <span class="card-category">校正・DB</span>
+            </div>
+            <h4>D型SH計 校正</h4>
+            <p class="card-repo">D型SH計_校正</p>
+            <p>D型ショア硬度計の測定入力・線形回帰・換算係数を SQL Server へ公開。NeedleDetection が最新換算を参照する校正データ基盤。</p>
+            <ul class="feature-list">
+              <li>打点入力・β0/β1 回帰・換算表公開履歴</li>
+              <li>旧 xlsm 取込・専用ログイン・WiX MSI</li>
+            </ul>
+            <div class="tech-tags">
+              <span>PyQt6</span><span>SQL Server</span><span>pytest</span><span>WiX</span>
+            </div>
+          
+            <a href="project.html?id=shore-hardness-calibration" class="card-detail-link">詳細を見る →</a>
+          </article>
+
+          <article data-id="measurecom" class="project-card" data-category="iot">
+            <div class="card-header">
+              <span class="card-version">v1.1.8</span>
+              <span class="card-category">シリアル入力</span>
+            </div>
+            <h4>MeasureCOM</h4>
+            <p class="card-repo">MeasureCOM</p>
+            <p>測定器 COM 受信値を前面ウィンドウへキーボード入力、または TP へパイプ送信するタスクトレイ常駐ツール。Mi/Ve デュアル COM・電文 AUTO 判定対応。</p>
+            <ul class="feature-list">
+              <li>Excel / 管理台帳 / 始業点検への自動入力</li>
+              <li>ID 範囲フィルタ・読み上げ・MSI 自動更新</li>
+            </ul>
+            <div class="tech-tags">
+              <span>pyserial</span><span>tkinter</span><span>SendInput</span><span>WiX</span>
+            </div>
+          
+            <a href="project.html?id=measurecom" class="card-detail-link">詳細を見る →</a>
+          </article>
+
           <article data-id="time5370-data-acquisition" class="project-card" data-category="iot">
             <div class="card-header">
               <span class="card-category">BLE</span>
             </div>
             <h4>TIME5370 データ取得</h4>
             <p class="card-repo">TIME5370_データ取得</p>
-            <p>Mitutoyo TIME5370 硬度計から BLE 経由で測定データを受信し、キーボード入力として PC アプリへ送信。システムトレイ常駐。</p>
+            <p>TIME 社硬度計 TIME5370 から BLE 経由で測定データを受信し、キーボード入力として PC アプリへ送信。システムトレイ常駐。</p>
             <ul class="feature-list">
               <li>BLE スキャン・接続・プロトコル実装</li>
               <li>換算表 CSV による値変換・単一インスタンス制御</li>
@@ -349,17 +387,17 @@
 
           <article data-id="softening-point-data" class="project-card" data-category="iot">
             <div class="card-header">
-              <span class="card-category">TCP/IP</span>
+              <span class="card-category">TCP/IP + DB</span>
             </div>
             <h4>軟化点データ取得</h4>
             <p class="card-repo">軟化点データ取得</p>
-            <p>軟化点試験装置から TCP/IP（Telnet）で測定データを自動受信・ログ保存。Sample ID によるログ自動分類。</p>
+            <p>軟化点試験装置から TCP/IP（Telnet）で測定データを自動受信し、ログ保存と SQL Server 履歴登録。Excel VBA からの履歴貼付にも対応。</p>
             <ul class="feature-list">
-              <li>Telnet ネゴシエーション・ネットワーク共有フォルダ保存</li>
-              <li>仮想 TCP-IP エコーツール同梱</li>
+              <li>Telnet 安定受信・履歴 UI・専用ログイン</li>
+              <li>Excel VBA 連携・仮想 TCP-IP エコーツール</li>
             </ul>
             <div class="tech-tags">
-              <span>socket</span><span>threading</span><span>tkinter</span>
+              <span>socket</span><span>pyodbc</span><span>tkinter</span><span>VBA</span>
             </div>
           
             <a href="project.html?id=softening-point-data" class="card-detail-link">詳細を見る →</a>
@@ -403,8 +441,8 @@
           <article data-id="common-utilities" class="project-card compact" data-category="tooling">
             <h4>汎用機能集</h4>
             <p class="card-repo">汎用機能集</p>
-            <p>SQL Server 接続、設定管理、ログ、MSI ビルド、バージョン bump、数値入力ウィジェットなど再利用モジュール群。</p>
-            <div class="tech-tags"><span>pyodbc</span><span>WiX</span><span>PyQt6</span></div>
+            <p>SQL Server 接続、DPAPI 秘密保護、SendInput、MSI/HTTP 自動更新、バージョン bump、PyQt テーマなど再利用モジュール群。</p>
+            <div class="tech-tags"><span>pyodbc</span><span>DPAPI</span><span>WiX</span><span>PyQt6</span></div>
           
             <a href="project.html?id=common-utilities" class="card-detail-link">詳細を見る →</a>
           </article>
@@ -456,7 +494,7 @@
           <div class="arch-card">
             <div class="arch-icon">03</div>
             <h3>配布まで含めた開発</h3>
-            <p>PyInstaller EXE 化、WiX MSI、ランタイム DLL 除外（OS 同梱 DLL 利用）、共有フォルダ自動更新まで一貫対応。</p>
+            <p>PyInstaller EXE 化、WiX MSI、ランタイム DLL 除外（OS 同梱 DLL 利用）、共有フォルダ / HTTP マニフェスト自動更新、DPAPI による秘密保護まで一貫対応。</p>
           </div>
           <div class="arch-card">
             <div class="arch-icon">04</div>
@@ -490,10 +528,10 @@
     <div class="container">
       <p>本ポートフォリオは複数リポジトリの内容を整理して構成しています。</p>
       <p class="footer-note">社内業務システムのため、デモ・ソース公開は個別にご相談ください。</p>
-      <p class="footer-copy">Generated 2026-07-07</p>
+      <p class="footer-copy">Updated 2026-11-12</p>
     </div>
   </footer>
 
-  <script src="script.js?v=20260708"></script>
+  <script src="script.js?v=20261112"></script>
 </body>
 </html>

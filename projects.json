@@ -1,5 +1,5 @@
 {
-  "generated": "2026-07-07",
+  "generated": "2026-11-12",
   "source_root": null,
   "selection_criteria": [
     "技術的深度（アーキテクチャ・AI/IoT・テスト）",
@@ -11,9 +11,9 @@
       {
         "name": "測定機器管理台帳システム",
         "repo": "管理台帳_統合版",
-        "version": "3.0.2.0",
+        "version": "3.2.43.0",
         "category": "enterprise",
-        "highlight": "PyQt6 + React + FastAPI + SQL Server、services/ 共有"
+        "highlight": "PyQt6 + React + FastAPI + SQL Server、始業点検アプリ・専用ログイン/DPAPI"
       },
       {
         "name": "U-WAVE 中継システム",
@@ -25,7 +25,7 @@
       {
         "name": "分析測定結果保存システム",
         "repo": "分析測定結果保存",
-        "version": "TP 1.0.13 / CTE 1.0.3 / VM 1.0.3",
+        "version": "TP 1.1.9 / CTE 1.0.16 / VM 1.0.5",
         "category": "enterprise",
         "highlight": "3アプリ構成・SQL Server・管理図・MSI自動更新"
       }
@@ -69,6 +69,20 @@
         "highlight": "OpenCV Hough 変換・リアルタイム"
       },
       {
+        "name": "D型SH計 校正",
+        "repo": "D型SH計_校正",
+        "version": "0.4.13.0",
+        "category": "calibration",
+        "highlight": "線形回帰・換算係数DB公開・NeedleDetection連携"
+      },
+      {
+        "name": "MeasureCOM",
+        "repo": "MeasureCOM",
+        "version": "1.1.8.0",
+        "category": "serial",
+        "highlight": "Mi/Ve COM受信・キーボード/TPパイプ・MSI"
+      },
+      {
         "name": "TIME5370 データ取得",
         "repo": "TIME5370_データ取得",
         "version": null,
@@ -80,7 +94,7 @@
         "repo": "軟化点データ取得",
         "version": null,
         "category": "tcp",
-        "highlight": "Telnet プロトコル・ログ自動分類"
+        "highlight": "Telnet・SQL Server 履歴・Excel VBA 連携"
       },
       {
         "name": "音声入力 HID",
@@ -103,7 +117,7 @@
         "repo": "汎用機能集",
         "version": null,
         "category": "library",
-        "highlight": "横断再利用モジュール群"
+        "highlight": "DPAPI・SendInput・HTTP自動更新など横断再利用"
       },
       {
         "name": "図番 PDF 管理ソフト",
@@ -148,6 +162,18 @@
     {
       "repo": "管理台帳_SQLServer(旧)",
       "reason": "統合版に置き換え済み"
+    },
+    {
+      "repo": "特定時間帯ミュート",
+      "reason": "単機能ユーティリティ"
+    },
+    {
+      "repo": "メールインポート",
+      "reason": "単機能ユーティリティ"
+    },
+    {
+      "repo": "工程検査_異常検知システム",
+      "reason": "試作・選定基準外"
     }
   ]
 }

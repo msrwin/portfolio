@@ -1,52 +1,56 @@
 {
-  "generated": "2026-07-07",
+  "generated": "2026-11-12",
   "projects": [
     {
       "id": "equipment-management",
       "tier": "flagship",
       "name": "測定機器管理台帳システム",
       "repo": "管理台帳_統合版",
-      "version": "3.0.2.0",
+      "version": "3.2.43.0",
       "tagline": "工場の測定機器台帳・点検・校正・承認を一元管理するデスクトップ＋Webシステム",
       "overview": [
         "工場で使用する測定機器の台帳管理、始業点検・年次校正の記録、承認ワークフロー、帳票出力を担うエンタープライズ向け業務システムです。PyQt6 デスクトップ版と React Web 版の2系統を提供し、いずれも SQL Server をバックエンドとします。",
         "最大の設計思想は、デスクトップ UI と Web API が別アプリではなく、同一のビジネスロジック層 services/ を共有する構成である点です。点検判定・権限・登録モード・CSV 出力などのコアロジックを一元化することで、デスクトップと Web の仕様乖離を防いでいます。",
-        "マルチメータ・三次元測定機・ゲージ・セットリングなど、機器種別ごとに専用画面と登録フォームを持ち、承認フロー・メール通知・管理図表示まで品質保証業務の一連をカバーします。"
+        "v3.2 系では、トレイ常駐の始業点検専用アプリ、社外校正依頼フロー、複数測定種別の UI 強化、専用 SQL ログイン＋DPAPI による接続秘密保護など、現場運用とセキュリティを大きく拡張しています。"
       ],
       "problem": "測定機器の校正期限管理、始業点検・年次校正の記録、承認ワークフロー、複数拠点・機器種別の台帳運用が紙・Excel・個別システムに分散し、漏れ・二重管理・監査対応の負荷が大きかった。",
-      "solution": "SQL Server 上の統合台帳にデスクトップ（PyQt6）と Web（React + FastAPI）の両面からアクセス。共通 services/ 層で判定・権限・登録ロジックを共有し、PIN 認証・変更申請承認・MSI 自動更新で現場運用と配布を両立。",
+      "solution": "SQL Server 上の統合台帳にデスクトップ（PyQt6）と Web（React + FastAPI）の両面からアクセス。共通 services/ 層で判定・権限・登録ロジックを共有し、PIN 認証・変更申請承認・始業点検アプリ・MSI 自動更新で現場運用と配布を両立。接続はアプリ専用ログインと DPAPI 保護で最小権限化する。",
       "features": [
         "機器一覧（始業点検 / 年次校正タブ）・地域切替・検索フィルタ・校正期限バー表示",
         "6種類の登録モード（基本・マルチメータ・三次元・ゲージ・セットリング・基準片）",
-        "始業点検・年次校正・機器履歴の CRUD と測定値自動判定",
-        "変更申請・承認・却下・一括承認・メール通知ワークフロー",
+        "トレイ常駐の始業点検アプリ（認識番号選択・基準値/公差初期表示・合否・履歴復元）",
+        "複数測定種別タブ・表示優先度・校正期限切れの視覚警告",
+        "社外校正依頼（依頼状況・校正事業者・年次登録連携）",
+        "変更申請・承認・却下・一括承認・承認取消・メール通知ワークフロー",
         "管理図（コントロールチャート）・CSV エクスポート",
-        "Web 版（React + TypeScript + Vite + TailwindCSS）",
-        "QR コードによる詳細画面オープン",
-        "MSI インストーラー配布・自動アップデート"
+        "Web 版（React + TypeScript + Vite + TailwindCSS）・閲覧専用オープン",
+        "専用 SQL ログイン＋DPAPI による接続パスワード保護",
+        "MSI インストーラー配布・自動アップデート・常駐リマインダー"
       ],
-      "tech_stack": ["Python 3.12", "PyQt6", "FastAPI", "Uvicorn", "React", "TypeScript", "Vite", "TailwindCSS", "SQL Server", "pyodbc", "PyYAML", "pytest", "pytest-qt", "WiX Toolset", "PyInstaller"],
-      "architecture": "デスクトップ UI ──直接──┐\n                         ├── services/（共通コア）── database/ ── SQL Server\nWeb フロント ──HTTP── web_api/（FastAPI）──委譲──┘\n\n主要ディレクトリ:\n  main_app.py, web_api/, services/, database/\n  ui/, screens/, frontend/, infrastructure/",
+      "tech_stack": ["Python 3.12", "PyQt6", "FastAPI", "Uvicorn", "React", "TypeScript", "Vite", "TailwindCSS", "SQL Server", "pyodbc", "PyYAML", "DPAPI", "pytest", "pytest-qt", "WiX Toolset", "PyInstaller"],
+      "architecture": "デスクトップ UI ──直接──┐\n                         ├── services/（共通コア）── database/ ── SQL Server\nWeb フロント ──HTTP── web_api/（FastAPI）──委譲──┘\n始業点検アプリ（トレイ常駐）── services/ 共有\n\n主要ディレクトリ:\n  main_app.py, startup_inspection_app.py, web_api/, services/, database/\n  ui/, screens/, frontend/, infrastructure/",
       "highlights": [
         "デスクトップと Web で services/ レイヤを共有するハイブリッドアーキテクチャ",
+        "始業点検専用アプリの分離により、現場入力と台帳管理の操作導線を最適化",
+        "専用ログイン＋DPAPI への移行と起動時スキーマ作成の停止による権限分離",
         "200+ pytest による Web API セキュリティ・承認・登録ロジックの網羅的テスト",
         "composition.yaml による DB・地域・メール・表示設定の外部化",
-        "api_outline/shards/ による大規模コードベース向け AI 索引",
         "WiX MSI + ランタイム DLL 除外ポリシーによるエンタープライズ配布"
       ],
       "challenges": [
         "デスクトップと Web の機能同等性を services/ 共有で維持しつつ UI 差異を吸収",
-        "登録モード誤選択時の訂正（モード変更・誤登録退避）設計",
+        "複数測定種別・社外校正・始業点検アプリの業務フロー整合",
+        "既存配布環境からの接続秘密移行と最小権限ログインへの段階切替",
         "Web API のセッション認証・権限レベル・列挙攻撃対策の段階的強化"
       ],
       "file_structure": {
-        "main_entry": "main_app.py",
+        "main_entry": "main_app.py / startup_inspection_app.py",
         "key_dirs": ["services/", "web_api/", "database/", "ui/", "screens/", "frontend/", "infrastructure/", "docs/", "test_file/"],
-        "config": "composition.yaml, file_version_info.txt"
+        "config": "composition.yaml, file_version_info*.txt"
       },
       "testing": "pytest + pytest-qt。test_file/ に 200 件超のテスト（Web API 認証・承認・登録・UI mixin・MSI ビルド等）",
-      "distribution": "WiX MSI（python build_msi.py）。PyInstaller onedir + file_version_info.txt v3.0.2.0。ランタイム DLL は同梱除外。",
-      "related_projects": ["汎用機能集", "管理台帳_SQLServer(旧)（置換済み）"]
+      "distribution": "WiX MSI（python build_msi.py）。PyInstaller onedir + file_version_info.txt v3.2.43.0（始業点検・リマインダーは別 version info）。ランタイム DLL は同梱除外。",
+      "related_projects": ["汎用機能集", "MeasureCOM", "管理台帳_SQLServer(旧)（置換済み）"]
     },
     {
       "id": "uwave-relay",
@@ -100,7 +104,7 @@
       "tier": "flagship",
       "name": "分析測定結果保存システム",
       "repo": "分析測定結果保存",
-      "version": "TP 1.0.13.0 / CTE 1.0.3.2 / VM 1.0.3.1",
+      "version": "TP 1.1.9.1 / CTE 1.0.16.0 / VM 1.0.5.1",
       "tagline": "分析室の TP・CTE・VM 測定データを SQL Server に集約・管理する3アプリ群",
       "overview": [
         "品質分析室における3種類の測定業務（TP 測定データ管理、CTE 熱膨張係数入力、VM 粘度計管理）を、それぞれ独立した PyQt6 デスクトップアプリとして提供するシステム群です。いずれも SQL Server（pyodbc）をバックエンドとし、composition.yaml による設定外部化・MSI 配布・自動アップデートを共通パターンとしています。",
@@ -364,7 +368,98 @@
       },
       "testing": "テストコードなし（手動検証）",
       "distribution": "PyInstaller（--onefile --noconsole 推奨）",
-      "related_projects": ["shore（ビルド環境）", "pyファイルexe化ツール"]
+      "related_projects": ["shore（ビルド環境）", "D型SH計_校正", "pyファイルexe化ツール"]
+    },
+    {
+      "id": "shore-hardness-calibration",
+      "tier": "iot",
+      "name": "D型SH計 校正",
+      "repo": "D型SH計_校正",
+      "version": "0.4.13.0",
+      "tagline": "D型ショア硬度計の測定入力・線形回帰・換算係数を SQL Server へ公開",
+      "overview": [
+        "D型ショア硬度計の校正測定を入力し、線形回帰（β0/β1）と換算表を SQL Server（Hardness_Tester_NTC）へ公開する PyQt6 アプリです。",
+        "測定打点は value_1〜value_10 の横持ちで保持し、換算係数は conversion_exports へ追記のみで履歴化。NeedleDetection が最新係数を参照する連携仕様を持ちます。",
+        "旧 xlsm からの取込、相関係数コピー、換算表印刷、WiX MSI 配布まで一連の校正業務をカバーします。"
+      ],
+      "problem": "ショア硬度計の校正データと換算係数が Excel に分散し、針検出ツール側での最新係数参照・履歴管理・監査が困難だった。",
+      "solution": "校正セッション・打点・回帰結果・換算公開を SQL Server に集約。NeedleDetection は DB 上の最新換算を参照し、校正アプリは専用ログインで測定データのみ読み書きする。",
+      "features": [
+        "年度×機械の校正セッション管理",
+        "測定入力（真値・打点 value_1〜10）と保存",
+        "線形回帰（β0/β1）・散布図・相関係数コピー",
+        "換算表の DB 公開（conversion_exports 追記履歴）",
+        "旧 xlsm 測定データの取込移行",
+        "換算表印刷（QPainter）",
+        "専用 SQL ログイン・MSI 配布"
+      ],
+      "tech_stack": ["Python", "PyQt6", "pyodbc", "SQL Server", "PyYAML", "openpyxl", "pytest", "PyInstaller", "WiX Toolset"],
+      "architecture": "main.py → shore_calibration/\n  domain/（回帰・打点）\n  db/（sessions, samples, exports）\n  ui/（測定・回帰・換算・取込）\n  → SQL Server（Hardness_Tester_NTC）\nNeedleDetection ← conversion_exports 参照",
+      "highlights": [
+        "校正データと換算公開の責務分離（追記のみの公開履歴）",
+        "NeedleDetection との換算 DB 連携仕様",
+        "汎用機能集（pyqt-modern-theme / spreadsheet-table 等）の適用",
+        "専用ログインによる測定データのみの読み書き権限"
+      ],
+      "challenges": [
+        "xlsm 時代の縦持ち打点から value_1〜10 横持ちへの移行",
+        "換算表印刷の見切れ・縮小の解消（全行 QPainter 描画）",
+        "MSI 配置失敗時に既存配布物を消さないビルド設計"
+      ],
+      "file_structure": {
+        "main_entry": "main.py",
+        "key_dirs": ["shore_calibration/", "app_config/", "docs/", "scripts/", "tests/"],
+        "config": "app_config/database_connection.yaml, file_version_info.txt"
+      },
+      "testing": "pytest（tests/ に 13 本前後。回帰・スキーマ・UI 周辺）",
+      "distribution": "PyInstaller onedir + WiX MSI（build_msi.py）。file_version_info v0.4.13.0。",
+      "related_projects": ["NeedleDetection", "汎用機能集", "管理台帳_統合版"]
+    },
+    {
+      "id": "measurecom",
+      "tier": "iot",
+      "name": "MeasureCOM",
+      "repo": "MeasureCOM",
+      "version": "1.1.8.0",
+      "tagline": "測定器 COM 受信値を前面ウィンドウへキーボード入力、または TP へパイプ送信",
+      "overview": [
+        "測定器から COM 経由で受け取った測定値を、前面ウィンドウへキーボード入力する（既定）、または TP 測定アプリへ名前付きパイプで送信するタスクトレイ常駐ツールです。",
+        "Mi / Ve のデュアル COM、電文形式の AUTO 判定（形式U / 形式DT）、小数点桁・測定器 ID 範囲フィルタ、受信音・読み上げを備え、Excel・管理台帳・始業点検アプリへの入力を自動化します。",
+        "管理台帳や始業点検が前面のときは TP パイプ設定でもキーボード入力に切り替えるなど、現場の前面アプリ判定を組み込んでいます。"
+      ],
+      "problem": "測定器の送信値を Excel や業務アプリへ手入力する作業が頻発し、転記ミスと入力遅延が品質記録のボトルネックになっていた。",
+      "solution": "COM 受信→値整形→SendInput キーボード入力（または TP パイプ）の常駐パイプライン化。U-WAVE 系電文にも対応し、ID 範囲や小数点モードで現場要件に合わせる。",
+      "features": [
+        "Mi / Ve デュアル COM 受信と電文 AUTO 判定",
+        "前面ウィンドウへのキーボード自動入力（Enter/Tab 付与可）",
+        "TP 測定アプリへの名前付きパイプ送信",
+        "管理台帳・始業点検前面時のキーボード入力切替",
+        "小数点桁数（指定/自動）・測定器 ID 範囲フィルタ",
+        "受信音・測定値読み上げ・タスクトレイ常駐",
+        "Windows 起動時自動実行・接続自動開始",
+        "WiX MSI 配布・自動アップデート"
+      ],
+      "tech_stack": ["Python", "tkinter", "pyserial", "pystray", "Pillow", "PyYAML", "pytest", "PyInstaller", "WiX Toolset"],
+      "architecture": "main.py → measurecom/\n  serial_receiver → packet_parse → value_format\n  → excel_keyboard（SendInput） / tp_pipe\n  tray + ui_settings（タスクトレイ常駐）",
+      "highlights": [
+        "U-WAVE 系電文（形式U / DT）への対応と ID 範囲フィルタ",
+        "前面アプリ判定による TP パイプとキーボード入力の切替",
+        "プロセス内 SAPI 読み上げで入力遅延を避ける設計",
+        "15 本前後の pytest と MSI 自動更新"
+      ],
+      "challenges": [
+        "CR なし電文の確定・再同期と接続開始時のデッドロック回避",
+        "SendInput 型不一致による Excel 入力失敗の根因修正",
+        "Ve 負値オフセットや 1000 正値処理など機種差分の設定化"
+      ],
+      "file_structure": {
+        "main_entry": "main.py",
+        "key_dirs": ["measurecom/", "tests/", "docs/", "auto_update_tk/"],
+        "config": "composition.yaml, update_config.yaml, file_version_info.txt"
+      },
+      "testing": "pytest（tests/ に 15 本前後。パース・入力・設定・前面判定など）",
+      "distribution": "PyInstaller + WiX MSI（build_msi.py）。file_version_info v1.1.8.0。",
+      "related_projects": ["汎用機能集", "分析測定結果保存", "管理台帳_統合版", "U-WAVE分岐送信"]
     },
     {
       "id": "time5370-data-acquisition",
@@ -414,42 +509,44 @@
       "name": "軟化点データ取得",
       "repo": "軟化点データ取得",
       "version": null,
-      "tagline": "軟化点試験装置から TCP/Telnet/シリアルでデータを受信・自動分類保存",
+      "tagline": "軟化点試験装置から TCP/Telnet で受信し、ログと SQL Server 履歴へ登録",
       "overview": [
-        "軟化点試験装置から TCP/IP（Telnet プロトコル）またはシリアル（COM）でデータを受信し、サンプル ID に基づいてログを自動分類・保存する tkinter アプリです。",
-        "Telnet ネゴシエーションの実装、STX/ETX フレーム境界での受信データ分割、サンプル ID パターン（G/IP/BP 等）によるフォルダ分類を行います。",
-        "受信スレッドと監視スレッドのソケット競合を解消し、フレーム境界を考慮した安定受信を実現しました。"
+        "軟化点試験装置から TCP/IP（Telnet プロトコル）またはシリアル（COM）でデータを受信し、ログ保存と SQL Server（SP_results）への登録を行う tkinter アプリです。",
+        "受信・解析・DB・UI を sp_receiver/ パッケージへ分割し、履歴一覧・年フィルタ・Excel VBA からの履歴選択貼付、トースト通知まで現場運用をカバーします。",
+        "接続は専用 SQL ログインのみ許可し、過去ログの一括インポートや Android 受信経路の補助資料も同梱しています。"
       ],
-      "problem": "軟化点試験装置のデータ受信で文字欠け・行結合・項目順序崩れが発生し、ログの信頼性が低下していた。",
-      "solution": "ETX フレーム境界抽出 + Telnet コマンド除去のタイミング改善 + 受信スレッド専用化で安定受信。サンプル ID パターンでログ自動分類。",
+      "problem": "軟化点試験装置のデータがファイルログ中心で、再参照・Excel 転記・監査用の履歴検索がしづらく、受信時の文字欠け・行結合も発生していた。",
+      "solution": "ETX フレーム境界抽出で安定受信しつつ、解析結果を SQL Server へ登録。履歴 UI と Excel VBA で再利用率を上げ、専用ログインで DB 権限を最小化。",
       "features": [
         "TCP（Telnet）/ シリアル（COM）両モード",
-        "Telnet プロトコルネゴシエーション実装",
-        "STX/ETX フレーム境界抽出",
-        "サンプル ID パターンによるログ自動分類",
-        "受信データの正規化（NUL/STX/ETX 除去、改行統一）",
+        "Telnet プロトコルネゴシエーション・STX/ETX フレーム境界抽出",
+        "受信データの SQL Server（SP_results）登録とログ自動保存",
+        "履歴一覧（年フィルタ）・詳細選択・トースト通知",
+        "Excel VBA による履歴選択・軟化点貼付",
+        "重複登録スキップ・過去ログ一括インポート",
         "仮想 TCP-IP エコーツール"
       ],
-      "tech_stack": ["Python", "tkinter", "pyserial", "socket", "configparser", "logging", "PyInstaller"],
-      "architecture": "軟化点データ取得.py（単一ファイル）\n  TelnetProtocol クラス\n  ConnectionManager（TCP/シリアル切替）\n  受信スレッド → フレーム分割 → キュー → UI表示/ログ保存",
+      "tech_stack": ["Python", "tkinter", "pyserial", "socket", "pyodbc", "SQL Server", "PyYAML", "pytest", "PyInstaller"],
+      "architecture": "軟化点データ取得.py → sp_receiver/\n  network/ services/ database/ ui/\n  受信スレッド → フレーム分割 → 解析 → DB/ログ → UI\n  vba/（Excel 履歴貼付）",
       "highlights": [
-        "Telnet プロトコルの自前実装",
-        "フレーム境界（ETX）ベースの受信安定化",
-        "ソケット競合（監視 recv 横取り）の根因修正"
+        "単一ファイルからドメイン別パッケージへのリファクタ",
+        "Telnet 安定受信と SQL Server 履歴の両立",
+        "Excel VBA 連携による現場の転記作業削減",
+        "専用ログインのみ許可する接続方針"
       ],
       "challenges": [
         "受信スレッドと監視スレッドのソケット競合",
         "フレーム境界を無視した分割による表示崩れ",
-        "Telnet ネゴシエーション応答のタイミング"
+        "DB 二重保存・重複判定と現場 UX（トースト・貼付）の両立"
       ],
       "file_structure": {
         "main_entry": "軟化点データ取得.py",
-        "key_dirs": ["docs/", "logs/", "ログサンプル/"],
+        "key_dirs": ["sp_receiver/", "vba/", "apk/", "docs/", "tests/", "ログサンプル/"],
         "config": "settings.ini, 軟化点データ取得.spec"
       },
-      "testing": "ログサンプルによる手動回帰検証",
-      "distribution": "PyInstaller（軟化点データ取得.spec）",
-      "related_projects": ["TIME5370_データ取得"]
+      "testing": "pytest（解析・DB 周り）＋ログサンプルによる手動回帰検証",
+      "distribution": "PyInstaller（軟化点データ取得.spec。隣接 汎用機能集 を参照）",
+      "related_projects": ["汎用機能集", "TIME5370_データ取得", "分析測定結果保存"]
     },
     {
       "id": "voice-hid",
@@ -544,42 +641,43 @@
       "version": null,
       "tagline": "デスクトップアプリ横断の共通モジュール参照実装リポジトリ群",
       "overview": [
-        "今後作成するデスクトップアプリ向けの共通機能を、参照実装として保管するリポジトリ群です。各サブフォルダは独立した git リポジトリとして管理され、実プロジェクトから抽出・汎用化されたモジュールを収録しています。",
-        "管理台帳_統合版・分析測定結果保存・U-WAVE分岐送信 等の実プロジェクトが参照元となっており、新規アプリ開発時はここからコピーして利用する運用です。"
+        "今後作成するデスクトップアプリ向けの共通機能を、参照実装として保管するリポジトリ群です。各サブフォルダは独立パッケージとして管理され、実プロジェクトから抽出・汎用化されたモジュールを収録しています。",
+        "管理台帳_統合版・分析測定結果保存・U-WAVE分岐送信・MeasureCOM・D型SH計_校正 等が参照元／利用先となっており、新規アプリ開発時はここからコピーして利用する運用です。"
       ],
-      "problem": "各デスクトップアプリで MSI ビルド・自動更新・DB 接続・設定管理・ログ等の同種コードが重複実装されていた。",
-      "solution": "実績のある実装をサブリポジトリとして抽出・汎用化。新規・移行時は汎用機能集を正とし、各アプリ内の重複を置き換え。",
+      "problem": "各デスクトップアプリで MSI ビルド・自動更新・DB 接続・設定管理・ログ・キーボード入力・秘密保護等の同種コードが重複実装されていた。",
+      "solution": "実績のある実装をパッケージとして抽出・汎用化。新規・移行時は汎用機能集を正とし、各アプリ内の重複を置き換え。",
       "features": [
-        "msi-installer: PyInstaller onedir + WiX MSI 作成",
-        "auto-update: MSI 自動アップデート（PyQt6 版）",
-        "auto-update-tk: MSI 自動アップデート（tkinter 版）",
-        "desktop-config: AppData 設定パス + INI 読み書き",
-        "pyodbc-sqlserver: SQL Server 接続・行参照",
-        "pyqt-single-instance: Windows 単一起動",
-        "numeric-input: JIS 丸め・半角変換",
-        "logging-bootstrap: AppData ログ + 日次ローテーション",
-        "file-version-bump: file_version_info.txt バージョン増分 CLI"
+        "msi-installer: PyInstaller onedir + WiX MSI 作成（WiX v6・日本語 UI）",
+        "auto-update / auto-update-http / auto-update-tk: MSI 自動更新（UNC / HTTP マニフェスト / tk）",
+        "windows-dpapi-secret: Windows DPAPI による秘密保護",
+        "windows-key-input: SendInput キーボード入力エミュレーション",
+        "windows-global-hotkey: グローバルホットキー + クリップボード貼付",
+        "tk-center-toast: Tkinter 中央トースト",
+        "desktop-config / pyodbc-sqlserver / logging-bootstrap",
+        "pyqt-modern-theme / pyqt-spreadsheet-table / pyqt-sendinput-lineedit",
+        "file-version-bump / parent-process-watchdog / cursor-python-envs-fix"
       ],
-      "tech_stack": ["Python", "PyQt6", "tkinter", "pyodbc", "PyInstaller", "WiX Toolset", "PyYAML"],
-      "architecture": "独立サブリポジトリ群:\n  msi-installer/, auto-update/, auto-update-tk/\n  desktop-config/, pyodbc-sqlserver/\n  pyqt-single-instance/, numeric-input/\n  logging-bootstrap/, file-version-bump/",
+      "tech_stack": ["Python", "PyQt6", "tkinter", "pyodbc", "PyInstaller", "WiX Toolset", "PyYAML", "DPAPI"],
+      "architecture": "モノレポの独立パッケージ群:\n  msi-installer/, auto-update*/, windows-*/,\n  desktop-config/, pyodbc-sqlserver/, pyqt-*/,\n  logging-bootstrap/, file-version-bump/",
       "highlights": [
         "実プロジェクトからの抽出・汎用化パターン",
+        "DPAPI・SendInput・HTTP 自動更新など横断課題の共通化",
         "ランタイム DLL 除外ポリシーの統一",
         "file-version-bump によるバージョン管理 CLI 化"
       ],
       "challenges": [
         "各アプリ内の重複実装の段階的置き換え",
-        "サブリポジトリ間のバージョン同期",
+        "パッケージ間のバージョン同期",
         "アプリ固有要件の分離"
       ],
       "file_structure": {
         "main_entry": "各サブフォルダが独立",
-        "key_dirs": ["msi-installer/", "auto-update/", "auto-update-tk/", "desktop-config/", "pyodbc-sqlserver/", "file-version-bump/"],
+        "key_dirs": ["msi-installer/", "auto-update/", "auto-update-http/", "windows-dpapi-secret/", "windows-key-input/", "pyodbc-sqlserver/", "file-version-bump/"],
         "config": "各サブフォルダの README.md, *.example"
       },
       "testing": "各サブモジュールに個別テスト（限定的）",
       "distribution": "ライブラリとして各アプリにコピー利用",
-      "related_projects": ["管理台帳_統合版", "分析測定結果保存", "U-WAVE分岐送信"]
+      "related_projects": ["管理台帳_統合版", "分析測定結果保存", "U-WAVE分岐送信", "MeasureCOM", "D型SH計_校正"]
     },
     {
       "id": "drawing-pdf-manager",

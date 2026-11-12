@@ -49,7 +49,7 @@ py -3 -m http.server 8080
 |---------|------|
 | `index.html` | ポートフォリオ一覧 |
 | `project.html` | プロジェクト詳細ページ（テンプレート） |
-| `projects-detail.json` | 全16プロジェクトの詳細データ |
+| `projects-detail.json` | 全18プロジェクトの詳細データ |
 | `project-detail.js` | 詳細ページの描画ロジック |
 | `styles.css` | スタイル |
 | `script.js` | 一覧ページのスクロールアニメーション等 |
@@ -69,10 +69,12 @@ py -3 -m http.server 8080
 
 ## 選定プロジェクト（概要）
 
+最終更新: 2026-11-12（前回 2026-07-08 以降の作成・更新を反映）
+
 ### Flagship（代表作）
-- 測定機器管理台帳システム（管理台帳_統合版）v3.0.2
+- 測定機器管理台帳システム（管理台帳_統合版）v3.2.43（始業点検アプリ・社外校正・専用ログイン/DPAPI）
 - U-WAVE 中継システム（U-WAVE分岐送信）v1.1.x
-- 分析測定結果保存（TP / CTE / VM）v1.0.x
+- 分析測定結果保存（TP / CTE / VM）TP 1.1.9 / CTE 1.0.16 / VM 1.0.5
 
 ### Technical（AI・OCR）
 - 軸受リング OCR → Excel（shaft_ring_ocr）v1.1.11
@@ -82,13 +84,15 @@ py -3 -m http.server 8080
 
 ### IoT・リアルタイム
 - ショア硬度計 針検出（NeedleDetection）
+- D型SH計 校正（線形回帰・換算 DB・NeedleDetection 連携）v0.4.13
+- MeasureCOM（COM 受信 → キーボード/TP パイプ）v1.1.8
 - TIME5370 データ取得（BLE）
-- 軟化点データ取得（TCP/Telnet）
+- 軟化点データ取得（TCP/Telnet + SQL Server 履歴 + Excel VBA）
 - 音声入力 HID（Voice_HID）
 
 ### Tooling
 - pyファイル exe 化ツール
-- 汎用機能集
+- 汎用機能集（DPAPI・SendInput・HTTP 自動更新など追加）
 - 図番 PDF 管理ソフト
 - 図面編集ツール
 - Cursor 使用量ダッシュボード
