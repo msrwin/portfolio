@@ -16,11 +16,11 @@
         "highlight": "PyQt6 + React + FastAPI + SQL Server、始業点検アプリ・専用ログイン/DPAPI"
       },
       {
-        "name": "U-WAVE 中継システム",
+        "name": "測定器データ中継システム（U-WAVE）",
         "repo": "U-WAVE分岐送信",
         "version": "client 1.1.12 / relay 1.1.10",
         "category": "distributed",
-        "highlight": "MQTT・シリアル・40+ pytest・WiX MSI"
+        "highlight": "共有測定器の複数PC配信・MQTT・pytest・MSI"
       },
       {
         "name": "分析測定結果保存システム",

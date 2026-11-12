@@ -91,12 +91,24 @@ function renderGallery(images) {
 function renderProject(project, allProjects) {
   const tierLabel = TIER_LABELS[project.tier] || project.tier;
   const versionBadge = project.version
-    ? `<span class="card-version">v${escapeHtml(project.version)}</span>`
+    ? `<span class="card-version">${escapeHtml(project.version)}</span>`
+    : "";
+  const roleBadge = project.role
+    ? `<span class="card-category">${escapeHtml(project.role)}</span>`
     : "";
 
-  document.title = `${project.name} | 開発ポートフォリオ`;
+  document.title = `${project.name} | 佐藤ポートフォリオ`;
 
   const images = (project.assets && project.assets.screenshots) || [];
+  const impactHtml = project.impact
+    ? `<div class="impact-banner">${escapeHtml(project.impact)}</div>`
+    : "";
+  const talkingHtml = project.interview_talking_points && project.interview_talking_points.length
+    ? `<div class="detail-block">
+         <h2>面接で話すポイント</h2>
+         ${renderList(project.interview_talking_points, "talking-points")}
+       </div>`
+    : "";
 
   return `
     <article class="detail-page">
@@ -110,6 +122,7 @@ function renderProject(project, allProjects) {
           <div class="detail-hero-meta">
             <span class="tier-badge tier-${project.tier === "flagship" ? "1" : project.tier === "technical" ? "2" : project.tier === "iot" ? "3" : "4"}">${tierLabel}</span>
             ${versionBadge}
+            ${roleBadge}
             <span class="card-category">${escapeHtml(project.repo)}</span>
           </div>
           <h1>${escapeHtml(project.name)}</h1>
@@ -121,6 +134,8 @@ function renderProject(project, allProjects) {
       <section class="detail-section">
         <div class="container detail-grid">
           <div class="detail-main">
+            ${impactHtml}
+
             <div class="detail-block">
               <h2>概要</h2>
               <div class="detail-text">${renderOverview(project.overview)}</div>
@@ -136,6 +151,8 @@ function renderProject(project, allProjects) {
                 <p>${escapeHtml(project.solution)}</p>
               </div>
             </div>
+
+            ${talkingHtml}
 
             <div class="detail-block">
               <h2>主な機能</h2>
@@ -186,7 +203,7 @@ function renderProject(project, allProjects) {
               ${renderRelated(project.related_projects, allProjects)}
             </div>
 
-            <a class="btn-primary btn-block" href="index.html#projects">一覧に戻る</a>
+            <a class="btn-primary btn-block" href="index.html#projects">代表実績に戻る</a>
           </aside>
         </div>
       </section>
@@ -200,7 +217,7 @@ function renderProject(project, allProjects) {
 
 function renderNav(currentId, allProjects) {
   const tiers = ["flagship", "technical", "iot", "tooling"];
-  const tierNames = { flagship: "代表作", technical: "AI・OCR", iot: "IoT", tooling: "ツール" };
+  const tierNames = { flagship: "代表実績", technical: "AI・OCR", iot: "計測連携", tooling: "基盤・ツール" };
   let html = "";
 
   tiers.forEach((tier) => {

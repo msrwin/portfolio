@@ -1,8 +1,9 @@
 # 開発ポートフォリオ
 
-公開サイト: `https://msrwin.github.io/portfolio/`
+公開サイト: https://msrwin.github.io/portfolio/
 
-ローカル環境上の各リポジトリを調査し、ポートフォリオに掲載するアプリを抽出した静的サイトです。
+面接・カジュアル面談向けに、製造現場の課題解決実績を整理した静的サイトです。  
+一覧では代表実績3件を中心に、課題 → 打ち手 → 工夫の順で読める構成にしています。
 
 ## 自己紹介
 
@@ -25,14 +26,12 @@ Start-Process ".\index.html"
 
 ### 詳細ページ
 
-各プロジェクトカードの「詳細を見る →」リンクから遷移できます。
-
-直接 URL で開く例:
+各プロジェクトの「詳細を見る」から遷移できます。詳細ページには、面接で話すポイントも載せています。
 
 ```text
 project.html?id=equipment-management
-project.html?id=shaft-ring-ocr
 project.html?id=uwave-relay
+project.html?id=analysis-measurement-storage
 ```
 
 > **注意:** 詳細ページは `projects-detail.json` を fetch するため、`file://` 直開きで CORS エラーになる場合があります。その場合は簡易 HTTP サーバーで起動してください。
@@ -47,60 +46,41 @@ py -3 -m http.server 8080
 
 | ファイル | 内容 |
 |---------|------|
-| `index.html` | ポートフォリオ一覧 |
-| `project.html` | プロジェクト詳細ページ（テンプレート） |
-| `projects-detail.json` | 全18プロジェクトの詳細データ |
-| `project-detail.js` | 詳細ページの描画ロジック |
+| `index.html` | 面接向け一覧（自己紹介・代表3件・その他） |
+| `project.html` | プロジェクト詳細ページ |
+| `projects-detail.json` | 詳細データ（impact / interview_talking_points 含む） |
+| `project-detail.js` | 詳細ページ描画 |
 | `styles.css` | スタイル |
-| `script.js` | 一覧ページのスクロールアニメーション等 |
-| `projects.json` | 選定基準・プロジェクト一覧（機械可読） |
-| `screenshots/` | 画面キャプチャ格納（任意） |
-| `tools/build_screenshots_manifest.py` | スクリーンショット一覧JSON生成 |
+| `script.js` | 一覧ページの挙動 |
+| `projects.json` | 選定一覧（機械可読） |
+| `screenshots/` | 画面キャプチャ |
+| `tools/build_screenshots_manifest.py` | スクリーンショット一覧生成 |
 
-## 詳細ページの内容（各プロジェクト）
+## 面接での使い方（推奨）
 
-- 概要・課題・解決策
-- 主な機能一覧
-- アーキテクチャ図
-- 技術的ハイライト・克服した課題
-- ファイル構成・テスト・配布情報
-- 関連プロジェクトへのリンク
-- 他プロジェクトへのナビゲーション
+1. 自己紹介（品質保証 × 業務システム、要件〜保守）
+2. 代表作1: 測定機器管理台帳（Desktop/Web 共有ロジック）
+3. 代表作2: 測定器データ中継（物理制約を分散構成で解く）
+4. 代表作3: 分析測定結果保存（現場入力と証跡の両立）
+5. 必要に応じて MeasureCOM / 汎用機能集 / OCR へ展開
 
 ## 選定プロジェクト（概要）
 
-最終更新: 2026-11-12（前回 2026-07-08 以降の作成・更新を反映）
+最終更新: 2026-11-12
 
-### Flagship（代表作）
-- 測定機器管理台帳システム（管理台帳_統合版）v3.2.43（始業点検アプリ・社外校正・専用ログイン/DPAPI）
-- U-WAVE 中継システム（U-WAVE分岐送信）v1.1.x
-- 分析測定結果保存（TP / CTE / VM）TP 1.1.9 / CTE 1.0.16 / VM 1.0.5
+### 代表実績
+- 測定機器管理台帳システム v3.2.43
+- 測定器データ中継システム（U-WAVE）v1.1.x
+- 分析測定結果保存（TP / CTE / VM）
 
-### Technical（AI・OCR）
-- 軸受リング OCR → Excel（shaft_ring_ocr）v1.1.11
-- RAG System（RAG）
-- Excel 翻訳ツール（Excel翻訳）
-- PDF → Excel 変換（PDF→EXCEL変換）
-
-### IoT・リアルタイム
-- ショア硬度計 針検出（NeedleDetection）
-- D型SH計 校正（線形回帰・換算 DB・NeedleDetection 連携）v0.4.13
-- MeasureCOM（COM 受信 → キーボード/TP パイプ）v1.1.8
-- TIME5370 データ取得（BLE）
-- 軟化点データ取得（TCP/Telnet + SQL Server 履歴 + Excel VBA）
-- 音声入力 HID（Voice_HID）
-
-### Tooling
-- pyファイル exe 化ツール
-- 汎用機能集（DPAPI・SendInput・HTTP 自動更新など追加）
-- 図番 PDF 管理ソフト
-- 図面編集ツール
-- Cursor 使用量ダッシュボード
+### 補足実績
+- 計測連携: MeasureCOM、D型SH計校正、針検出、TIME5370、軟化点、音声 HID
+- AI/OCR: 軸受リング OCR、RAG、Excel 翻訳、PDF→Excel
+- 基盤: 汎用機能集、exe 化ツール、図面系、Cursor 使用量
 
 ## カスタマイズ
 
-- 氏名・連絡先を追加する場合は `index.html` の hero セクションを編集
-- プロジェクト詳細を更新する場合は `projects-detail.json` を編集
-- スクリーンショットを追加する場合は `screenshots/` に配置し、`py -3 tools/build_screenshots_manifest.py` を実行して `screenshots/manifest.json` を生成（コミット・push）
-- スクリーンショットを追加する場合は `portfolio/assets/` を作成し、詳細ページに画像セクションを追加
-- 社外公開用に社名・機密情報を伏せる場合は `projects-detail.json` の説明文を調整
+- 氏名・連絡先は `index.html` の hero / contact を編集
+- プロジェクト詳細は `projects-detail.json` を編集
+- スクリーンショット追加後は `py -3 tools/build_screenshots_manifest.py` を実行
+- 社外公開で伏せたい情報があれば `projects-detail.json` の説明文を調整

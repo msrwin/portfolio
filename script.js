@@ -25,7 +25,7 @@ document.addEventListener("DOMContentLoaded", () => {
     { threshold: 0.08, rootMargin: "0px 0px -40px 0px" }
   );
 
-  document.querySelectorAll(".project-card, .arch-card, .about-card").forEach((el) => {
+  document.querySelectorAll(".project-card, .arch-card, .about-card, .featured-story, .intro-panel, .contact-panel").forEach((el) => {
     el.style.opacity = "0";
     el.style.transform = "translateY(16px)";
     el.style.transition = "opacity 0.5s ease, transform 0.5s ease";
