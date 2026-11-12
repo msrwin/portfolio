@@ -377,6 +377,10 @@ a:hover {
   margin-top: 32px;
 }
 
+.about-grid-4 {
+  grid-template-columns: repeat(2, 1fr);
+}
+
 .about-card {
   background: var(--surface);
   border: 1px solid var(--border);
