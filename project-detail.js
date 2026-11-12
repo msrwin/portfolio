@@ -97,7 +97,7 @@ function renderProject(project, allProjects) {
     ? `<span class="card-category">${escapeHtml(project.role)}</span>`
     : "";
 
-  document.title = `${project.name} | 佐藤ポートフォリオ`;
+  document.title = `${project.name} | 佐藤 勝ポートフォリオ`;
 
   const images = (project.assets && project.assets.screenshots) || [];
   const impactHtml = project.impact

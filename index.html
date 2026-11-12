@@ -3,17 +3,17 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>佐藤 | 製造現場向け業務システム・計測連携ポートフォリオ</title>
-  <meta name="description" content="品質保証の現場知見をもとに、測定機器台帳・計測器連携・分析データ管理まで設計・開発・配布・保守を一貫して担当した実績ポートフォリオ">
+  <title>佐藤 勝 | 製造現場向け業務システムのポートフォリオ</title>
+  <meta name="description" content="佐藤 勝のポートフォリオ。品質保証の現場知見をもとに、測定機器管理・計測器連携・分析データ管理の設計から導入・保守まで一貫して担当した実績をまとめています。">
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+JP:wght@400;500;700&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
-  <link rel="stylesheet" href="styles.css?v=20261112b">
+  <link rel="stylesheet" href="styles.css?v=20261112c">
 </head>
 <body>
   <header class="site-header">
     <nav class="nav">
-      <a class="logo" href="#top">佐藤 / Portfolio</a>
+      <a class="logo" href="#top">佐藤 勝</a>
       <ul class="nav-links">
         <li><a href="#about">自己紹介</a></li>
         <li><a href="#highlights">強み</a></li>
@@ -27,26 +27,26 @@
   <main id="top">
     <section class="hero">
       <div class="hero-inner">
-        <p class="hero-label">Manufacturing DX / QA Systems</p>
-        <p class="hero-name">佐藤</p>
-        <h1>品質保証の現場課題を、<br>使える業務システムにする</h1>
+        <p class="hero-identity">Portfolio of</p>
+        <h1 class="hero-fullname">佐藤 勝</h1>
+        <p class="hero-role">品質保証 × 業務システム開発</p>
         <p class="hero-lead">
-          品質保証として分析業務に携わりながら、測定機器管理・計測器連携・分析データ管理の
-          要件定義から設計・実装・テスト・MSI 配布・現場導入・保守まで一貫して担当しています。
-          「作って終わり」ではなく、現場で継続利用される設計を重視します。
+          品質保証として分析業務に携わりながら、測定機器の管理、計測器との自動連携、分析データの保存までを
+          企画から設計・実装・テスト・導入・保守まで一貫して担当しています。
+          「作って終わり」ではなく、現場で使い続けられる仕組みにすることを重視します。
         </p>
         <div class="hero-stats">
           <div class="stat">
-            <span class="stat-num">要件〜保守</span>
-            <span class="stat-label">一気通貫で担当</span>
+            <span class="stat-num">企画〜保守</span>
+            <span class="stat-label">現場導入まで一貫担当</span>
           </div>
           <div class="stat">
-            <span class="stat-num">Desktop+Web</span>
-            <span class="stat-label">同一業務ロジック共有</span>
+            <span class="stat-num">PC版 + Web版</span>
+            <span class="stat-label">同じ業務ルールで運用</span>
           </div>
           <div class="stat">
-            <span class="stat-num">実機連携</span>
-            <span class="stat-label">BLE / シリアル / MQTT</span>
+            <span class="stat-num">実機と連携</span>
+            <span class="stat-label">測定器から自動で取込</span>
           </div>
         </div>
         <div class="hero-actions">
@@ -58,9 +58,9 @@
         <div class="pitch-card">
           <p class="pitch-kicker">面接で話す軸</p>
           <ol class="pitch-list">
-            <li><strong>現場の業務を理解して設計する</strong><span>紙・Excel・属人運用を、権限と監査に耐える仕組みへ</span></li>
-            <li><strong>Desktop と Web でロジックを二重化しない</strong><span>共通 services 層で仕様乖離を防ぐ</span></li>
-            <li><strong>配布・更新・権限まで含めて完成させる</strong><span>MSI・自動更新・専用ログイン・秘密保護</span></li>
+            <li><strong>現場の仕事を理解して設計する</strong><span>紙・Excel・属人運用を、権限と記録が残る仕組みへ</span></li>
+            <li><strong>画面が違ってもルールは一つにする</strong><span>パソコン版とWeb版で判定や権限を二重に作らない</span></li>
+            <li><strong>配って使えるところまで完成させる</strong><span>インストーラー、自動更新、専用アカウント、パスワード保護</span></li>
           </ol>
         </div>
       </div>
@@ -69,22 +69,22 @@
     <section id="about" class="section">
       <div class="container">
         <h2 class="section-title">自己紹介</h2>
-        <p class="section-desc">面接の冒頭でお伝えする内容です。</p>
+        <p class="section-desc">佐藤 勝 / 面接の冒頭でお伝えする内容です。</p>
         <div class="intro-panel">
           <p>
             製造業の品質保証部門で、分析業務と並行して業務システムの内製開発を行っています。
-            現場の測定・校正・記録業務を理解したうえで、SQL Server を中心に PyQt デスクトップアプリと
-            React / FastAPI の Web を設計・実装しています。
+            現場の測定・校正・記録の流れを理解したうえで、社内データベースを中心に
+            パソコン向けアプリと Web 画面を設計・実装しています。
           </p>
           <p>
-            Cursor を中心に複数 AI を組み合わせた実装・レビューも活用しつつ、
-            共通化・設定外部化・pytest・MSI 配布など、運用後の保守性を意識した設計を続けています。
-            社内技術発表会での発表経験もあります。
+            AI を使った実装・レビューも活用しつつ、共通化、設定の外出し、自動テスト、
+            インストーラー配布など、運用後も保守しやすい設計を続けています。
+            社内の技術発表会での発表経験もあります。
           </p>
           <ul class="intro-points">
             <li>担当範囲: 要件整理 / 設計 / 実装 / テスト / 導入 / 保守</li>
-            <li>主な領域: 測定機器台帳、分析データ管理、計測器からの自動取込</li>
-            <li>志向: 現場課題を理解し、設計から運用まで価値を出せる DX エンジニア</li>
+            <li>主な領域: 測定機器の台帳管理、分析データの保存、測定器からの自動取込</li>
+            <li>志向: 現場課題を理解し、設計から運用まで価値を出せる DX 人材</li>
           </ul>
         </div>
       </div>
@@ -93,19 +93,19 @@
     <section id="highlights" class="section section-alt">
       <div class="container">
         <h2 class="section-title">強み</h2>
-        <p class="section-desc">技術スタックの列挙より先に、採用側に伝えたい価値です。</p>
+        <p class="section-desc">技術名の列挙より先に、伝えたい価値です。</p>
         <div class="about-grid">
           <div class="about-card">
-            <h3>ドメイン起点の設計</h3>
-            <p>校正期限、始業点検、承認、社外校正など、品質保証の実務フローを理解したうえで画面とデータモデルを切っています。現場に残る運用を前提に設計します。</p>
+            <h3>現場の仕事から設計する</h3>
+            <p>校正期限、作業前点検、承認、外部校正など、品質保証の実務の流れを踏まえて画面とデータを設計します。現場に残る運用を前提にします。</p>
           </div>
           <div class="about-card">
-            <h3>一貫した品質と配布</h3>
-            <p>社内ツールでも pytest、権限設計、専用ログイン、DPAPI による秘密保護、WiX MSI / 自動更新まで含めます。「動くデモ」ではなく「配って使える状態」をゴールにします。</p>
+            <h3>配って使える完成度</h3>
+            <p>社内ツールでも、自動テスト、権限設計、専用アカウント、パスワード保護、インストーラーと自動更新まで含めます。「動く試作」ではなく「渡して使える状態」をゴールにします。</p>
           </div>
           <div class="about-card">
-            <h3>横展開できる共通基盤</h3>
-            <p>DB 接続、設定、ログ、MSI、自動更新、キーボード入力などを汎用機能集として切り出し、新規アプリの立ち上がりを速くしています。</p>
+            <h3>横展開できる共通部品</h3>
+            <p>データベース接続、設定、ログ、インストーラー、自動更新、キーボード入力などを共通部品化し、新しいアプリを速く安定して立ち上げます。</p>
           </div>
         </div>
       </div>
@@ -114,7 +114,7 @@
     <section id="projects" class="section">
       <div class="container">
         <h2 class="section-title">代表実績</h2>
-        <p class="section-desc">面接ではまずこの3件を中心にお話しします。課題 → 打ち手 → 技術的な工夫、の順で説明できます。</p>
+        <p class="section-desc">面接ではまずこの3件を中心にお話しします。課題 → 対応 → 工夫、の順で説明できます。</p>
 
         <div class="featured-stack">
 
@@ -122,34 +122,34 @@
             <div class="featured-story-main">
               <div class="card-header">
                 <span class="card-version">代表作 01</span>
-                <span class="card-category">Desktop + Web / SQL Server</span>
+                <span class="card-category">パソコン版 + Web版</span>
               </div>
-              <h3>測定機器管理台帳システム</h3>
-              <p class="story-outcome">校正・点検・承認が分散していた測定機器管理を、デスクトップと Web で同じ業務ルールを共有する統合台帳に再設計しました。</p>
+              <h3>測定機器の管理台帳システム</h3>
+              <p class="story-outcome">校正・点検・承認がバラバラだった測定機器管理を、パソコン版と Web 版で同じルールで使える統合台帳に作り直しました。</p>
               <dl class="story-facts">
                 <div>
                   <dt>課題</dt>
-                  <dd>紙・Excel・個別システムに分散し、期限漏れや二重管理、監査対応の負荷が大きい</dd>
+                  <dd>紙・Excel・個別の仕組みに分かれ、期限漏れや二重管理、監査対応の負担が大きい</dd>
                 </div>
                 <div>
-                  <dt>打ち手</dt>
-                  <dd>共通 services 層 + SQL Server。台帳本体、始業点検アプリ、社外校正、承認フロー、MSI 配布まで一連で構築</dd>
+                  <dt>対応</dt>
+                  <dd>台帳本体、作業前点検アプリ、外部校正の依頼、承認の流れ、インストーラー配布まで一連で構築</dd>
                 </div>
                 <div>
                   <dt>工夫</dt>
-                  <dd>UI を分けても判定・権限・登録ロジックは共有。専用ログインと秘密保護で配布後の権限も設計</dd>
+                  <dd>画面は分けても、合否判定や権限などの業務ルールは共有。配布後の権限も専用アカウントとパスワード保護で設計</dd>
                 </div>
               </dl>
               <div class="tech-tags">
-                <span>Python</span><span>PyQt6</span><span>FastAPI</span><span>React</span><span>SQL Server</span><span>WiX MSI</span>
+                <span>Python</span><span>デスクトップアプリ</span><span>Web API</span><span>React</span><span>SQL Server</span><span>インストーラー</span>
               </div>
-              <a href="project.html?id=equipment-management" class="card-detail-link">詳細・構成を見る →</a>
+              <a href="project.html?id=equipment-management" class="card-detail-link">詳細を見る →</a>
             </div>
             <div class="featured-story-media">
               <a href="screenshots/equipment-management__機器一覧.png" target="_blank" rel="noopener noreferrer">
                 <img src="screenshots/equipment-management__機器一覧.png" alt="測定機器管理台帳の機器一覧画面" loading="lazy">
               </a>
-              <p class="media-cap">機器一覧（校正期限・点検状態を一目で把握）</p>
+              <p class="media-cap">機器一覧（校正期限や点検状態を一覧で確認）</p>
             </div>
           </article>
 
@@ -157,35 +157,35 @@
             <div class="featured-story-main">
               <div class="card-header">
                 <span class="card-version">代表作 02</span>
-                <span class="card-category">分散 / MQTT / シリアル</span>
+                <span class="card-category">測定器連携 / 複数PC配信</span>
               </div>
-              <h3>測定器データ中継システム（U-WAVE）</h3>
-              <p class="story-outcome">1台の測定器出力を、複数の測定用 PC へ安全に振り分ける中継基盤を設計・実装しました。</p>
+              <h3>共有測定器のデータを複数PCへ届ける中継システム</h3>
+              <p class="story-outcome">1台の測定器しかない出力を、中継パソコン経由で複数の測定用パソコンへ安全に振り分けられるようにしました。</p>
               <dl class="story-facts">
                 <div>
                   <dt>課題</dt>
-                  <dd>共有測定器は物理的に1系統の出力しかなく、複数 PC での同時利用と不正受信防止が難しい</dd>
+                  <dd>共有の測定器は出力が1系統しかなく、複数のパソコンで同時に使うことや、関係ない端末への流入防止が難しい</dd>
                 </div>
                 <div>
-                  <dt>打ち手</dt>
-                  <dd>中継 PC で受信し MQTT 配信。クライアントは認証後に仮想 COM へ出力し、既存の測定ソフトへ接続</dd>
+                  <dt>対応</dt>
+                  <dd>中継パソコンで受信して社内ネットワークへ配信。受け取る側は認証後に仮想の通信ポートへ出し、既存の測定ソフトへつなぐ</dd>
                 </div>
                 <div>
                   <dt>工夫</dt>
-                  <dd>パケット解析・ルーティング・常駐運用を分離し、pytest と MSI 配布で現場展開できる形にした</dd>
+                  <dd>データの読み取り、振り分け、常駐運用を分けて設計。自動テストとインストーラー配布で現場展開できる形にした</dd>
                 </div>
               </dl>
               <div class="tech-tags">
-                <span>Python</span><span>MQTT</span><span>pyserial</span><span>tkinter</span><span>pytest</span><span>WiX MSI</span>
+                <span>Python</span><span>社内ネットワーク配信</span><span>シリアル通信</span><span>自動テスト</span><span>インストーラー</span>
               </div>
-              <a href="project.html?id=uwave-relay" class="card-detail-link">詳細・構成を見る →</a>
+              <a href="project.html?id=uwave-relay" class="card-detail-link">詳細を見る →</a>
             </div>
             <div class="featured-story-aside">
               <p class="aside-label">面接で深掘りされやすい点</p>
               <ul>
-                <li>なぜ MQTT を選んだか</li>
-                <li>測定器 ID ベースの振り分け設計</li>
-                <li>現場常駐（トレイ・再接続・更新）</li>
+                <li>なぜ社内ネットワーク配信にしたか</li>
+                <li>測定器ごとの振り分け設計</li>
+                <li>常駐運用（起動、再接続、更新）</li>
               </ul>
             </div>
           </article>
@@ -194,35 +194,35 @@
             <div class="featured-story-main">
               <div class="card-header">
                 <span class="card-version">代表作 03</span>
-                <span class="card-category">分析室 / 3アプリ構成</span>
+                <span class="card-category">分析室向け / 3アプリ</span>
               </div>
-              <h3>分析測定結果保存システム</h3>
-              <p class="story-outcome">分析室の測定データを Excel 起点から SQL Server 管理へ移し、履歴・管理図・関連試験連携まで標準化しました。</p>
+              <h3>分析室の測定結果を保存・管理するシステム</h3>
+              <p class="story-outcome">分析室の測定データを Excel 中心の運用からデータベース管理へ移し、履歴確認・管理図・関連試験への反映まで整えました。</p>
               <dl class="story-facts">
                 <div>
                   <dt>課題</dt>
-                  <dd>測定種別ごとに入力方法が分かれ、統計確認や他試験への反映、証跡管理が属人化していた</dd>
+                  <dd>測定の種類ごとに入力方法が分かれ、後からの確認や他試験への反映、記録の残し方が属人化していた</dd>
                 </div>
                 <div>
-                  <dt>打ち手</dt>
-                  <dd>測定種別に特化した3アプリを用意しつつ、DB・設定・MSI 自動更新の型は共通化</dd>
+                  <dt>対応</dt>
+                  <dd>用途別の3アプリを用意しつつ、データベース、設定、インストーラー自動更新の型は共通化</dd>
                 </div>
                 <div>
                   <dt>工夫</dt>
-                  <dd>管理図を業務画面に合わせて描画し、高速入力や試験間連携など現場作業に寄せた UI にした</dd>
+                  <dd>管理図を業務画面に合わせて表示し、速い入力や試験同士の連携など、現場作業に寄せた操作感にした</dd>
                 </div>
               </dl>
               <div class="tech-tags">
-                <span>Python</span><span>PyQt6</span><span>SQL Server</span><span>QPainter</span><span>WiX MSI</span>
+                <span>Python</span><span>デスクトップアプリ</span><span>SQL Server</span><span>管理図</span><span>インストーラー</span>
               </div>
-              <a href="project.html?id=analysis-measurement-storage" class="card-detail-link">詳細・構成を見る →</a>
+              <a href="project.html?id=analysis-measurement-storage" class="card-detail-link">詳細を見る →</a>
             </div>
             <div class="featured-story-aside">
               <p class="aside-label">一緒に伝える関連実績</p>
               <ul>
-                <li>MeasureCOM: 測定値の自動入力</li>
-                <li>軟化点データ取得: 装置受信と履歴 DB</li>
-                <li>汎用機能集: 共通モジュール横展開</li>
+                <li>測定値の自動入力ツール</li>
+                <li>軟化点試験データの受信・履歴保存</li>
+                <li>複数アプリで使う共通部品集</li>
               </ul>
             </div>
           </article>
@@ -231,111 +231,111 @@
 
         <div class="more-projects">
           <h3 class="more-title">その他の実績</h3>
-          <p class="more-desc">代表3件を補足する関連テーマです。詳細は必要に応じて展開してください。</p>
+          <p class="more-desc">代表3件を補足する関連テーマです。必要に応じて開いてください。</p>
 
           <details class="project-group" open>
-            <summary>計測器連携・自動入力</summary>
+            <summary>測定器との連携・自動入力</summary>
             <div class="project-grid project-grid-compact">
               <article class="project-card compact" data-id="measurecom">
-                <h4>MeasureCOM</h4>
-                <p>測定器の COM 受信値を、Excel や業務アプリの入力欄へ自動送信する常駐ツール。</p>
-                <div class="tech-tags"><span>シリアル</span><span>SendInput</span><span>MSI</span></div>
+                <h4>測定値の自動入力ツール</h4>
+                <p>測定器から受け取った数値を、Excel や業務アプリの入力欄へ自動で送ります。</p>
+                <div class="tech-tags"><span>ケーブル通信</span><span>キーボード自動入力</span><span>インストーラー</span></div>
                 <a href="project.html?id=measurecom" class="card-detail-link">詳細 →</a>
               </article>
               <article class="project-card compact" data-id="shore-hardness-calibration">
-                <h4>D型SH計 校正</h4>
-                <p>ショア硬度計の校正測定・回帰・換算係数を DB 公開し、針検出ツールと連携。</p>
-                <div class="tech-tags"><span>PyQt6</span><span>SQL Server</span><span>回帰</span></div>
+                <h4>ショア硬度計の校正アプリ</h4>
+                <p>校正の測定入力、直線近似、換算表の公開までをデータベースで管理します。</p>
+                <div class="tech-tags"><span>デスクトップアプリ</span><span>SQL Server</span><span>換算表</span></div>
                 <a href="project.html?id=shore-hardness-calibration" class="card-detail-link">詳細 →</a>
               </article>
               <article class="project-card compact" data-id="needle-detection">
-                <h4>ショア硬度計 針検出</h4>
-                <p>カメラ映像から針位置を検出し、硬度値へ換算して自動入力。</p>
-                <div class="tech-tags"><span>OpenCV</span><span>リアルタイム</span></div>
+                <h4>硬度計の針をカメラで読むツール</h4>
+                <p>カメラ映像から針の位置を検出し、硬度値へ換算して自動入力します。</p>
+                <div class="tech-tags"><span>画像処理</span><span>リアルタイム</span></div>
                 <a href="project.html?id=needle-detection" class="card-detail-link">詳細 →</a>
               </article>
               <article class="project-card compact" data-id="time5370-data-acquisition">
-                <h4>TIME5370 データ取得</h4>
-                <p>BLE 硬度計からの測定値取得とキーボード送信。</p>
-                <div class="tech-tags"><span>BLE</span><span>PyQt6</span></div>
+                <h4>無線硬度計からのデータ取得</h4>
+                <p>Bluetooth 対応の硬度計から測定値を受け取り、パソコンへ自動入力します。</p>
+                <div class="tech-tags"><span>Bluetooth</span><span>デスクトップアプリ</span></div>
                 <a href="project.html?id=time5370-data-acquisition" class="card-detail-link">詳細 →</a>
               </article>
               <article class="project-card compact" data-id="softening-point-data">
-                <h4>軟化点データ取得</h4>
-                <p>試験装置からの安定受信、履歴 DB 登録、Excel 連携。</p>
-                <div class="tech-tags"><span>Telnet</span><span>SQL Server</span></div>
+                <h4>軟化点試験データの受信・保存</h4>
+                <p>試験装置からの受信を安定化し、履歴保存と Excel 連携までつなぎます。</p>
+                <div class="tech-tags"><span>装置通信</span><span>データベース</span><span>Excel連携</span></div>
                 <a href="project.html?id=softening-point-data" class="card-detail-link">詳細 →</a>
               </article>
               <article class="project-card compact" data-id="voice-hid">
-                <h4>音声入力 HID</h4>
-                <p>音声認識結果をキーボード入力として送出するトレイ常駐アプリ。</p>
-                <div class="tech-tags"><span>音声認識</span><span>HID</span></div>
+                <h4>音声をキーボード入力へ変換</h4>
+                <p>話した内容を認識し、選択中の入力欄へキーボード入力として送ります。</p>
+                <div class="tech-tags"><span>音声認識</span><span>常駐アプリ</span></div>
                 <a href="project.html?id=voice-hid" class="card-detail-link">詳細 →</a>
               </article>
             </div>
           </details>
 
           <details class="project-group">
-            <summary>AI・OCR・文書変換</summary>
+            <summary>文字読み取り・文書変換・社内AI</summary>
             <div class="project-grid project-grid-compact">
               <article class="project-card compact" data-id="shaft-ring-ocr">
-                <h4>軸受リング OCR → Excel</h4>
-                <p>手書き測定表を OCR / VLM で読み取り、確認後に Excel 化。</p>
-                <div class="tech-tags"><span>OCR</span><span>VLM</span><span>pytest</span></div>
+                <h4>手書き測定表の読み取り → Excel</h4>
+                <p>手書きの測定表を読み取り、確認したうえで Excel に落とします。</p>
+                <div class="tech-tags"><span>文字読み取り</span><span>画像AI</span><span>自動テスト</span></div>
                 <a href="project.html?id=shaft-ring-ocr" class="card-detail-link">詳細 →</a>
               </article>
               <article class="project-card compact" data-id="rag-system">
-                <h4>ローカル RAG</h4>
-                <p>社内ドキュメントをクラウドに出さず質問応答するローカル構成。</p>
-                <div class="tech-tags"><span>ChromaDB</span><span>LM Studio</span></div>
+                <h4>社内文書へ質問できるローカルAI</h4>
+                <p>社内の資料を外部へ出さず、質問して答えを探す仕組みです。</p>
+                <div class="tech-tags"><span>文書検索</span><span>ローカルAI</span></div>
                 <a href="project.html?id=rag-system" class="card-detail-link">詳細 →</a>
               </article>
               <article class="project-card compact" data-id="excel-translator">
                 <h4>Excel 翻訳ツール</h4>
-                <p>複数翻訳エンジンのフォールバックでセル単位翻訳。</p>
-                <div class="tech-tags"><span>openpyxl</span><span>GGUF</span></div>
+                <p>セル単位で翻訳し、使えなかった場合は別の翻訳手段へ切り替えます。</p>
+                <div class="tech-tags"><span>Excel</span><span>翻訳</span></div>
                 <a href="project.html?id=excel-translator" class="card-detail-link">詳細 →</a>
               </article>
               <article class="project-card compact" data-id="pdf-to-excel">
-                <h4>PDF → Excel 変換</h4>
-                <p>スキャン PDF の表を Vision API で構造化して Excel 化。</p>
-                <div class="tech-tags"><span>Vision API</span><span>PyMuPDF</span></div>
+                <h4>PDF の表を Excel へ変換</h4>
+                <p>スキャンした PDF の表を読み取り、Excel として再利用できるようにします。</p>
+                <div class="tech-tags"><span>PDF</span><span>画像認識</span></div>
                 <a href="project.html?id=pdf-to-excel" class="card-detail-link">詳細 →</a>
               </article>
             </div>
           </details>
 
           <details class="project-group">
-            <summary>開発基盤・ユーティリティ</summary>
+            <summary>開発を支える共通部品・周辺ツール</summary>
             <div class="project-grid project-grid-compact">
               <article class="project-card compact" data-id="common-utilities">
-                <h4>汎用機能集</h4>
-                <p>MSI、自動更新、DPAPI、DB 接続、入力補助などの共通実装。</p>
-                <div class="tech-tags"><span>横断再利用</span><span>WiX</span><span>DPAPI</span></div>
+                <h4>複数アプリで使う共通部品集</h4>
+                <p>インストーラー、自動更新、パスワード保護、DB接続などを共通化しています。</p>
+                <div class="tech-tags"><span>共通化</span><span>インストーラー</span><span>パスワード保護</span></div>
                 <a href="project.html?id=common-utilities" class="card-detail-link">詳細 →</a>
               </article>
               <article class="project-card compact" data-id="py-to-exe-tool">
-                <h4>py → exe 化ツール</h4>
-                <p>依存解析から venv / PyInstaller までを GUI で実行。</p>
-                <div class="tech-tags"><span>AST</span><span>PyInstaller</span></div>
+                <h4>Python を実行ファイル化する工具</h4>
+                <p>必要な部品の検出から実行ファイル作成までを画面操作で行います。</p>
+                <div class="tech-tags"><span>ビルド支援</span><span>実行ファイル化</span></div>
                 <a href="project.html?id=py-to-exe-tool" class="card-detail-link">詳細 →</a>
               </article>
               <article class="project-card compact" data-id="drawing-pdf-manager">
-                <h4>図番 PDF 管理</h4>
-                <p>図番と PDF の対応を検索・プレビューする軽量管理ツール。</p>
-                <div class="tech-tags"><span>SQLite</span><span>PyMuPDF</span></div>
+                <h4>図面番号と PDF の管理ツール</h4>
+                <p>図面番号から PDF を探して、その場で内容を確認できます。</p>
+                <div class="tech-tags"><span>図面管理</span><span>PDF表示</span></div>
                 <a href="project.html?id=drawing-pdf-manager" class="card-detail-link">詳細 →</a>
               </article>
               <article class="project-card compact" data-id="drawing-editor">
-                <h4>図面編集ツール</h4>
-                <p>番号振り付けとスキャン図面の背景除去。</p>
-                <div class="tech-tags"><span>Pillow</span><span>OpenCV</span></div>
+                <h4>図面への番号付け・掃除ツール</h4>
+                <p>図面への番号振りと、スキャン図面の背景汚れ除去を支援します。</p>
+                <div class="tech-tags"><span>画像編集</span><span>図面</span></div>
                 <a href="project.html?id=drawing-editor" class="card-detail-link">詳細 →</a>
               </article>
               <article class="project-card compact" data-id="cursor-usage-dashboard">
-                <h4>Cursor 使用量ダッシュボード</h4>
-                <p>IDE 使用量 CSV の可視化。</p>
-                <div class="tech-tags"><span>pandas</span><span>PyQt6</span></div>
+                <h4>AI開発ツールの使用量見える化</h4>
+                <p>開発支援AIの利用量を集計し、グラフで確認します。</p>
+                <div class="tech-tags"><span>集計</span><span>可視化</span></div>
                 <a href="project.html?id=cursor-usage-dashboard" class="card-detail-link">詳細 →</a>
               </article>
             </div>
@@ -350,41 +350,41 @@
         <div class="arch-grid">
           <div class="arch-card">
             <div class="arch-icon">01</div>
-            <h3>業務ロジックの単一化</h3>
-            <p>管理台帳では Desktop と Web が同じ services 層を参照します。画面差は吸収しつつ、判定や権限の二重実装を避けます。</p>
+            <h3>業務ルールを一つに保つ</h3>
+            <p>管理台帳では、パソコン版と Web 版が同じ業務処理を参照します。画面は違っても、判定や権限の考え方は揃えます。</p>
           </div>
           <div class="arch-card">
             <div class="arch-icon">02</div>
-            <h3>現場導入まで含めた完成定義</h3>
-            <p>EXE / MSI、自動更新、単一起動、ログ、設定外部化までを最初から設計に含めます。</p>
+            <h3>現場へ渡せるところまで完成とみなす</h3>
+            <p>実行ファイル化、インストーラー、自動更新、二重起動防止、ログ、設定の外出しまで、最初から設計に含めます。</p>
           </div>
           <div class="arch-card">
             <div class="arch-icon">03</div>
-            <h3>権限と秘密情報の扱い</h3>
-            <p>アプリ専用ログイン、最小権限、DPAPI による秘密保護など、配布後の運用リスクも設計対象にします。</p>
+            <h3>権限と秘密情報も設計対象にする</h3>
+            <p>アプリ専用のログイン、必要最小限の権限、パスワードの暗号化保存など、配ったあとのリスクも扱います。</p>
           </div>
           <div class="arch-card">
             <div class="arch-icon">04</div>
-            <h3>実機プロトコルとの接続</h3>
-            <p>BLE・シリアル・MQTT・TCP など、実機前提で設計し、検証用の仮想環境も用意します。</p>
+            <h3>実際の測定器とつながる前提で作る</h3>
+            <p>無線、ケーブル通信、社内ネットワーク配信、装置通信など、実機前提で設計し、検証用の模擬環境も用意します。</p>
           </div>
         </div>
 
         <div class="diagram-wrap">
-          <h3>代表作の骨格（測定機器管理台帳）</h3>
+          <h3>代表作の骨格（測定機器の管理台帳）</h3>
           <pre class="arch-diagram">┌─────────────────┐     ┌─────────────────┐
-│  Desktop UI     │     │  Web Frontend   │
-│  (PyQt6)        │     │  (React + TS)   │
+│  パソコン版画面   │     │  Web画面         │
+│  （現場入力など） │     │  （閲覧・承認など）│
 └────────┬────────┘     └────────┬────────┘
-         │ 直接呼出               │ HTTP
+         │ 直接呼び出し            │ 通信
          ▼                       ▼
     ┌────────────────────────────────────┐
-    │         services/（共通コア）        │
+    │         共通の業務処理              │
     │  点検判定・権限・登録・承認・出力     │
     └────────────────┬───────────────────┘
                      ▼
               ┌─────────────┐
-              │  SQL Server │
+              │ 社内データベース │
               └─────────────┘</pre>
         </div>
       </div>
@@ -393,57 +393,58 @@
     <section id="skills" class="section">
       <div class="container">
         <h2 class="section-title">スキルセット</h2>
-        <p class="section-desc">面接で詳しく話す技術は、代表実績の文脈にひも付けて説明します。</p>
+        <p class="section-desc">面接では、代表実績の話の流れに合わせて具体例を説明します。</p>
         <div class="skills-grid">
           <div class="skill-group">
-            <h3>言語・アプリ</h3>
+            <h3>作るもの</h3>
             <ul class="tag-list">
               <li>Python</li>
-              <li>PyQt6</li>
-              <li>FastAPI</li>
-              <li>React + TypeScript</li>
+              <li>デスクトップアプリ</li>
+              <li>Web API</li>
+              <li>React（Web画面）</li>
             </ul>
           </div>
           <div class="skill-group">
             <h3>データ</h3>
             <ul class="tag-list">
               <li>SQL Server</li>
-              <li>pyodbc</li>
+              <li>社内DB連携</li>
               <li>SQLite</li>
             </ul>
           </div>
           <div class="skill-group">
-            <h3>計測・連携</h3>
+            <h3>測定器連携</h3>
             <ul class="tag-list">
-              <li>シリアル</li>
-              <li>BLE</li>
-              <li>MQTT</li>
-              <li>TCP / Telnet</li>
+              <li>ケーブル通信</li>
+              <li>Bluetooth</li>
+              <li>社内ネットワーク配信</li>
+              <li>装置通信</li>
             </ul>
           </div>
           <div class="skill-group">
-            <h3>AI / OCR</h3>
+            <h3>AI / 読み取り</h3>
             <ul class="tag-list">
-              <li>Tesseract / EasyOCR</li>
-              <li>VLM / RAG</li>
-              <li>OpenCV</li>
+              <li>文字読み取り</li>
+              <li>画像AI</li>
+              <li>文書検索AI</li>
+              <li>画像処理</li>
             </ul>
           </div>
           <div class="skill-group">
             <h3>品質</h3>
             <ul class="tag-list">
-              <li>pytest</li>
-              <li>ruff</li>
+              <li>自動テスト</li>
+              <li>静的チェック</li>
               <li>レビュー活用</li>
             </ul>
           </div>
           <div class="skill-group">
             <h3>配布・運用</h3>
             <ul class="tag-list">
-              <li>PyInstaller</li>
-              <li>WiX MSI</li>
+              <li>実行ファイル化</li>
+              <li>インストーラー</li>
               <li>自動更新</li>
-              <li>DPAPI</li>
+              <li>パスワード保護</li>
             </ul>
           </div>
         </div>
@@ -454,6 +455,7 @@
       <div class="container">
         <h2 class="section-title">連絡先</h2>
         <div class="contact-panel">
+          <p class="contact-name">佐藤 勝</p>
           <p>ポートフォリオや実績の詳細について、面接・カジュアル面談でご説明できます。</p>
           <ul class="contact-list">
             <li><span>GitHub</span><a href="https://github.com/msrwin" target="_blank" rel="noopener noreferrer">github.com/msrwin</a></li>
@@ -468,11 +470,11 @@
 
   <footer class="site-footer">
     <div class="container">
-      <p>製造現場の課題解決を軸に、設計から導入・保守まで担った実績をまとめています。</p>
+      <p>佐藤 勝 / 製造現場の課題解決を軸に、設計から導入・保守まで担った実績をまとめています。</p>
       <p class="footer-copy">Updated 2026-11-12</p>
     </div>
   </footer>
 
-  <script src="script.js?v=20261112b"></script>
+  <script src="script.js?v=20261112c"></script>
 </body>
 </html>

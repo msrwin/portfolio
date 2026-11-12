@@ -9,21 +9,21 @@
   "tiers": {
     "flagship": [
       {
-        "name": "測定機器管理台帳システム",
+        "name": "測定機器の管理台帳システム",
         "repo": "管理台帳_統合版",
         "version": "3.2.43.0",
         "category": "enterprise",
         "highlight": "PyQt6 + React + FastAPI + SQL Server、始業点検アプリ・専用ログイン/DPAPI"
       },
       {
-        "name": "測定器データ中継システム（U-WAVE）",
+        "name": "共有測定器のデータを複数PCへ届ける中継システム",
         "repo": "U-WAVE分岐送信",
         "version": "client 1.1.12 / relay 1.1.10",
         "category": "distributed",
         "highlight": "共有測定器の複数PC配信・MQTT・pytest・MSI"
       },
       {
-        "name": "分析測定結果保存システム",
+        "name": "分析室の測定結果を保存・管理するシステム",
         "repo": "分析測定結果保存",
         "version": "TP 1.1.9 / CTE 1.0.16 / VM 1.0.5",
         "category": "enterprise",
@@ -32,14 +32,14 @@
     ],
     "technical": [
       {
-        "name": "軸受リング OCR → Excel",
+        "name": "手書き測定表の読み取り → Excel",
         "repo": "shaft_ring_ocr",
         "version": "1.1.11.0",
         "category": "ocr",
         "highlight": "Tesseract + VLM + 36 pytest"
       },
       {
-        "name": "RAG System",
+        "name": "社内文書へ質問できるローカルAI",
         "repo": "RAG",
         "version": null,
         "category": "ai",
@@ -53,7 +53,7 @@
         "highlight": "マルチエンジンフォールバック・GGUF"
       },
       {
-        "name": "PDF → Excel 変換",
+        "name": "PDF の表を Excel へ変換",
         "repo": "PDF→EXCEL変換",
         "version": null,
         "category": "vision",
@@ -62,42 +62,42 @@
     ],
     "iot": [
       {
-        "name": "ショア硬度計 針検出ツール",
+        "name": "硬度計の針をカメラで読むツール",
         "repo": "NeedleDetection",
         "version": null,
         "category": "cv",
         "highlight": "OpenCV Hough 変換・リアルタイム"
       },
       {
-        "name": "D型SH計 校正",
+        "name": "ショア硬度計の校正アプリ",
         "repo": "D型SH計_校正",
         "version": "0.4.13.0",
         "category": "calibration",
         "highlight": "線形回帰・換算係数DB公開・NeedleDetection連携"
       },
       {
-        "name": "MeasureCOM",
+        "name": "測定値の自動入力ツール",
         "repo": "MeasureCOM",
         "version": "1.1.8.0",
         "category": "serial",
         "highlight": "Mi/Ve COM受信・キーボード/TPパイプ・MSI"
       },
       {
-        "name": "TIME5370 データ取得",
+        "name": "無線硬度計からのデータ取得",
         "repo": "TIME5370_データ取得",
         "version": null,
         "category": "ble",
         "highlight": "BLE 硬度計連携"
       },
       {
-        "name": "軟化点データ取得",
+        "name": "軟化点試験データの受信・保存",
         "repo": "軟化点データ取得",
         "version": null,
         "category": "tcp",
         "highlight": "Telnet・SQL Server 履歴・Excel VBA 連携"
       },
       {
-        "name": "音声入力 HID",
+        "name": "音声をキーボード入力へ変換",
         "repo": "Voice_HID",
         "version": null,
         "category": "voice",
@@ -106,35 +106,35 @@
     ],
     "tooling": [
       {
-        "name": "pyファイル exe 化ツール",
+        "name": "Python を実行ファイル化する工具",
         "repo": "pyファイルexe化ツール",
         "version": null,
         "category": "build",
         "highlight": "AST 依存解析・venv・PyInstaller GUI"
       },
       {
-        "name": "汎用機能集",
+        "name": "複数アプリで使う共通部品集",
         "repo": "汎用機能集",
         "version": null,
         "category": "library",
         "highlight": "DPAPI・SendInput・HTTP自動更新など横断再利用"
       },
       {
-        "name": "図番 PDF 管理ソフト",
+        "name": "図面番号と PDF の管理ツール",
         "repo": "図番pdf管理ソフト",
         "version": "1.0",
         "category": "utility",
         "highlight": "SQLite + PDF プレビュー"
       },
       {
-        "name": "図面編集ツール",
+        "name": "図面への番号付け・掃除ツール",
         "repo": "図面編集ツール",
         "version": null,
         "category": "utility",
         "highlight": "番号振り付け・背景除去"
       },
       {
-        "name": "Cursor 使用量ダッシュボード",
+        "name": "AI開発ツールの使用量見える化",
         "repo": "Cursor使用量",
         "version": null,
         "category": "analytics",

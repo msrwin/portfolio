@@ -128,18 +128,11 @@ a:hover {
   margin-bottom: 16px;
 }
 
-.hero h1 {
-  font-size: clamp(2rem, 4vw, 2.75rem);
-  font-weight: 700;
-  line-height: 1.3;
-  margin-bottom: 20px;
-}
-
 .hero-lead {
   color: var(--text-muted);
   font-size: 1.05rem;
   margin-bottom: 32px;
-  max-width: 520px;
+  max-width: 540px;
 }
 
 .hero-stats {
@@ -197,11 +190,35 @@ a:hover {
   text-decoration: none;
 }
 
-.hero-name {
-  font-size: 1rem;
-  font-weight: 700;
-  color: var(--text);
+.hero-identity {
+  font-size: 0.82rem;
+  font-weight: 500;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  color: var(--accent);
   margin-bottom: 10px;
+}
+
+.hero-fullname {
+  font-size: clamp(2.4rem, 5vw, 3.4rem);
+  font-weight: 700;
+  line-height: 1.15;
+  margin-bottom: 10px;
+  letter-spacing: 0.04em;
+}
+
+.hero-role {
+  font-size: 1.05rem;
+  font-weight: 500;
+  color: var(--text);
+  margin-bottom: 20px;
+}
+
+.contact-name {
+  font-size: 1.35rem;
+  font-weight: 700;
+  color: var(--text) !important;
+  margin-bottom: 8px !important;
 }
 
 .hero-actions {
