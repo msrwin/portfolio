@@ -4,10 +4,10 @@
     {
       "id": "equipment-management",
       "tier": "flagship",
-      "name": "測定機器管理台帳システム",
+      "name": "測定機器の管理台帳システム",
       "repo": "管理台帳_統合版",
       "version": "3.2.43.0",
-      "tagline": "測定機器の台帳・点検・校正・承認を、DesktopとWebで同じ業務ルールで運用する統合システム",
+      "tagline": "測定機器の台帳・点検・校正・承認を、パソコン版とWeb版で同じルールで運用するシステム",
       "overview": [
         "工場で使用する測定機器の台帳管理、始業点検・年次校正の記録、承認ワークフロー、帳票出力を担うエンタープライズ向け業務システムです。PyQt6 デスクトップ版と React Web 版の2系統を提供し、いずれも SQL Server をバックエンドとします。",
         "最大の設計思想は、デスクトップ UI と Web API が別アプリではなく、同一のビジネスロジック層 services/ を共有する構成である点です。点検判定・権限・登録モード・CSV 出力などのコアロジックを一元化することで、デスクトップと Web の仕様乖離を防いでいます。",
@@ -95,10 +95,10 @@
     {
       "id": "uwave-relay",
       "tier": "flagship",
-      "name": "測定器データ中継システム（U-WAVE）",
+      "name": "共有測定器のデータを複数PCへ届ける中継システム",
       "repo": "U-WAVE分岐送信",
       "version": "client 1.1.12.0 / relay 1.1.10.0",
-      "tagline": "共有測定器の出力を、複数PCへ安全に振り分けるMQTT中継基盤",
+      "tagline": "共有測定器の出力を、複数の測定用パソコンへ安全に振り分ける中継システム",
       "overview": [
         "Mitutoyo U-WAVE 測定器から U-WAVE-R 経由でシリアル受信した測定データを、1台の中継 PC から LAN 内の複数クライアント PC へ配信する tkinter アプリ群です。中継アプリ（relay_app.py）とクライアントアプリ（client_app.py）の2構成で、現場の QC-PRO 連携を実現します。",
         "中継側は受信パケットを解析し、測定器 ID（R{受信機}-G{グループ}-C{チャネル}）に基づくルーティング設定で MQTT トピックへ振り分けます。クライアント側は合言葉（passphrase）照合後、仮想 COM ポートへ出力します。",
@@ -175,10 +175,10 @@
     {
       "id": "analysis-measurement-storage",
       "tier": "flagship",
-      "name": "分析測定結果保存システム",
+      "name": "分析室の測定結果を保存・管理するシステム",
       "repo": "分析測定結果保存",
       "version": "TP 1.1.9.1 / CTE 1.0.16.0 / VM 1.0.5.1",
-      "tagline": "分析室の測定データをSQL Serverへ集約し、履歴・管理図・試験間連携を標準化するアプリ群",
+      "tagline": "分析室の測定データをデータベースへ集約し、履歴・管理図・関連試験連携を整えるアプリ群",
       "overview": [
         "品質分析室における3種類の測定業務（TP 測定データ管理、CTE 熱膨張係数入力、VM 粘度計管理）を、それぞれ独立した PyQt6 デスクトップアプリとして提供するシステム群です。いずれも SQL Server（pyodbc）をバックエンドとし、composition.yaml による設定外部化・MSI 配布・自動アップデートを共通パターンとしています。",
         "TP アプリはロット単位の多様な測定結果の登録・履歴管理・管理図（QPainter 描画）・CTE 反映連携を担います。CTE アプリは熱膨張係数の高速入力作業（グローバルホットキー・タイマー・管理図）を支援します。",
@@ -250,10 +250,10 @@
     {
       "id": "shaft-ring-ocr",
       "tier": "technical",
-      "name": "軸受リング OCR → Excel",
+      "name": "手書き測定表の読み取り → Excel",
       "repo": "shaft_ring_ocr",
       "version": "1.1.11.0",
-      "tagline": "手書き軸受リング測定表を OCR し罫線付き Excel に自動変換",
+      "tagline": "手書き測定表を読み取り、確認したうえでExcelへ変換する",
       "overview": [
         "手書き測定表（軸受リング）の画像または PDF を OCR 処理し、罫線・日本語ラベル付き Excel テンプレートに変換する PyQt6 GUI ツールです。Tesseract OCR をベースに、グリッド検出・セル前処理・番号列 OCR（EasyOCR フォールバック）を組み合わせた多段パイプラインを持ちます。",
         "手書き数字の読取精度向上のため、Qwen2.5-VL（GGUF + llama-cpp-python）による VLM 補完機能をオプションで提供。Tesseract で空欄・不正値になったセルのみ VLM で再読取するハイブリッド方式です。",
@@ -319,10 +319,10 @@
     {
       "id": "rag-system",
       "tier": "technical",
-      "name": "RAG System",
+      "name": "社内文書へ質問できるローカルAI",
       "repo": "RAG",
       "version": null,
-      "tagline": "LM Studio × ChromaDB によるローカル RAG 質問応答システム",
+      "tagline": "社内資料を外部へ出さず、質問して答えを探すローカルAI",
       "overview": [
         "PDF・テキスト・Markdown・Web ページを横断して質問に答えるローカル RAG システムです。LM Studio のローカル API（チャットモデル + Embedding モデル）と ChromaDB ベクトルストアを組み合わせ、クラウド依存なしで社内ドキュメント検索・質問応答を実現します。",
         "当初は CLI として設計されましたが、現在は PyQt6 ベースの GUI アプリに発展。ダークテーマの UI で、インデックス追加・質問・ソース一覧・チャンク管理をタブ操作できます。",
@@ -381,7 +381,7 @@
       "name": "Excel 翻訳ツール",
       "repo": "Excel翻訳",
       "version": null,
-      "tagline": "Excel セルをマルチエンジンで翻訳する PyQt6 デスクトップアプリ",
+      "tagline": "Excelの文字を複数の翻訳手段でセル単位に翻訳する",
       "overview": [
         "Excel のテキストセルを指定言語へ翻訳して保存する PyQt6 デスクトップアプリです。ローカル GGUF モデル → deep-translator → DeepL → Google Cloud Translation のマルチエンジンフォールバックを実装し、翻訳順序は設定で変更可能です。",
         "2つの使い方を提供: (1) ソースファイルのテキストを翻訳して新規保存、(2) ソースの空白セルに翻訳済みファイルの内容を逆翻訳して挿入。用語集・プレースホルダ保護・数値のみセルのスキップを行います。",
@@ -443,10 +443,10 @@
     {
       "id": "pdf-to-excel",
       "tier": "technical",
-      "name": "PDF → Excel 変換",
+      "name": "PDF の表を Excel へ変換",
       "repo": "PDF→EXCEL変換",
       "version": null,
-      "tagline": "Claude Vision API で PDF 表を認識し Excel に変換",
+      "tagline": "スキャンPDFの表を読み取り、Excelとして再利用できるようにする",
       "overview": [
         "PDF を Claude Vision API で読み取り、表・テキストを認識して Excel に変換するツールです。スキャン PDF・画像 PDF にも対応し、PyMuPDF でページを PNG 画像化してから Vision API に送信します。",
         "CLI（引数指定）と GUI（引数なし起動）の両モードをサポート。API レスポンスの JSON を openpyxl で再現し、セル結合・背景色・太字等の書式も可能な範囲で保持します。",
@@ -495,10 +495,10 @@
     {
       "id": "needle-detection",
       "tier": "iot",
-      "name": "ショア硬度計 針検出ツール",
+      "name": "硬度計の針をカメラで読むツール",
       "repo": "NeedleDetection",
       "version": null,
-      "tagline": "Web カメラでショア硬度計の針位置をリアルタイム検出し硬度値を自動送信",
+      "tagline": "カメラ映像から硬度計の針位置を検出し、硬度値へ換算して自動入力する",
       "overview": [
         "Web カメラ映像からショア硬度計の針位置を OpenCV Hough 変換でリアルタイム検出し、換算表に基づく硬度値を計算・表示・自動送信するツールです。元は単一ファイルから config/・ui/・image_processing/・calibration/ 等にリファクタリング済みです。",
         "機器タイプ別の換算表を読み込み、針角度から硬度値を算出。キーボードショートカット・自動送信・音声フィードバック・設定 UI を備えます。",
@@ -559,10 +559,10 @@
     {
       "id": "shore-hardness-calibration",
       "tier": "iot",
-      "name": "D型SH計 校正",
+      "name": "ショア硬度計の校正アプリ",
       "repo": "D型SH計_校正",
       "version": "0.4.13.0",
-      "tagline": "ショア硬度計の校正データと換算係数をDB管理し、針検出ツールへ公開する",
+      "tagline": "ショア硬度計の校正測定と換算表をデータベースで管理し、針検出ツールへ公開する",
       "overview": [
         "D型ショア硬度計の校正測定を入力し、線形回帰（β0/β1）と換算表を SQL Server（Hardness_Tester_NTC）へ公開する PyQt6 アプリです。",
         "測定打点は value_1〜value_10 の横持ちで保持し、換算係数は conversion_exports へ追記のみで履歴化。NeedleDetection が最新係数を参照する連携仕様を持ちます。",
@@ -630,10 +630,10 @@
     {
       "id": "measurecom",
       "tier": "iot",
-      "name": "MeasureCOM",
+      "name": "測定値の自動入力ツール",
       "repo": "MeasureCOM",
       "version": "1.1.8.0",
-      "tagline": "測定器の受信値を、人が打ち込む代わりに業務画面へ自動入力する常駐ツール",
+      "tagline": "測定器の数値を、人が打ち込む代わりに業務画面へ自動入力する常駐ツール",
       "overview": [
         "測定器から COM 経由で受け取った測定値を、前面ウィンドウへキーボード入力する（既定）、または TP 測定アプリへ名前付きパイプで送信するタスクトレイ常駐ツールです。",
         "Mi / Ve のデュアル COM、電文形式の AUTO 判定（形式U / 形式DT）、小数点桁・測定器 ID 範囲フィルタ、受信音・読み上げを備え、Excel・管理台帳・始業点検アプリへの入力を自動化します。",
@@ -703,10 +703,10 @@
     {
       "id": "time5370-data-acquisition",
       "tier": "iot",
-      "name": "TIME5370 データ取得",
+      "name": "無線硬度計からのデータ取得",
       "repo": "TIME5370_データ取得",
       "version": null,
-      "tagline": "BLE 硬度計 TIME5370 から測定データを取得する PyQt6 アプリ",
+      "tagline": "Bluetooth対応の硬度計から測定値を受け取り、パソコンへ自動入力する",
       "overview": [
         "BLE（Bluetooth Low Energy）対応の硬度計 TIME5370 から測定データを取得する PyQt6 デスクトップアプリです。bleak ライブラリで BLE 通信を行い、専用プロトコル（NOTIFY/WRITE UUID、CRC16-MODBUS）でデバイスと通信します。",
         "QLocalServer による単一インスタンス制御、衝撃方向設定、バッテリー残量取得、測定値の自動キーボード送信（pynput）を実装。モジュール分割（ble/, ui/, conversion.py）で保守性を確保しています。"
@@ -760,10 +760,10 @@
     {
       "id": "softening-point-data",
       "tier": "iot",
-      "name": "軟化点データ取得",
+      "name": "軟化点試験データの受信・保存",
       "repo": "軟化点データ取得",
       "version": null,
-      "tagline": "軟化点試験装置の受信を安定化し、履歴DBとExcel連携までつなぐ",
+      "tagline": "軟化点試験装置からの受信を安定化し、履歴保存とExcel連携までつなぐ",
       "overview": [
         "軟化点試験装置から TCP/IP（Telnet プロトコル）またはシリアル（COM）でデータを受信し、ログ保存と SQL Server（SP_results）への登録を行う tkinter アプリです。",
         "受信・解析・DB・UI を sp_receiver/ パッケージへ分割し、履歴一覧・年フィルタ・Excel VBA からの履歴選択貼付、トースト通知まで現場運用をカバーします。",
@@ -832,10 +832,10 @@
     {
       "id": "voice-hid",
       "tier": "iot",
-      "name": "音声入力 HID",
+      "name": "音声をキーボード入力へ変換",
       "repo": "Voice_HID",
       "version": null,
-      "tagline": "音声認識結果をキーボード入力として送出するタスクトレイアプリ",
+      "tagline": "話した内容を認識し、選択中の入力欄へキーボード入力として送る",
       "overview": [
         "音声認識（SpeechRecognition + Google Speech API）の結果をキーボード入力（HID）として送出する Windows タスクトレイ常駐アプリです。「スタート」で音声受付開始、「エンド」で終了、認識テキストをリアルタイムにキー入力として送出します。",
         "無音検出で発話区切りを判断し、区切りごとに Enter キーを自動送信。pyttsx3 による音声フィードバックと「戻る」ワードによる直前入力の巻き戻しも実装。"
@@ -883,10 +883,10 @@
     {
       "id": "py-to-exe-tool",
       "tier": "tooling",
-      "name": "pyファイル exe 化ツール",
+      "name": "Python を実行ファイル化する工具",
       "repo": "pyファイルexe化ツール",
       "version": null,
-      "tagline": "AST 依存解析 + venv 自動構築 + PyInstaller GUI ビルドツール",
+      "tagline": "必要な部品の検出から実行ファイル作成までを画面操作で行う工具",
       "overview": [
         "Python スクリプトを PyInstaller で EXE 化するための tkinter GUI ツールです。AST 解析で import 文から依存パッケージを自動検出し、一時 venv を作成→pip install→PyInstaller ビルドを一気通貫で実行します。",
         "標準ライブラリ・問題モジュールの判定ロジック、日本語パス対策、エラー表示改善、onefile/onedir ラジオ選択、venv 削除リトライ等の実運用改善が蓄積されています。"
@@ -940,10 +940,10 @@
     {
       "id": "common-utilities",
       "tier": "tooling",
-      "name": "汎用機能集",
+      "name": "複数アプリで使う共通部品集",
       "repo": "汎用機能集",
       "version": null,
-      "tagline": "複数業務アプリで再利用する配布・接続・入力・秘密保護の共通実装集",
+      "tagline": "インストーラー、自動更新、パスワード保護、DB接続などを横断再利用する共通部品集",
       "overview": [
         "今後作成するデスクトップアプリ向けの共通機能を、参照実装として保管するリポジトリ群です。各サブフォルダは独立パッケージとして管理され、実プロジェクトから抽出・汎用化されたモジュールを収録しています。",
         "管理台帳_統合版・分析測定結果保存・U-WAVE分岐送信・MeasureCOM・D型SH計_校正 等が参照元／利用先となっており、新規アプリ開発時はここからコピーして利用する運用です。"
@@ -1015,10 +1015,10 @@
     {
       "id": "drawing-pdf-manager",
       "tier": "tooling",
-      "name": "図番 PDF 管理ソフト",
+      "name": "図面番号と PDF の管理ツール",
       "repo": "図番pdf管理ソフト",
       "version": "1.0",
-      "tagline": "図面番号と PDF を SQLite で管理・プレビューするツール",
+      "tagline": "図面番号とPDFの対応を探して、その場で内容を確認するツール",
       "overview": [
         "図面番号と PDF ファイルの対応を SQLite データベースで管理し、PDF プレビュー・検索・登録・削除を行う tkinter アプリです。PyMuPDF で PDF レンダリング、PIL でサムネイル表示。",
         "図面番号でのグルーピング表示、部分一致検索、複数 PDF の同一図番登録、削除時のパスワード保護を実装。"
@@ -1066,10 +1066,10 @@
     {
       "id": "drawing-editor",
       "tier": "tooling",
-      "name": "図面編集ツール",
+      "name": "図面への番号付け・掃除ツール",
       "repo": "図面編集ツール",
       "version": null,
-      "tagline": "図面画像への番号振り付けと背景除去を行うツール群",
+      "tagline": "図面への番号振りと、スキャン図面の背景汚れ除去を支援する",
       "overview": [
         "図面画像の編集を支援する2つの tkinter ツール群です。(1) 図面番号振り付けツール: 画像に連番アノテーションを配置・回転・色変更してエクスポート。(2) 図面掃除ツール: スキャン図面の背景除去とノイズ除去。",
         "番号振り付けツールは tkinterdnd2 によるドラッグ&ドロップ対応、画像回転・アノテーション履歴（Undo）・プレビューを実装。"
@@ -1118,10 +1118,10 @@
     {
       "id": "cursor-usage-dashboard",
       "tier": "tooling",
-      "name": "Cursor 使用量ダッシュボード",
+      "name": "AI開発ツールの使用量見える化",
       "repo": "Cursor使用量",
       "version": null,
-      "tagline": "Cursor IDE の usage-events CSV を可視化する PyQt6 ダッシュボード",
+      "tagline": "開発支援AIの利用量を集計し、グラフで確認する",
       "overview": [
         "Cursor IDE が出力する usage-events CSV ファイルを読み込み、使用量を可視化する PyQt6 + Matplotlib ダッシュボードです。ダークテーマの UI で、モデル別使用量・日別推移・コスト分析等をタブ表示します。",
         "ファイル選択ダイアログまたは CLI 引数で CSV を指定。pandas によるデータ集計、matplotlib によるグラフ描画を実装。"

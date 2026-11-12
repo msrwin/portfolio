@@ -97,7 +97,7 @@ function renderProject(project, allProjects) {
     ? `<span class="card-category">${escapeHtml(project.role)}</span>`
     : "";
 
-  document.title = `${project.name} | 佐藤ポートフォリオ`;
+  document.title = `${project.name} | 佐藤 勝ポートフォリオ`;
 
   const images = (project.assets && project.assets.screenshots) || [];
   const impactHtml = project.impact
@@ -105,7 +105,7 @@ function renderProject(project, allProjects) {
     : "";
   const talkingHtml = project.interview_talking_points && project.interview_talking_points.length
     ? `<div class="detail-block">
-         <h2>面接で話すポイント</h2>
+         <h2>設計・実装のポイント</h2>
          ${renderList(project.interview_talking_points, "talking-points")}
        </div>`
     : "";
@@ -203,7 +203,7 @@ function renderProject(project, allProjects) {
               ${renderRelated(project.related_projects, allProjects)}
             </div>
 
-            <a class="btn-primary btn-block" href="index.html#projects">代表実績に戻る</a>
+            <a class="btn-primary btn-block" href="index.html#projects">主要制作物に戻る</a>
           </aside>
         </div>
       </section>
@@ -217,7 +217,7 @@ function renderProject(project, allProjects) {
 
 function renderNav(currentId, allProjects) {
   const tiers = ["flagship", "technical", "iot", "tooling"];
-  const tierNames = { flagship: "代表実績", technical: "AI・OCR", iot: "計測連携", tooling: "基盤・ツール" };
+  const tierNames = { flagship: "主要制作物", technical: "AI・OCR", iot: "計測連携", tooling: "基盤・ツール" };
   let html = "";
 
   tiers.forEach((tier) => {
